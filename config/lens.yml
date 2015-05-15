@@ -1,0 +1,15 @@
+production:
+  omniauth:
+    path_prefix: '/user'
+  auth_providers:
+    github:
+      app_id: 'b5dd091722ab2550f343'
+      app_secret: '4a2013a2665d35844a184f4703e4b5459ae423e9'
+
+development:
+  omniauth:
+    path_prefix: '/user'
+  auth_providers:
+    github:
+      app_id: 'be2bc52c344ae294bf48'
+      app_secret: '539b13aef91a6688cb1fd742693c19a5a3f0e094'
