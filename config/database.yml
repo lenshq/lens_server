@@ -3,7 +3,7 @@ development:
   encoding: utf8
   database: lens
   pool: 5
-  username: postgres
+  username: jaredt67
   password: coub389
   host: localhost
 
@@ -12,7 +12,7 @@ test:
   encoding: utf8
   database: lens_test
   pool: 5
-  username: dev
+  username: jaredt67
   password:
   host: localhost
   prepared_statements: false
@@ -22,7 +22,7 @@ production:
   encoding: utf8
   database: lens
   pool: 5
-  username: dev
+  username: jaredt67
   password:
   host: localhost
 
@@ -31,6 +31,6 @@ staging:
   encoding: utf8
   database: lens
   pool: 5
-  username: dev
+  username: jaredt67
   password:
   host: localhost
