@@ -1,8 +1,8 @@
 worker_processes 10
-working_directory "/home2/apps/lens/current"
+working_directory "/home2/apps/lens-server/current"
 listen '0.0.0.0:10050'
 timeout 60
-pid "/home2/apps/lens/tmp/pids/unicorn.pid"
+pid "/home2/apps/lens-server/tmp/pids/unicorn.pid"
 preload_app true
 
 GC.respond_to?(:copy_on_write_friendly=) and
