@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_one :github, :dependent => :destroy, :autosave => true
+  has_many :applications, :dependent => :destroy, :autosave => true
 
   def guest?
     false

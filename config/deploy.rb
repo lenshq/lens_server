@@ -40,34 +40,37 @@ set :linked_files, fetch(:linked_files, []).push('config/database.yml')
 # Default value for keep_releases is 5
 set :keep_releases, 5
 
+desc 'Bundle'
+namespace "bundler" do
+  task "install" do
+    on roles(:app) do
+      within release_path do
+        execute "bundle", "install"
+      end
+    end
+  end
+end
+
+namespace "db" do
+  task "migrate" do
+    on roles(:app) do
+      within release_path do
+        execute "rake", "db:migrate"
+      end
+    end
+  end
+end
+
+
 namespace :deploy do
   #after 'deploy:publishing', 'deploy:restart'
   #after :finishing, 'deploy:cleanup'
 
   #after "deploy:updated", "deploy:bundle"
-  desc 'Bundle'
-  namespace "bundler" do
-    task "install" do
-      on roles(:app) do
-        within release_path do
-          execute "bundle", "install"
-        end
-      end
-    end
-  end
-
-  namespace "db" do
-    task "migrate" do
-      on roles(:app) do
-        within release_path do
-          execute "rake", "db:migrate"
-        end
-      end
-    end
-  end
-
 
   after "bundler:install", "db:migrate"
+  after "db:migrate", "deploy:restart"
+
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
