@@ -1,12 +1,11 @@
 Rails.application.routes.draw do
-  namespace :api do
-  end
+  scope module: :web do
+    root to: "start#index"
 
-  scope :module => :web do
-    root :to => "start#index"
+    resources :applications
 
-    resource :user, :only => [:index] do
-      scope :module => :user do
+    resource :user, only: [:index] do
+      scope module: :user do
         resource :session, :only => [:new, :destroy]
         resource :network, :only => [] do
           get :failure, :on => :member
