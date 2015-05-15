@@ -3,8 +3,8 @@ development:
   encoding: utf8
   database: lens
   pool: 5
-  username: dev
-  password:
+  username: postgres
+  password: coub389
   host: localhost
 
 test:
