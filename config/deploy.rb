@@ -5,6 +5,12 @@ set :application, 'lens-server'
 set :repo_url, 'git@github.com:coub/lens-server.git'
 set :deploy_to, '/home2/apps/lens-server'
 
+set :rvm_type, :system                     # Defaults to: :auto
+set :rvm_map_bins, ['ruby', 'rake', 'bundle']
+set :rvm_path, "/usr/local/rvm/bin"
+set :rvm_ruby_version, '2.2.2@lens-server'      # Defaults to: 'default'
+set :default_env, { rvm_bin_path: '/usr/local/rvm/bin' }
+
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
@@ -32,10 +38,33 @@ set :linked_files, fetch(:linked_files, []).push('config/database.yml')
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
 # Default value for keep_releases is 5
-# set :keep_releases, 5
+set :keep_releases, 5
 
 namespace :deploy do
+  #after 'deploy:publishing', 'deploy:restart'
+  #after :finishing, 'deploy:cleanup'
 
+  #after "deploy:updated", "deploy:bundle"
+  desc 'Bundle'
+  namespace "bundler" do
+    task "install" do
+      on roles(:app) do
+        within release_path do
+          execute "bundle", "install"
+        end
+      end
+    end
+  end
+
+  desc 'Restart application'
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+      execute "sudo sv restart lens"
+      # Your restart mechanism here, for example:
+      # execute :touch, release_path.join('tmp/restart.txt')
+    end
+  end
+  
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       # Here we can do anything such as:
