@@ -3,8 +3,8 @@ production:
     path_prefix: '/user'
   auth_providers:
     github:
-      app_id: 'b5dd091722ab2550f343'
-      app_secret: '4a2013a2665d35844a184f4703e4b5459ae423e9'
+      app_id: '3b61864ce3c525aa017e'
+      app_secret: 'df200c7f4a26e85e1f817f5f863a81f110525abb'
 
 development:
   omniauth:
