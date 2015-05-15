@@ -1,4 +1,4 @@
-class Web::User::ApplicationsController < ApplicationController
+class Web::ApplicationsController < ApplicationController
   def index
   end
 
