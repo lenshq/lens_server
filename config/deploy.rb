@@ -56,6 +56,8 @@ namespace :deploy do
     end
   end
 
+  after "bundler:install", "db:migrate"
+
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
