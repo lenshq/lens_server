@@ -11,10 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150515125055) do
+ActiveRecord::Schema.define(version: 20150515143422) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "applications", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "title"
+    t.string   "description"
+    t.string   "domain"
+    t.string   "token"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "applications", ["user_id"], name: "index_applications_on_user_id", using: :btree
 
   create_table "user_githubs", force: :cascade do |t|
     t.integer  "user_id"
@@ -32,5 +44,6 @@ ActiveRecord::Schema.define(version: 20150515125055) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "applications", "users"
   add_foreign_key "user_githubs", "users"
 end

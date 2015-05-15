@@ -13,3 +13,13 @@ development:
     github:
       app_id: 'be2bc52c344ae294bf48'
       app_secret: '539b13aef91a6688cb1fd742693c19a5a3f0e094'
+
+staging:
+  omniauth:
+    path_prefix: '/user'
+  auth_providers:
+    github:
+      app_id: '3b61864ce3c525aa017e'
+      app_secret: 'df200c7f4a26e85e1f817f5f863a81f110525abb'
+
+
