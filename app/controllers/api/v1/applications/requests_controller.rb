@@ -16,9 +16,9 @@ class Api::V1::Applications::RequestsController < Api::ApplicationController
     @request = application.requests(params).first
     @data = {
       id: @request["id"],
-      url: @reques["url"],
-      datetime: @reques['datetime'],
-      duration: @reques['duration']
+      url: @request["url"],
+      datetime: @request['datetime'],
+      duration: @request['duration']
     }
     render json: @data
   end
