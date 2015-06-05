@@ -1,4 +1,6 @@
 class Api::ApplicationController < ApplicationController
+  skip_before_filter :verify_authenticity_token
+
   def api_token
     request.headers["X-Auth-Token"] || params[:api_token]
   end

@@ -17,6 +17,10 @@ class Web::ApplicationsController <Web::ApplicationController
     redirect_to applications_path
   end
 
+  def query
+    @application = Application.find(params[:id])
+  end
+
   def update
     @application = current_user.applications.find(params[:id])
     @application.update(permitted_params)
