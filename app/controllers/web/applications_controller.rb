@@ -5,7 +5,7 @@ class Web::ApplicationsController <Web::ApplicationController
   end
 
   def new
-    @application = current_user.build_application
+    @application = current_user.applications.build
   end
 
   def edit
@@ -50,6 +50,6 @@ class Web::ApplicationsController <Web::ApplicationController
 
 
   def permitted_params
-    params[:application].require(:application).permit(:title, :description, :domain)
+    params[:application].permit(:title, :description, :domain)
   end
 end

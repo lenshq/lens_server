@@ -1,2 +1,9 @@
-%h1 Web::User::Applications#new
-%p Find me in app/views/web/user/applications/new.html.haml
+.col-md-12
+  %h1 New application
+
+  = simple_form_for @application, html: { class: 'form-horizontal' } do |f|
+    .col-sm-2
+      = f.input :title
+      = f.input :description
+      = f.input :domain
+      = f.button :submit
