@@ -63,6 +63,7 @@ CREATE INDEX index_#{app_table_name}_on_url ON #{app_table_name} USING btree (ur
     query = query.where(tbl[:id].lteq(last_id))                      if last_id
     query = query.skip(offset)                                       if offset > 0
     query = query.take(limit)
+    query = query.order(tbl[:datetime].desc)
 
     query = query.project(Arel.star)
 
