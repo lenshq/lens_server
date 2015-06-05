@@ -7,22 +7,13 @@ class Application < ActiveRecord::Base
   validates :token, presence: true, uniqueness: true
   validates :title, presence: true
 
-
   before_validation :generate_token, on: :create
-
-  def generate_token
-    if self.token.blank?
-      self.token = Digest::MD5.hexdigest([Time.now, rand(1_000_000)].join("_"))
-    end
-  end
-
 
   def app_table_name
     "events_data_for_#{id}"
   end
 
   def table_exists?
-    exists = true
     res = ActiveRecord::Base.connection.execute(%Q{
 select * from information_schema.tables where table_name='#{app_table_name}';
 }).to_a
@@ -68,4 +59,9 @@ private
     out
   end
 
+  def generate_token
+    if self.token.blank?
+      self.token = Digest::MD5.hexdigest([Time.now, rand(1_000_000)].join("_"))
+    end
+  end
 end

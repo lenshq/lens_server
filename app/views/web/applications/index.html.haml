@@ -1,1 +1,23 @@
-= react_component('ApplicationsPage')
+-#= react_component('ApplicationsPage')
+.col-md-12
+  .col-sm-6
+    - if @own_applications.any?
+      %h2 OWN applications
+      %ul
+      - @own_applications.each do |application|
+        %li
+          = link_to application.title, application_path(application)
+          = application.description
+          = application.domain
+          .btn.btn-default= link_to 'Edit', edit_application_path(application)
+
+  .col-sm-6
+    - if @participate_applications.any?
+      %h2 Participate applications
+      %ul
+      - @participate_applications.each do |application|
+        %li
+          = link_to application.title, edit_application_path(application)
+          = application.description
+          = application.domain
+          .btn.btn-default= link_to 'Edit', edit_application_path(application)
