@@ -29,6 +29,7 @@ select * from information_schema.tables where table_name='#{app_table_name}';
   def create_table_if_not_exists
     return if table_exists?
     str = %Q{CREATE TABLE #{app_table_name} (
+id serial primary key,
 url character varying(255),
 datetime timestamp without time zone,
 duration integer,
@@ -63,11 +64,11 @@ CREATE INDEX index_#{app_table_name}_on_url ON #{app_table_name} USING btree (ur
 
     tbl = Arel::Table.new(app_table_name)
     query = tbl.project(Arel.star)
-    if params[:date_from]
+    if params[:date_from].present?
       query = tbl.where(tbl[:datetime].gteq(start_period.to_s(:db)))
     end
 
-    if params[:date_end]
+    if params[:date_to].present?
       query = tbl.where(tbl[:datetime].lteq(end_period.to_s(:db)))
     end
 

@@ -1,8 +1,14 @@
 require 'test_helper'
 
 class Web::ApplicationsControllerTest < ActionController::TestCase
+  include AuthHelper
+
   def setup
-    @application = FactoryGirl.create(:application)
+    @user = FactoryGirl.create(:user)
+    sign_in @user
+    @application = FactoryGirl.create(:application, user_id: @user.id)
+    FactoryGirl.create(:application_user, user_id: @user.id, application_id: @application.id)
+
     load_fake_data_into_app(@application)
   end
 
@@ -16,6 +22,7 @@ class Web::ApplicationsControllerTest < ActionController::TestCase
       duration_from: 100
     }
     assert_response :success
+
     puts "RESP: " + response.body
   end
 
