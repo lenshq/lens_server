@@ -1,4 +1,4 @@
-class Api::V1::DataController < ApiController
+class Api::V1::DataController < Api::ApplicationController
   def rec
     if signed_in?
       if params[:data].blank?

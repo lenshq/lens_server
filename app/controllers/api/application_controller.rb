@@ -1,4 +1,4 @@
-class ApiController < ApplicationController
+class Api::ApplicationController < ApplicationController
   def api_token
     request.headers["X-Auth-Token"] || params[:api_token]
   end

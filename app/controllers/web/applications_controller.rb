@@ -13,13 +13,13 @@ class Web::ApplicationsController <Web::ApplicationController
   end
 
   def create
-    @application = current_user.applications.create(params[:application])
+    @application = current_user.applications.create(permitted_params)
     redirect_to applications_path
   end
 
   def update
     @application = current_user.applications.find(params[:id])
-    @application.update(params[:application])
+    @application.update(permitted_params)
     redirect_to applications_path
   end
 
@@ -27,5 +27,11 @@ class Web::ApplicationsController <Web::ApplicationController
     @application = current_user.applications.find(params[:id])
     @application.destroy
     redirect_to applications_path
+  end
+
+  private
+
+  def permitted_params
+    params[:application].require(:application).permit(:title, :description, :domain)
   end
 end
