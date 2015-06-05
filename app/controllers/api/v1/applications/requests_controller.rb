@@ -13,7 +13,7 @@ class Api::V1::Applications::RequestsController < Api::ApplicationController
   end
 
   def show
-    @request = application.requests(params)
+    @request = application.requests(params).first
     @data = {
       id: @request["id"],
       url: @reques["url"],
@@ -22,8 +22,6 @@ class Api::V1::Applications::RequestsController < Api::ApplicationController
     }
     render json: @data
   end
-
-  private
 
   def application
     @application ||= current_user.participate_applications.find(params[:application_id])
