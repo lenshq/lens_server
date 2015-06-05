@@ -22,7 +22,7 @@ class Web::ApplicationsController <Web::ApplicationController
   end
 
   def query
-    @application = Application.find(params[:id])
+    @application = current_user.participate_applications.find(params[:id])
     data = @application.run_query(params)
 
     render json: data
