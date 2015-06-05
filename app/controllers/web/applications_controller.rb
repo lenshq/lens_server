@@ -23,6 +23,7 @@ class Web::ApplicationsController <Web::ApplicationController
 
   def query
     @application = current_user.participate_applications.find(params[:id])
+
     if params[:date_from].empty?
       render json: {status: "error", msg: "date_from must be set"}, status: 422
     elsif params[:date_to].empty?

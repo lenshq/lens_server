@@ -29,6 +29,7 @@ select * from information_schema.tables where table_name='#{app_table_name}';
   def create_table_if_not_exists
     return if table_exists?
     str = %Q{CREATE TABLE #{app_table_name} (
+id serial primary key,
 url character varying(255),
 datetime timestamp without time zone,
 duration integer,
