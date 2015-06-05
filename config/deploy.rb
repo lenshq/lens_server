@@ -46,6 +46,7 @@ namespace "bundler" do
     on roles(:app) do
       within release_path do
         execute "bundle", "install"
+        execute "rake", "assets:precompile"
       end
     end
   end
