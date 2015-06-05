@@ -12,6 +12,10 @@ class Web::ApplicationsController <Web::ApplicationController
     @application = current_user.applications.find(params[:id])
   end
 
+  def show
+    @application = current_user.participate_applications.find(params[:id])
+  end
+
   def create
     @application = current_user.applications.create(permitted_params)
     redirect_to applications_path
