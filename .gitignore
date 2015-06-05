@@ -18,3 +18,5 @@
 *.sw*
 .idea
 config/database.yml
+.rvmrc
+.powrc
