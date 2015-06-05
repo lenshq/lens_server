@@ -41,6 +41,40 @@ CREATE INDEX index_#{app_table_name}_on_url ON #{app_table_name} USING btree (ur
     ActiveRecord::Base.connection.execute(str)
   end
 
+  def requests(params = {})
+    request_id    = params[:id]            ? params[:id].to_s.to_i            : nil
+    start_period  = params[:date_from]     ? Time.parse(params[:date_from])   : nil
+    end_period    = params[:date_from]     ? Time.parse(params[:date_to])     : nil
+    duration_from = params[:duration_from] ? params[:duration_from].to_s.to_i : nil
+    duration_to   = params[:duration_to]   ? params[:duration_from].to_s.to_i : nil
+    last_id       = params[:last_id]       ? params[:last_id].to_s.to_i       : nil
+    limit         = params[:per_page]      ? params[:per_page].to_s.to_i      : 10
+    page          = params[:page]          ? params[:page].to_s.to_i          : 1
+    page          = page > 0 ? page : 1
+    offset        = (page - 1) * limit
+
+    tbl = Arel::Table.new(app_table_name)
+    query = query.project(Arel.star)
+
+    if request_id
+      query = query.where(tbl[:id].eq(request_id))
+    else
+      query = query.where(tbl[:datetime].gteq(start_period.to_s(:db)))   if start_period.present?
+      query = query.where(tbl[:datetime].lteq(end_period.to_s(:db)))   if end_period.present?
+      query = query.where(tbl[:url].matches(params[:url]))             if params[:url]
+      query = query.where(tbl[:duration].gteq(duration_from))          if duration_from
+      query = query.where(tbl[:duration].lteq(duration_to))            if duration_to
+      query = query.where(tbl[:id].lteq(last_id))                      if last_id
+      query = query.skip(offset)                                       if offset > 0
+      query = query.take(limit)
+      query = query.order(tbl[:datetime].desc)
+    end
+
+    query = query.project(Arel.star)
+
+    ActiveRecord::Base.connection.execute(query.to_sql).to_a
+  end
+
   def rec_data(data)
     create_table_if_not_exists
     json = filter_json_for_record(data)

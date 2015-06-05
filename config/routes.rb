@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
+      resources :applications do
+        scope module: :applications do
+          resources :requests
+        end
+      end
+
       resource :data, only: [] do
         collection do
           post :rec
