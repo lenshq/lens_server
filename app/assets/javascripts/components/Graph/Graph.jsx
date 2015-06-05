@@ -34,7 +34,7 @@ var Graph = React.createClass({
       var el = test[i];
       formated.push(
         [
-          el.range.join("-"),
+          el.group.join("-"),
           el.count
         ]
       );
