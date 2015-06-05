@@ -9,7 +9,7 @@ class Web::ApplicationsController <Web::ApplicationController
   end
 
   def edit
-    @application = current_user.applications.find(params[:id])
+    @application = current_user.applications.find_by_id(params[:id]) || current_user.applications.find_by_id(params[:id])
   end
 
   def create
@@ -25,7 +25,7 @@ class Web::ApplicationsController <Web::ApplicationController
   end
 
   def update
-    @application = current_user.applications.find(params[:id])
+    @application = current_user.applications.find_by_id(params[:id]) || current_user.applications.find_by_id(params[:id])
     @application.update(permitted_params)
     redirect_to applications_path
   end

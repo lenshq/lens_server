@@ -6,8 +6,4 @@ class User::Guest
   def admin?
     false
   end
-
-  def applications
-    []
-  end
 end
