@@ -40,6 +40,7 @@ gem "minitest-rg"
 
 #gem 'minitest'
 #gem 'minitest-colorize'
+gem 'gon'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

@@ -1,33 +1,33 @@
-= react_component('StartPageUnlogged', url: register_with_cpath(:github))
+= react_component('StartPage', url: register_with_cpath(:github))
 
-.row
-  .col-md-6
-    .form-group
-      %label{for: "appIdSelect"} App ID
-      %select#appIdSelect.form-control
-        %option App ID #1
-        %option App ID #2
-        %option App ID #3
+- if false
+  .row
+    .col-md-6
+      .form-group
+        %label{for: "appIdSelect"} App ID
+        %select#appIdSelect.form-control
+          %option App ID #1
+          %option App ID #2
+          %option App ID #3
 
-    .form-group
-      %label{for: "durationInput"} Duration
-      %input#duration{type: "range"}
+      .form-group
+        %label{for: "durationInput"} Duration
+        %input#duration{type: "range"}
 
-    .form-group
-      %label{for: "dateFromInput"} Date from
-      %input.form-control{type: "date"}
+      .form-group
+        %label{for: "dateFromInput"} Date from
+        %input.form-control{type: "date"}
 
-    .form-group
-      %label{for: "dateToInput"} Date to
-      %input.form-control{type: "date"}
+      .form-group
+        %label{for: "dateToInput"} Date to
+        %input.form-control{type: "date"}
 
-    .form-group
-      %label{for: "urlFilterInput"} Url filter:
-      %input.form-control
+      .form-group
+        %label{for: "urlFilterInput"} Url filter:
+        %input.form-control
 
-%div
-  Graph
+  %div
+    Graph
 
-%div
-  Table
-
+  %div
+    Table

@@ -1,4 +1,4 @@
-var StartPageUnlogged = React.createClass({
+var StartPage = React.createClass({
   render: function() {
     return (
       <div className="jumbotron">

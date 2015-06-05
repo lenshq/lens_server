@@ -30,4 +30,10 @@ test:
       app_id: '3b61864ce3c525aa017e'
       app_secret: 'df200c7f4a26e85e1f817f5f863a81f110525abb'
 
-
+test:
+  omniauth:
+    path_prefix: '/user'
+  auth_providers:
+    github:
+      app_id: '1'
+      app_secret: '2'

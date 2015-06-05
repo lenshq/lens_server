@@ -85,6 +85,11 @@ GEM
       multipart-post (>= 1.2, < 3)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
+    gon (5.2.3)
+      actionpack (>= 2.3.0)
+      json
+      multi_json
+      request_store (>= 1.0.5)
     haml (4.0.6)
       tilt
     haml-rails (0.9.0)
@@ -192,6 +197,7 @@ GEM
       react-source (~> 0.13)
     react-source (0.13.3)
     ref (1.0.5)
+    request_store (1.1.0)
     ruby_parser (3.6.6)
       sexp_processor (~> 4.1)
     sass (3.4.13)
@@ -254,6 +260,7 @@ DEPENDENCIES
   capistrano-rvm
   coffee-rails (~> 4.1.0)
   factory_girl_rails
+  gon
   haml-rails (~> 0.9)
   jbuilder (~> 2.0)
   jquery-rails
