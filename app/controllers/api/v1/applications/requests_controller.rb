@@ -18,7 +18,8 @@ class Api::V1::Applications::RequestsController < Api::ApplicationController
       id: @request["id"],
       url: @request["url"],
       datetime: @request['datetime'],
-      duration: @request['duration']
+      duration: @request['duration'],
+      records: @request['data']
     }
     render json: @data
   end
