@@ -1,1 +1,7 @@
 @import "bootstrap";
+
+form.filterForm {
+  .form-group {
+    display: inline-block; margin-right: 5px;
+  }
+}
