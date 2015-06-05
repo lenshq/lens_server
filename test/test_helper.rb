@@ -26,18 +26,20 @@ class ActiveSupport::TestCase
   end
 
 
-  def load_fake_data_into_app
-    10000.downto(0) do |i|
+  def load_fake_data_into_app(app)
+    5000.downto(0) do |i|
       data = {
-        action: ["index", "show"], controller: ["users", "posts"],
+        action: ["index", "show"].pick, controller: ["users", "posts"].pick,
         params: {id: "123", msg: "test evt"},
-        url: "/posts/123",
-        time: Time.now,
-        duration: 300,
+        url: "/view/#{rand(123_123_123)}",
+        time: (Time.now - i.minutes).to_s,
+        duration: [50, 100, 300, 550, 800, 900, 1400, 1900, 3000].pick,
         records: [],
-        method: "GET",
+        method: ["GET", "POST"].pick,
         meta: {client_version: 123}
       }
+
+      app.rec_data(data)
     end
   end
 end

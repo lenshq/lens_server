@@ -9,6 +9,12 @@ class Application < ActiveRecord::Base
 
   before_validation :generate_token, on: :create
 
+
+  GROUPS = [
+    100, 200, 300,500,750,1000,
+    1250,1500,2000,3000,3000,5000,7000,10000000000
+  ]
+
   def app_table_name
     "events_data_for_#{id}"
   end
@@ -24,7 +30,8 @@ select * from information_schema.tables where table_name='#{app_table_name}';
     return if table_exists?
     str = %Q{CREATE TABLE #{app_table_name} (
 url character varying(255),
-datetime time without time zone,
+datetime timestamp without time zone,
+duration integer,
 data json
 );
 CREATE INDEX index_#{app_table_name}_on_url ON #{app_table_name} USING btree (url);
@@ -37,12 +44,74 @@ CREATE INDEX index_#{app_table_name}_on_url ON #{app_table_name} USING btree (ur
     create_table_if_not_exists
     json = filter_json_for_record(data)
 
-    time = Time.parse(data['time']) || Time.now
-    vals = [w(data['url'], "\'"), w(time, "'"), w(JSON.dump(json), "'")]
-    ActiveRecord::Base.connection.execute(%Q{INSERT INTO #{app_table_name} (url,datetime,data) VALUES (#{vals.join(',')})})
+    data.stringify_keys!
+    if data['time'].is_a?(Time)
+      time = data['time']
+    else
+      time = Time.parse(data['time']) || Time.now
+    end
+
+    vals = [w(data['url'], "\'"), w(time.to_s(:db), "'"), data['duration'].to_i, w(JSON.dump(json), "'")]
+    #puts "TRACK DUR #{data['duration'].to_i}"
+
+    ActiveRecord::Base.connection.execute(%Q{INSERT INTO #{app_table_name} (url,datetime,duration,data) VALUES (#{vals.join(',')})})
+  end
+
+  def run_query(params)
+    start_period = Time.parse(params[:date_from])
+    end_period = Time.parse(params[:date_to])
+
+
+    tbl = Arel::Table.new(app_table_name)
+    query = tbl.project(Arel.star)
+    if params[:date_from]
+      query = tbl.where(tbl[:datetime].gteq(start_period.to_s(:db)))
+    end
+
+    if params[:date_end]
+      query = tbl.where(tbl[:datetime].lteq(end_period.to_s(:db)))
+    end
+
+    if params[:url]
+      query = query.where(tbl[:url].matches(params[:url]))
+    end
+
+    if params[:duration_from]
+      query = query.where(tbl[:duration].gteq(params[:duration_from]))
+    end
+
+    if params[:duration_to]
+      query = query.where(tbl[:duration].lteq(params[:duration_to]))
+    end
+
+    query = query.project(Arel.star)
+
+
+    res = ActiveRecord::Base.connection.execute(query.to_sql).to_a
+    sort_into_groups(res)
   end
 
 private
+
+  def sort_into_groups(res)
+    grouped = {}
+    res.each do |event|
+      detected_group = GROUPS.detect {|g| 
+        g > event['duration'].to_i 
+      }
+      grouped[detected_group] ||= 0
+      grouped[detected_group] += 1
+    end
+
+    out = []
+    grouped.each do |k, v|
+      start_ind = GROUPS.index(k) - 1
+      start = start_ind >= 0 ? GROUPS[start_ind] : 0
+      out << {group: [start, k], count: v}
+    end
+
+    out
+  end
 
   def w(str, wrapper)
     "#{wrapper}#{str}#{wrapper}"
@@ -51,7 +120,7 @@ private
   def filter_json_for_record(data)
     out = {}
     data.each do |k, v|
-      if !['url', 'time'].include?(k)
+      if !['url', 'time', 'duration'].include?(k)
         out[k] = v
       end
     end
