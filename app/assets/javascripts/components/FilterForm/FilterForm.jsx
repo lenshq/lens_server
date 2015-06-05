@@ -51,7 +51,7 @@ var FilterForm = React.createClass({
 
   render: function() {
     return (
-      <form className="filterForm" onSubmit={this.submited}>
+      <form className="filter-form" onSubmit={this.submited}>
         <div className="col-md-6">
           <div className="form-group">
             <label htmlFor="appIdSelect">App ID</label>
