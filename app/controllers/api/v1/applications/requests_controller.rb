@@ -8,8 +8,8 @@ class Api::V1::Applications::RequestsController < Api::ApplicationController
         datetime: req['datetim'],
         duration: req['duration']
       }
-      render json: @data
     end
+    render json: @data
   end
 
   def application
