@@ -96,9 +96,7 @@ private
   def sort_into_groups(res)
     grouped = {}
     res.each do |event|
-      detected_group = GROUPS.detect {|g| 
-        g > event['duration'].to_i 
-      }
+      detected_group = GROUPS.detect {|g| g > event['duration'].to_i }
       grouped[detected_group] ||= 0
       grouped[detected_group] += 1
     end
