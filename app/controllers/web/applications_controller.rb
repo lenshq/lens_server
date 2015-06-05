@@ -19,6 +19,9 @@ class Web::ApplicationsController <Web::ApplicationController
 
   def query
     @application = Application.find(params[:id])
+    #@application.run_query(params[:query])
+
+    render json: make_fake_data_for_query_response
   end
 
   def update
@@ -34,6 +37,17 @@ class Web::ApplicationsController <Web::ApplicationController
   end
 
   private
+
+  def make_fake_data_for_query_response
+    [
+      {range: [0, 100], count: 3500},
+      {range: [100, 200], count: 3000},
+      {range: [200, 500], count: 2500},
+      {range: [500, 750], count: 3000},
+      {range: [750, 1000], count: 200}
+    ]
+  end
+
 
   def permitted_params
     params[:application].require(:application).permit(:title, :description, :domain)

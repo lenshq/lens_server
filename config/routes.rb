@@ -12,7 +12,11 @@ Rails.application.routes.draw do
   scope module: :web do
     root to: "start#index"
 
-    resources :applications
+    resources :applications do
+      member do
+        get :query
+      end
+    end
 
 
     resource :user, only: [:index] do
