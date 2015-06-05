@@ -17,27 +17,21 @@ class Web::ApplicationsController <Web::ApplicationController
   end
 
   def create
-    @application = current_user.applications.create(permitted_params)
-    redirect_to applications_path
-  end
-
-  def query
-    @application = current_user.participate_applications.find(params[:id])
-
-    if params[:date_from].empty?
-      render json: {status: "error", msg: "date_from must be set"}, status: 422
-    elsif params[:date_to].empty?
-      render json: {status: "error", msg: "date_to must be set"}, status: 422
+    @application = current_user.applications.new(permitted_params)
+    if @application.save
+      redirect_to applications_path
     else
-      data = @application.run_query(params)
-      render json: data
+      render :new
     end
   end
 
   def update
     @application = current_user.applications.find(params[:id])
-    @application.update(permitted_params)
-    redirect_to applications_path
+    if @application.update(permitted_params)
+      redirect_to applications_path
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -47,16 +41,6 @@ class Web::ApplicationsController <Web::ApplicationController
   end
 
   private
-
-  def make_fake_data_for_query_response
-    [
-      {range: [0, 100], count: 3500},
-      {range: [100, 200], count: 3000},
-      {range: [200, 500], count: 2500},
-      {range: [500, 750], count: 3000},
-      {range: [750, 1000], count: 200}
-    ]
-  end
 
   def permitted_params
     params[:application].permit(:title, :description, :domain, colleague_ids: [])
