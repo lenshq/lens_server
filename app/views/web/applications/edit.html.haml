@@ -1,2 +1,11 @@
-%h1 Web::User::Applications#edit
-%p Find me in app/views/web/user/applications/edit.html.haml
+.col-md-12
+  %h1 Edit application
+
+  .col-sm-6
+    = simple_form_for @application, html: { class: 'form-horizontal' } do |f|
+      = f.input :title
+      = f.input :description
+      = f.input :domain
+      = f.input :token, disabled: true
+      -#= f.association :colleagues, label_method: :id, value_method: :id
+      = f.button :submit

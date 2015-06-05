@@ -45,6 +45,7 @@ namespace "bundler" do
   task "install" do
     on roles(:app) do
       within release_path do
+        execute "rake", "assets:precompile"
         execute "bundle", "install"
       end
     end
@@ -69,7 +70,7 @@ namespace :deploy do
   #after "deploy:updated", "deploy:bundle"
 
   after "bundler:install", "db:migrate"
-  after "db:migrate", "deploy:restart"
+  after "deploy:published", "deploy:restart"
 
   desc 'Restart application'
   task :restart do

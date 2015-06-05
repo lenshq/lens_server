@@ -31,4 +31,9 @@ class Web::User::ApplicationsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should post query" do
+    get :query, {date_from: Time.now - 1.week, date_to: Time.now, url: "/view/*", group_by: "day", duration_from: 1000}
+    assert_response :success
+  end
+
 end

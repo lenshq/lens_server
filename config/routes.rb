@@ -1,18 +1,23 @@
 Rails.application.routes.draw do
-  scope module: :web do
-    root to: "start#index"
-
-    resources :applications
-
-    scope :api do
-      scope :v1 do
-        resource :data, only: [] do
-          collection do
-            post :rec
-          end
+  namespace :api do
+    namespace :v1 do
+      resource :data, only: [] do
+        collection do
+          post :rec
         end
       end
     end
+  end
+
+  scope module: :web do
+    root to: "start#index"
+
+    resources :applications do
+      member do
+        get :query
+      end
+    end
+
 
     resource :user, only: [:index] do
       scope module: :user do

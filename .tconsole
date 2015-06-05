@@ -1,0 +1,43 @@
+TConsole::Config.run do |config|
+  # Configures the directory where your tests are located
+  config.test_dir = "./test"
+
+  # Include paths that should be added to Ruby's load path
+  config.include_paths = ["./test", "./lib"]
+
+  # Paths that should be preloaded. You'll have to run the reload
+  # command to reload these paths in TConsole
+  config.preload_paths = ["./config/application"]
+
+  # File sets are the named sets of files that can be executed. A file
+  # set named "all" must be included.
+  config.file_sets = {
+    "all" => ["test/**/*_test.rb", "test/**/**/**/*_test.rb"],
+    "units" => ["test/units/**/*_test.rb"]
+  }
+
+  # Fail fast specifies whether or not tests should stop executing once
+  # the first failure occurs.
+  config.fail_fast = true
+
+  # Specifies code to be run before loading the environment
+  config.before_load do
+    ENV["RAILS_ENV"] ||= "test"
+  end
+
+  # Specifies code to be run after loading the environment
+  config.after_load do
+    ::Rails.application
+    ::Rails::Engine.class_eval do
+      def eager_load!
+        # turn off eager_loading
+      end
+    end
+  end
+
+  # Specifies code to be run before each test execution
+  config.before_test_run do
+    puts "I'm about to run!!!"
+  end
+end
+
