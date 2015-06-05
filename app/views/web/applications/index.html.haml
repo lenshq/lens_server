@@ -17,7 +17,6 @@
       %ul
       - @participate_applications.each do |application|
         %li
-          = link_to application.title, edit_application_path(application)
+          = link_to application.title, application_path(application)
           = application.description
           = application.domain
-          .btn.btn-default= link_to 'Edit', edit_application_path(application)

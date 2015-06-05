@@ -7,5 +7,5 @@
       = f.input :description
       = f.input :domain
       = f.input :token, disabled: true
-      -#= f.association :colleagues, label_method: :id, value_method: :id
+      = f.association :colleagues, label_method: :nickname, value_method: :id
       = f.button :submit
