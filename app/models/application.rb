@@ -67,7 +67,7 @@ CREATE INDEX index_#{app_table_name}_on_url ON #{app_table_name} USING btree (ur
       query = tbl.where(tbl[:datetime].gteq(start_period.to_s(:db)))
     end
 
-    if params[:date_end]
+    if params[:date_to]
       query = tbl.where(tbl[:datetime].lteq(end_period.to_s(:db)))
     end
 
