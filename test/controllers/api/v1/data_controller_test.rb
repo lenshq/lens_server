@@ -15,6 +15,13 @@ class Api::V1::DataControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "должно записывать входные данные правильно при втором и следующих запросах" do
+    100.times do
+      post :rec, generate_fake_event_data.merge(api_token: @app.token)
+      assert_response :success
+    end
+  end
+
   test "должно выдавать ошибку если кривые данные" do
     post :rec, {"zhopa" => 123, api_token: @app.token}
     assert_response 422

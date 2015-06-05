@@ -12,7 +12,16 @@ class Application < ActiveRecord::Base
     "events_data_for_#{id}"
   end
 
+  def table_exists?
+    exists = true
+    res = ActiveRecord::Base.connection.execute(%Q{
+select * from information_schema.tables where table_name='#{table_name}';
+}).to_a
+    res.length == 1
+  end
+
   def create_table_if_not_exists
+    return if table_exists?
     str = %Q{CREATE TABLE #{table_name} (
 url character varying(255),
 datetime time without time zone,
@@ -20,20 +29,16 @@ data jsonb
 );
 CREATE INDEX index_#{table_name}_on_url ON #{table_name} USING btree (url);
 }
+
     ActiveRecord::Base.connection.execute(str)
   end
 
   def rec_data(data)
     create_table_if_not_exists
-    puts data.inspect
-
     json = filter_json_for_record(data)
 
     vals = [w(data['url'], "\'"), w(Time.parse(data['time']), "'"), w(JSON.dump(json), "'")]
     ActiveRecord::Base.connection.execute(%Q{INSERT INTO #{table_name} (url,datetime,data) VALUES (#{vals.join(',')})})
-
-
-    # sql_query = %Q{INSERT INTO #{Event.date_to_table_name(date)} (type,datetime,data) VALUES #{logs_insert_str.join(',')}}
   end
 
 private
