@@ -14,10 +14,10 @@ class User < ActiveRecord::Base
   end
 
   def email
-    providers.first.email
+    providers.first.try(:email)
   end
 
   def nickname
-    providers.first.nickname
+    providers.first.try(:nickname)
   end
 end

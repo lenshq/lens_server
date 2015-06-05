@@ -48,8 +48,7 @@ class Web::ApplicationsController <Web::ApplicationController
     ]
   end
 
-
   def permitted_params
-    params[:application].permit(:title, :description, :domain)
+    params[:application].permit(:title, :description, :domain, colleague_ids: [])
   end
 end
