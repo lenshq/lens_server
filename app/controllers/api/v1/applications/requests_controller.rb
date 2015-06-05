@@ -5,7 +5,7 @@ class Api::V1::Applications::RequestsController < Api::ApplicationController
       {
         id: req["id"],
         url: req["url"],
-        datetime: req['datetim'],
+        datetime: req['datetime'],
         duration: req['duration']
       }
     end
