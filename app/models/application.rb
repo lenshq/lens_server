@@ -54,7 +54,7 @@ CREATE INDEX index_#{app_table_name}_on_url ON #{app_table_name} USING btree (ur
     offset        = (page - 1) * limit
 
     tbl = Arel::Table.new(app_table_name)
-    query = query.project(Arel.star)
+    query = tbl.project(Arel.star)
 
     if request_id
       query = query.where(tbl[:id].eq(request_id))
