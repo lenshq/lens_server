@@ -35,6 +35,11 @@ gem 'capistrano-rvm'
 
 gem 'unicorn'
 gem 'omniauth-github'
+gem "tconsole"
+gem "minitest-rg"
+
+#gem 'minitest'
+#gem 'minitest-colorize'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
