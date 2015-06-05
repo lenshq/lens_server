@@ -22,10 +22,10 @@ class Web::ApplicationsController <Web::ApplicationController
   end
 
   def query
-    @application = Application.find(params[:id])
-    #@application.run_query(params[:query])
+    @application = current_user.participate_applications.find(params[:id])
+    data = @application.run_query(params)
 
-    render json: make_fake_data_for_query_response
+    render json: data
   end
 
   def update
