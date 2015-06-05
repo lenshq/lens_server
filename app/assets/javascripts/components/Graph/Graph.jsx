@@ -59,7 +59,7 @@ var Graph = React.createClass({
     };
 
     var chart = new google.visualization.ColumnChart(
-      React.findDOMNode(this));
+      document.getElementById("chartDiv"));
 
     chart.draw(data, options);
   },
