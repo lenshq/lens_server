@@ -8,6 +8,15 @@ class Application < ActiveRecord::Base
   validates :title, presence: true
 
 
+  before_validation :generate_token, on: :create
+
+  def generate_token
+    if self.token.blank?
+      self.token = Digest::MD5.hexdigest([Time.now, rand(1_000_000)].join("_"))
+    end
+  end
+
+
   def app_table_name
     "events_data_for_#{id}"
   end
