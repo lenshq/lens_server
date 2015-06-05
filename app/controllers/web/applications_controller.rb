@@ -12,6 +12,10 @@ class Web::ApplicationsController <Web::ApplicationController
     @application = current_user.applications.find(params[:id])
   end
 
+  def show
+    @application = current_user.participate_applications.find(params[:id])
+  end
+
   def create
     @application = current_user.applications.create(permitted_params)
     redirect_to applications_path
@@ -48,8 +52,7 @@ class Web::ApplicationsController <Web::ApplicationController
     ]
   end
 
-
   def permitted_params
-    params[:application].permit(:title, :description, :domain)
+    params[:application].permit(:title, :description, :domain, colleague_ids: [])
   end
 end

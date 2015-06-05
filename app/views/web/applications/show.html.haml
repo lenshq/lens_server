@@ -1,0 +1,9 @@
+.col-md-12
+  %h1
+    = @application.title
+    = "(#{@application.domain})"
+  .col-md-8= @application.description
+  .col-md-4
+    For integration use token
+    .badge= @application.token
+
