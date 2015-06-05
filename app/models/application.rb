@@ -38,7 +38,7 @@ CREATE INDEX index_#{app_table_name}_on_url ON #{app_table_name} USING btree (ur
     json = filter_json_for_record(data)
 
     time = Time.parse(data['time']) || Time.now
-    vals = [w(data['url'], "\'"), w(, "'"), w(JSON.dump(json), "'")]
+    vals = [w(data['url'], "\'"), w(time, "'"), w(JSON.dump(json), "'")]
     ActiveRecord::Base.connection.execute(%Q{INSERT INTO #{app_table_name} (url,datetime,data) VALUES (#{vals.join(',')})})
   end
 
