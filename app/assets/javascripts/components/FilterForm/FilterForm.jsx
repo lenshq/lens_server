@@ -22,9 +22,14 @@ var FilterForm = React.createClass({
     }
   },
 
+  submited: function() {
+    this.props.onSubmit(this.state);
+    return false;
+  },
+
   render: function() {
     return (
-      <form onSubmit={this.props.onSubmit}>
+      <form onSubmit={this.submited}>
         <div className="col-md-6">
           <div className="form-group">
             <label htmlFor="appIdSelect">App ID</label>
