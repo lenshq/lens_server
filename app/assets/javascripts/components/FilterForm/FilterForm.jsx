@@ -8,9 +8,7 @@ var FilterForm = React.createClass({
 
   getInitialState: function() {
     var appsIds = [
-      {id: 1, name: "App ID #1"},
-      {id: 2, name: "App ID #2"},
-      {id: 3, name: "App ID #3"}
+      {id: 1, name: "App ID #1"}
     ];
 
     return {
@@ -18,7 +16,7 @@ var FilterForm = React.createClass({
       dateTo :"2015-01-07",
       urlFilter: "",
       appsIds: appsIds,
-      appId: appsIds[0].id
+      appId: 1
     }
   },
 

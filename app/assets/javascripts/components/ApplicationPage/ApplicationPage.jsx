@@ -4,10 +4,13 @@ var ApplicationPage = React.createClass({
     console.log("Submited", state);
     var that = this;
 
-    var url = "/applications/1/query?date_from=";
-    url += state.dateFrom;
-    url += "&date_to=";
-    url += state.dateTo;
+    var params = {
+      date_from: state.dateFrom,
+      date_to: state.dateTo,
+      id: state.appId
+    };
+
+    var url = "/applications/1/query?" + $.param(params);
 
     $.ajax(
       url,
