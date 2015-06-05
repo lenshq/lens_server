@@ -8,26 +8,26 @@ class Application < ActiveRecord::Base
   validates :title, presence: true
 
 
-  def table_name
+  def app_table_name
     "events_data_for_#{id}"
   end
 
   def table_exists?
     exists = true
     res = ActiveRecord::Base.connection.execute(%Q{
-select * from information_schema.tables where table_name='#{table_name}';
+select * from information_schema.tables where table_name='#{app_table_name}';
 }).to_a
     res.length == 1
   end
 
   def create_table_if_not_exists
     return if table_exists?
-    str = %Q{CREATE TABLE #{table_name} (
+    str = %Q{CREATE TABLE #{app_table_name} (
 url character varying(255),
 datetime time without time zone,
 data jsonb
 );
-CREATE INDEX index_#{table_name}_on_url ON #{table_name} USING btree (url);
+CREATE INDEX index_#{app_table_name}_on_url ON #{app_table_name} USING btree (url);
 }
 
     ActiveRecord::Base.connection.execute(str)
@@ -38,7 +38,7 @@ CREATE INDEX index_#{table_name}_on_url ON #{table_name} USING btree (url);
     json = filter_json_for_record(data)
 
     vals = [w(data['url'], "\'"), w(Time.parse(data['time']), "'"), w(JSON.dump(json), "'")]
-    ActiveRecord::Base.connection.execute(%Q{INSERT INTO #{table_name} (url,datetime,data) VALUES (#{vals.join(',')})})
+    ActiveRecord::Base.connection.execute(%Q{INSERT INTO #{app_table_name} (url,datetime,data) VALUES (#{vals.join(',')})})
   end
 
 private
