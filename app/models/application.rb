@@ -122,7 +122,7 @@ private
   def filter_json_for_record(data)
     out = {}
     data.each do |k, v|
-      if !['url', 'time', 'duration', 'records'].include?(k)
+      if !['url', 'time', 'duration'].include?(k)
         out[k] = v
       end
     end
