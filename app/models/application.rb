@@ -34,7 +34,7 @@ select * from information_schema.tables where table_name='#{app_table_name}';
     str = %Q{CREATE TABLE #{app_table_name} (
 url character varying(255),
 datetime time without time zone,
-data jsonb
+data json
 );
 CREATE INDEX index_#{app_table_name}_on_url ON #{app_table_name} USING btree (url);
 }
