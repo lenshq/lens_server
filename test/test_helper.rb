@@ -34,7 +34,13 @@ class ActiveSupport::TestCase
         url: "/view/#{rand(123_123_123)}",
         time: (Time.now - i.minutes).to_s,
         duration: [50, 100, 300, 550, 800, 900, 1400, 1900, 3000].pick,
-        records: [],
+        records: [{
+         "sql" => "SELECT  \"channels\".* FROM \"channels\"  WHERE \"channels\".\"user_id\" = 51 AND \"channels\".\"being_deleted\" = 'f' AND \"channels\".\"default_channel\" = 't' ORDER BY created_at ASC LIMIT 1",
+         "name" => "Channel Load",
+         "connection_id" => 70334014529560,
+         "binds" => nil,
+         "connection_name" => nil
+      }],
         method: ["GET", "POST"].pick,
         meta: {client_version: 123}
       }

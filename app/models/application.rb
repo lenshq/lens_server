@@ -51,10 +51,9 @@ CREATE INDEX index_#{app_table_name}_on_url ON #{app_table_name} USING btree (ur
       time = Time.parse(data['time']) || Time.now
     end
 
-    vals = [w(data['url'], "\'"), w(time.to_s(:db), "'"), data['duration'].to_i, w(JSON.dump(json), "'")]
-    #puts "TRACK DUR #{data['duration'].to_i}"
 
-    ActiveRecord::Base.connection.execute(%Q{INSERT INTO #{app_table_name} (url,datetime,duration,data) VALUES (#{vals.join(',')})})
+    sql = sanitize_query(["INSERT INTO #{app_table_name} (url,datetime,duration,data) VALUES (?,?,?,?)", data['url'], time, data['duration'].to_i, JSON.dump(json)])
+    ActiveRecord::Base.connection.execute(sql)
   end
 
   def run_query(params)
@@ -115,13 +114,20 @@ private
     "#{wrapper}#{str}#{wrapper}"
   end
 
+  def sanitize_query(arr)
+    self.class.send(:sanitize_sql, arr)
+  end
+
+
   def filter_json_for_record(data)
     out = {}
     data.each do |k, v|
-      if !['url', 'time', 'duration'].include?(k)
+      if !['url', 'time', 'duration', 'records'].include?(k)
         out[k] = v
       end
     end
+
+    #out['records'] = <D-d>
 
     out
   end
