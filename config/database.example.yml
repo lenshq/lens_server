@@ -1,0 +1,17 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+development:
+  <<: *default
+  database: lens_development
+
+test:
+  <<: *default
+  database: lens_test
+  min_messages: WARNING
+
+production:
+  <<: *default
+  database: lens_production

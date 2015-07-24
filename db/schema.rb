@@ -11,51 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150515151145) do
+ActiveRecord::Schema.define(version: 0) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "application_users", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "application_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-  end
-
-  add_index "application_users", ["application_id"], name: "index_application_users_on_application_id", using: :btree
-  add_index "application_users", ["user_id"], name: "index_application_users_on_user_id", using: :btree
-
-  create_table "applications", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "title"
-    t.string   "description"
-    t.string   "domain"
-    t.string   "token"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  add_index "applications", ["user_id"], name: "index_applications_on_user_id", using: :btree
-
-  create_table "user_githubs", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "uid"
-    t.string   "nickname"
-    t.string   "email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "user_githubs", ["user_id"], name: "index_user_githubs_on_user_id", using: :btree
-
-  create_table "users", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_foreign_key "application_users", "applications"
-  add_foreign_key "application_users", "users"
-  add_foreign_key "applications", "users"
-  add_foreign_key "user_githubs", "users"
 end
