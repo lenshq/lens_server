@@ -6,3 +6,17 @@ gem 'rails-api'
 gem 'pg'
 
 gem 'unicorn'
+
+gem 'pg_query'
+
+group :development, :test do
+  gem 'pry'
+  gem 'pry-nav'
+end
+
+group :test do
+  gem 'simplecov', require: false
+  gem 'database_cleaner'
+  gem 'rspec-rails', '~> 3.0'
+  gem "factory_girl_rails"
+end
