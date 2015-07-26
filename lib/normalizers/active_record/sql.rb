@@ -9,9 +9,17 @@ module Normalizers::ActiveRecord
         source = ['SCHEMA', 'CACHE'].include?(record[:name]) ? 'rails' : 'app'
 
         {
-          content: PgQuery.normalize(record[:sql]),
+          content: cleanup(PgQuery.normalize(record[:sql])),
           source: source
         }.merge(super)
+      end
+
+      private
+
+      def cleanup(query)
+        arr = query.split("\n")
+        arr = arr.map { |line| line.strip }
+        arr.join(' ')
       end
     end
   end
