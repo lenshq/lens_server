@@ -1,0 +1,1144 @@
+{
+  "data": {
+    "action": "graphs",
+    "controller": "StatsController",
+    "params": {
+      "action": "graphs",
+      "controller": "stats"
+    },
+    "method": "GET",
+    "url": "/stats/graphs",
+    "records": [
+      {
+        "sql": "            SELECT a.attname, format_type(a.atttypid, a.atttypmod),\n                     pg_get_expr(d.adbin, d.adrelid), a.attnotnull, a.atttypid, a.atttypmod\n              FROM pg_attribute a LEFT JOIN pg_attrdef d\n                ON a.attrelid = d.adrelid AND a.attnum = d.adnum\n             WHERE a.attrelid = '\"users\"'::regclass\n               AND a.attnum > 0 AND NOT a.attisdropped\n             ORDER BY a.attnum\n",
+        "name": "SCHEMA",
+        "connection_id": 27250300,
+        "binds": [
+          
+        ],
+        "connection_name": null,
+        "etype": "sql.active_record",
+        "eduration": 2.566142,
+        "estart": 1437835548.728163,
+        "efinish": 1437835548.73073
+      },
+      {
+        "sql": "SELECT  \"users\".* FROM \"users\"  WHERE \"users\".\"remember_token\" = '4ab4750697fef28ed0cf44f0415869aae215d390' LIMIT 1",
+        "name": "User Load",
+        "connection_id": 27250300,
+        "binds": [
+          
+        ],
+        "connection_name": null,
+        "etype": "sql.active_record",
+        "eduration": 1.60729,
+        "estart": 1437835548.736598,
+        "efinish": 1437835548.738206
+      },
+      {
+        "sql": "            SELECT a.attname, format_type(a.atttypid, a.atttypmod),\n                     pg_get_expr(d.adbin, d.adrelid), a.attnotnull, a.atttypid, a.atttypmod\n              FROM pg_attribute a LEFT JOIN pg_attrdef d\n                ON a.attrelid = d.adrelid AND a.attnum = d.adnum\n             WHERE a.attrelid = '\"channels\"'::regclass\n               AND a.attnum > 0 AND NOT a.attisdropped\n             ORDER BY a.attnum\n",
+        "name": "SCHEMA",
+        "connection_id": 27250300,
+        "binds": [
+          
+        ],
+        "connection_name": null,
+        "etype": "sql.active_record",
+        "eduration": 1.058167,
+        "estart": 1437835548.782015,
+        "efinish": 1437835548.783073
+      },
+      {
+        "sql": "            SELECT COUNT(*)\n            FROM pg_class c\n            LEFT JOIN pg_namespace n ON n.oid = c.relnamespace\n            WHERE c.relkind in ('v','r')\n            AND c.relname = 'channels'\n            AND n.nspname = ANY (current_schemas(false))\n",
+        "name": "SCHEMA",
+        "connection_id": 27250300,
+        "binds": [
+          
+        ],
+        "connection_name": null,
+        "etype": "sql.active_record",
+        "eduration": 0.362193,
+        "estart": 1437835548.784225,
+        "efinish": 1437835548.784587
+      },
+      {
+        "sql": "          SELECT attr.attname\n          FROM pg_attribute attr\n          INNER JOIN pg_constraint cons ON attr.attrelid = cons.conrelid AND attr.attnum = cons.conkey[1]\n          WHERE cons.contype = 'p'\n            AND cons.conrelid = '\"channels\"'::regclass\n",
+        "name": "SCHEMA",
+        "connection_id": 27250300,
+        "binds": [
+          
+        ],
+        "connection_name": null,
+        "etype": "sql.active_record",
+        "eduration": 0.332216,
+        "estart": 1437835548.784956,
+        "efinish": 1437835548.785288
+      },
+      {
+        "sql": "SHOW client_min_messages",
+        "name": "SCHEMA",
+        "connection_id": 72793420,
+        "binds": [
+          
+        ],
+        "connection_name": "read_slave",
+        "etype": "sql.active_record",
+        "eduration": 0.156007,
+        "estart": 1437835548.792036,
+        "efinish": 1437835548.792192
+      },
+      {
+        "sql": "SET client_min_messages TO 'panic'",
+        "name": "SCHEMA",
+        "connection_id": 72793420,
+        "binds": [
+          
+        ],
+        "connection_name": "read_slave",
+        "etype": "sql.active_record",
+        "eduration": 0.058432,
+        "estart": 1437835548.79266,
+        "efinish": 1437835548.792718
+      },
+      {
+        "sql": "SET standard_conforming_strings = on",
+        "name": "SCHEMA",
+        "connection_id": 72793420,
+        "binds": [
+          
+        ],
+        "connection_name": "read_slave",
+        "etype": "sql.active_record",
+        "eduration": 0.06289299999999999,
+        "estart": 1437835548.793049,
+        "efinish": 1437835548.793112
+      },
+      {
+        "sql": "SET client_min_messages TO 'notice'",
+        "name": "SCHEMA",
+        "connection_id": 72793420,
+        "binds": [
+          
+        ],
+        "connection_name": "read_slave",
+        "etype": "sql.active_record",
+        "eduration": 0.048219,
+        "estart": 1437835548.793418,
+        "efinish": 1437835548.793466
+      },
+      {
+        "sql": "SET time zone 'UTC'",
+        "name": "SCHEMA",
+        "connection_id": 72793420,
+        "binds": [
+          
+        ],
+        "connection_name": "read_slave",
+        "etype": "sql.active_record",
+        "eduration": 0.6422220000000001,
+        "estart": 1437835548.79411,
+        "efinish": 1437835548.794752
+      },
+      {
+        "sql": "SHOW TIME ZONE",
+        "name": "SCHEMA",
+        "connection_id": 72793420,
+        "binds": [
+          
+        ],
+        "connection_name": "read_slave",
+        "etype": "sql.active_record",
+        "eduration": 0.070231,
+        "estart": 1437835548.795119,
+        "efinish": 1437835548.79519
+      },
+      {
+        "sql": "            SELECT COUNT(*)\n            FROM pg_class c\n            LEFT JOIN pg_namespace n ON n.oid = c.relnamespace\n            WHERE c.relkind in ('v','r')\n            AND c.relname = 'channels'\n            AND n.nspname = ANY (current_schemas(false))\n",
+        "name": "SCHEMA",
+        "connection_id": 72793420,
+        "binds": [
+          
+        ],
+        "connection_name": "read_slave",
+        "etype": "sql.active_record",
+        "eduration": 1.310924,
+        "estart": 1437835548.796052,
+        "efinish": 1437835548.797362
+      },
+      {
+        "sql": "            SELECT a.attname, format_type(a.atttypid, a.atttypmod),\n                     pg_get_expr(d.adbin, d.adrelid), a.attnotnull, a.atttypid, a.atttypmod\n              FROM pg_attribute a LEFT JOIN pg_attrdef d\n                ON a.attrelid = d.adrelid AND a.attnum = d.adnum\n             WHERE a.attrelid = '\"channels\"'::regclass\n               AND a.attnum > 0 AND NOT a.attisdropped\n             ORDER BY a.attnum\n",
+        "name": "SCHEMA",
+        "connection_id": 72793420,
+        "binds": [
+          
+        ],
+        "connection_name": "read_slave",
+        "etype": "sql.active_record",
+        "eduration": 1.707077,
+        "estart": 1437835548.797842,
+        "efinish": 1437835548.799549
+      },
+      {
+        "sql": "SELECT  \"channels\".* FROM \"channels\"  WHERE \"channels\".\"id\" IS NULL LIMIT 1",
+        "name": "Channel Load",
+        "connection_id": 72793420,
+        "binds": [
+          
+        ],
+        "connection_name": "read_slave",
+        "etype": "sql.active_record",
+        "eduration": 1.074117,
+        "estart": 1437835548.800841,
+        "efinish": 1437835548.801915
+      },
+      {
+        "sql": "SELECT  \"channels\".* FROM \"channels\"  WHERE \"channels\".\"user_id\" = 1 ORDER BY created_at ASC LIMIT 1",
+        "name": "Channel Load",
+        "connection_id": 72793420,
+        "binds": [
+          
+        ],
+        "connection_name": "read_slave",
+        "etype": "sql.active_record",
+        "eduration": 1.971133,
+        "estart": 1437835548.815623,
+        "efinish": 1437835548.817594
+      },
+      {
+        "sql": "SELECT  \"channels\".* FROM \"channels\"  WHERE \"channels\".\"user_id\" = 1 AND \"channels\".\"being_deleted\" = 'f' AND \"channels\".\"default_channel\" = 't' ORDER BY created_at ASC LIMIT 1",
+        "name": "Channel Load",
+        "connection_id": 27250300,
+        "binds": [
+          
+        ],
+        "connection_name": null,
+        "etype": "sql.active_record",
+        "eduration": 2.922178,
+        "estart": 1437835548.871173,
+        "efinish": 1437835548.874095
+      },
+      {
+        "sql": "            SELECT COUNT(*)\n            FROM pg_class c\n            LEFT JOIN pg_namespace n ON n.oid = c.relnamespace\n            WHERE c.relkind in ('v','r')\n            AND c.relname = 'user_sessions_histories'\n            AND n.nspname = ANY (current_schemas(false))\n",
+        "name": "SCHEMA",
+        "connection_id": 27250300,
+        "binds": [
+          
+        ],
+        "connection_name": null,
+        "etype": "sql.active_record",
+        "eduration": 0.619565,
+        "estart": 1437835548.901213,
+        "efinish": 1437835548.901832
+      },
+      {
+        "sql": "          SELECT attr.attname\n          FROM pg_attribute attr\n          INNER JOIN pg_constraint cons ON attr.attrelid = cons.conrelid AND attr.attnum = cons.conkey[1]\n          WHERE cons.contype = 'p'\n            AND cons.conrelid = '\"user_sessions_histories\"'::regclass\n",
+        "name": "SCHEMA",
+        "connection_id": 27250300,
+        "binds": [
+          
+        ],
+        "connection_name": null,
+        "etype": "sql.active_record",
+        "eduration": 0.355716,
+        "estart": 1437835548.902292,
+        "efinish": 1437835548.902647
+      },
+      {
+        "sql": "            SELECT a.attname, format_type(a.atttypid, a.atttypmod),\n                     pg_get_expr(d.adbin, d.adrelid), a.attnotnull, a.atttypid, a.atttypmod\n              FROM pg_attribute a LEFT JOIN pg_attrdef d\n                ON a.attrelid = d.adrelid AND a.attnum = d.adnum\n             WHERE a.attrelid = '\"user_sessions_histories\"'::regclass\n               AND a.attnum > 0 AND NOT a.attisdropped\n             ORDER BY a.attnum\n",
+        "name": "SCHEMA",
+        "connection_id": 27250300,
+        "binds": [
+          
+        ],
+        "connection_name": null,
+        "etype": "sql.active_record",
+        "eduration": 0.25217,
+        "estart": 1437835548.903135,
+        "efinish": 1437835548.903387
+      },
+      {
+        "sql": "SELECT  1 AS one FROM \"user_sessions_histories\"  WHERE \"user_sessions_histories\".\"user_id\" = 1 LIMIT 1",
+        "name": "User::SessionsHistory Exists",
+        "connection_id": 27250300,
+        "binds": [
+          
+        ],
+        "connection_name": null,
+        "etype": "sql.active_record",
+        "eduration": 0.9153819999999999,
+        "estart": 1437835548.905671,
+        "efinish": 1437835548.906587
+      },
+      {
+        "sql": "UPDATE \"user_sessions_histories\" SET sessions = array_append(sessions, '2015-07-25 14:45:48') WHERE \"user_sessions_histories\".\"user_id\" = 1",
+        "name": "SQL",
+        "connection_id": 27250300,
+        "binds": [
+          
+        ],
+        "connection_name": null,
+        "etype": "sql.active_record",
+        "eduration": 18.533923,
+        "estart": 1437835548.911733,
+        "efinish": 1437835548.930267
+      },
+      {
+        "sql": "            SELECT a.attname, format_type(a.atttypid, a.atttypmod),\n                     pg_get_expr(d.adbin, d.adrelid), a.attnotnull, a.atttypid, a.atttypmod\n              FROM pg_attribute a LEFT JOIN pg_attrdef d\n                ON a.attrelid = d.adrelid AND a.attnum = d.adnum\n             WHERE a.attrelid = '\"raw_videos\"'::regclass\n               AND a.attnum > 0 AND NOT a.attisdropped\n             ORDER BY a.attnum\n",
+        "name": "SCHEMA",
+        "connection_id": 27250300,
+        "binds": [
+          
+        ],
+        "connection_name": null,
+        "etype": "sql.active_record",
+        "eduration": 0.914807,
+        "estart": 1437835549.330693,
+        "efinish": 1437835549.331608
+      },
+      {
+        "sql": "            SELECT a.attname, format_type(a.atttypid, a.atttypmod),\n                     pg_get_expr(d.adbin, d.adrelid), a.attnotnull, a.atttypid, a.atttypmod\n              FROM pg_attribute a LEFT JOIN pg_attrdef d\n                ON a.attrelid = d.adrelid AND a.attnum = d.adnum\n             WHERE a.attrelid = '\"oauth_applications\"'::regclass\n               AND a.attnum > 0 AND NOT a.attisdropped\n             ORDER BY a.attnum\n",
+        "name": "SCHEMA",
+        "connection_id": 27250300,
+        "binds": [
+          
+        ],
+        "connection_name": null,
+        "etype": "sql.active_record",
+        "eduration": 1.403179,
+        "estart": 1437835549.818359,
+        "efinish": 1437835549.819762
+      },
+      {
+        "sql": "            SELECT COUNT(*)\n            FROM pg_class c\n            LEFT JOIN pg_namespace n ON n.oid = c.relnamespace\n            WHERE c.relkind in ('v','r')\n            AND c.relname = 'oauth_applications'\n            AND n.nspname = ANY (current_schemas(false))\n",
+        "name": "SCHEMA",
+        "connection_id": 27250300,
+        "binds": [
+          
+        ],
+        "connection_name": null,
+        "etype": "sql.active_record",
+        "eduration": 0.436636,
+        "estart": 1437835549.821244,
+        "efinish": 1437835549.821681
+      },
+      {
+        "sql": "          SELECT attr.attname\n          FROM pg_attribute attr\n          INNER JOIN pg_constraint cons ON attr.attrelid = cons.conrelid AND attr.attnum = cons.conkey[1]\n          WHERE cons.contype = 'p'\n            AND cons.conrelid = '\"oauth_applications\"'::regclass\n",
+        "name": "SCHEMA",
+        "connection_id": 27250300,
+        "binds": [
+          
+        ],
+        "connection_name": null,
+        "etype": "sql.active_record",
+        "eduration": 0.360741,
+        "estart": 1437835549.82223,
+        "efinish": 1437835549.822591
+      },
+      {
+        "sql": "SELECT  1 AS one FROM \"channels\"  WHERE \"channels\".\"user_id\" = 1 AND \"channels\".\"is_promo_account\" = 't' LIMIT 1",
+        "name": "Channel Exists",
+        "connection_id": 27250300,
+        "binds": [
+          
+        ],
+        "connection_name": null,
+        "etype": "sql.active_record",
+        "eduration": 0.43171,
+        "estart": 1437835549.828891,
+        "efinish": 1437835549.829322
+      },
+      {
+        "sql": "            SELECT a.attname, format_type(a.atttypid, a.atttypmod),\n                     pg_get_expr(d.adbin, d.adrelid), a.attnotnull, a.atttypid, a.atttypmod\n              FROM pg_attribute a LEFT JOIN pg_attrdef d\n                ON a.attrelid = d.adrelid AND a.attnum = d.adnum\n             WHERE a.attrelid = '\"coubs\"'::regclass\n               AND a.attnum > 0 AND NOT a.attisdropped\n             ORDER BY a.attnum\n",
+        "name": "SCHEMA",
+        "connection_id": 27250300,
+        "binds": [
+          
+        ],
+        "connection_name": null,
+        "etype": "sql.active_record",
+        "eduration": 3.806246,
+        "estart": 1437835549.893389,
+        "efinish": 1437835549.897196
+      },
+      {
+        "sql": "            SELECT COUNT(*)\n            FROM pg_class c\n            LEFT JOIN pg_namespace n ON n.oid = c.relnamespace\n            WHERE c.relkind in ('v','r')\n            AND c.relname = 'coubs'\n            AND n.nspname = ANY (current_schemas(false))\n",
+        "name": "SCHEMA",
+        "connection_id": 27250300,
+        "binds": [
+          
+        ],
+        "connection_name": null,
+        "etype": "sql.active_record",
+        "eduration": 0.42062,
+        "estart": 1437835549.899127,
+        "efinish": 1437835549.899548
+      },
+      {
+        "sql": "          SELECT attr.attname\n          FROM pg_attribute attr\n          INNER JOIN pg_constraint cons ON attr.attrelid = cons.conrelid AND attr.attnum = cons.conkey[1]\n          WHERE cons.contype = 'p'\n            AND cons.conrelid = '\"coubs\"'::regclass\n",
+        "name": "SCHEMA",
+        "connection_id": 27250300,
+        "binds": [
+          
+        ],
+        "connection_name": null,
+        "etype": "sql.active_record",
+        "eduration": 0.351315,
+        "estart": 1437835549.900019,
+        "efinish": 1437835549.900371
+      },
+      {
+        "sql": "            SELECT a.attname, format_type(a.atttypid, a.atttypmod),\n                     pg_get_expr(d.adbin, d.adrelid), a.attnotnull, a.atttypid, a.atttypmod\n              FROM pg_attribute a LEFT JOIN pg_attrdef d\n                ON a.attrelid = d.adrelid AND a.attnum = d.adnum\n             WHERE a.attrelid = '\"coubs\"'::regclass\n               AND a.attnum > 0 AND NOT a.attisdropped\n             ORDER BY a.attnum\n",
+        "name": "SCHEMA",
+        "connection_id": 27250300,
+        "binds": [
+          
+        ],
+        "connection_name": null,
+        "etype": "sql.active_record",
+        "eduration": 3.729218,
+        "estart": 1437835549.947722,
+        "efinish": 1437835549.951452
+      },
+      {
+        "sql": "SHOW max_identifier_length",
+        "name": null,
+        "connection_id": 72793420,
+        "binds": [
+          
+        ],
+        "connection_name": "read_slave",
+        "etype": "sql.active_record",
+        "eduration": 0.320867,
+        "estart": 1437835549.975514,
+        "efinish": 1437835549.975835
+      },
+      {
+        "sql": "            SELECT COUNT(*)\n            FROM pg_class c\n            LEFT JOIN pg_namespace n ON n.oid = c.relnamespace\n            WHERE c.relkind in ('v','r')\n            AND c.relname = 'coubs'\n            AND n.nspname = ANY (current_schemas(false))\n",
+        "name": "SCHEMA",
+        "connection_id": 72793420,
+        "binds": [
+          
+        ],
+        "connection_name": "read_slave",
+        "etype": "sql.active_record",
+        "eduration": 0.502437,
+        "estart": 1437835549.977184,
+        "efinish": 1437835549.977686
+      },
+      {
+        "sql": "            SELECT a.attname, format_type(a.atttypid, a.atttypmod),\n                     pg_get_expr(d.adbin, d.adrelid), a.attnotnull, a.atttypid, a.atttypmod\n              FROM pg_attribute a LEFT JOIN pg_attrdef d\n                ON a.attrelid = d.adrelid AND a.attnum = d.adnum\n             WHERE a.attrelid = '\"coubs\"'::regclass\n               AND a.attnum > 0 AND NOT a.attisdropped\n             ORDER BY a.attnum\n",
+        "name": "SCHEMA",
+        "connection_id": 72793420,
+        "binds": [
+          
+        ],
+        "connection_name": "read_slave",
+        "etype": "sql.active_record",
+        "eduration": 2.412214,
+        "estart": 1437835549.978165,
+        "efinish": 1437835549.980577
+      },
+      {
+        "sql": "SELECT COUNT(*) AS count_all, date_trunc('day', coubs.created_at) AS date_trunc_day_coubs_created_at FROM \"coubs\"  WHERE \"coubs\".\"type\" IN ('Coub::Simple') AND (coubs.created_at > '2015-06-25 00:00:00.000000' AND coubs.created_at < '2015-07-25 23:59:59.999999') GROUP BY date_trunc('day', coubs.created_at) ORDER BY date_trunc('day', coubs.created_at)",
+        "name": null,
+        "connection_id": 72793420,
+        "binds": [
+          
+        ],
+        "connection_name": "read_slave",
+        "etype": "sql.active_record",
+        "eduration": 1.457748,
+        "estart": 1437835549.982759,
+        "efinish": 1437835549.984217
+      },
+      {
+        "sql": "SELECT COUNT(*) AS count_all, date_trunc('day', coubs.created_at) AS date_trunc_day_coubs_created_at FROM \"coubs\"  WHERE \"coubs\".\"type\" IN ('Coub::Simple') AND \"coubs\".\"uploaded_by_android_app\" = 't' AND (coubs.created_at > '2015-06-25 00:00:00.000000' AND coubs.created_at < '2015-07-25 23:59:59.999999') GROUP BY date_trunc('day', coubs.created_at) ORDER BY date_trunc('day', coubs.created_at)",
+        "name": null,
+        "connection_id": 72793420,
+        "binds": [
+          
+        ],
+        "connection_name": "read_slave",
+        "etype": "sql.active_record",
+        "eduration": 0.545913,
+        "estart": 1437835549.986009,
+        "efinish": 1437835549.986554
+      },
+      {
+        "sql": "SELECT COUNT(*) AS count_all, date_trunc('day', coubs.created_at) AS date_trunc_day_coubs_created_at FROM \"coubs\"  WHERE \"coubs\".\"type\" IN ('Coub::Simple') AND \"coubs\".\"uploaded_by_ios_app\" = 't' AND (coubs.created_at > '2015-06-25 00:00:00.000000' AND coubs.created_at < '2015-07-25 23:59:59.999999') GROUP BY date_trunc('day', coubs.created_at) ORDER BY date_trunc('day', coubs.created_at)",
+        "name": null,
+        "connection_id": 72793420,
+        "binds": [
+          
+        ],
+        "connection_name": "read_slave",
+        "etype": "sql.active_record",
+        "eduration": 0.490086,
+        "estart": 1437835549.98813,
+        "efinish": 1437835549.98862
+      },
+      {
+        "sql": "SELECT COUNT(*) AS count_all, date_trunc('day', coubs.created_at) AS date_trunc_day_coubs_created_at FROM \"coubs\"  WHERE \"coubs\".\"type\" IN ('Coub::Simple') AND \"coubs\".\"uploaded_by_web_editor\" = 't' AND (coubs.created_at > '2015-06-25 00:00:00.000000' AND coubs.created_at < '2015-07-25 23:59:59.999999') GROUP BY date_trunc('day', coubs.created_at) ORDER BY date_trunc('day', coubs.created_at)",
+        "name": null,
+        "connection_id": 72793420,
+        "binds": [
+          
+        ],
+        "connection_name": "read_slave",
+        "etype": "sql.active_record",
+        "eduration": 0.443806,
+        "estart": 1437835549.990139,
+        "efinish": 1437835549.990583
+      },
+      {
+        "sql": "SELECT \"channels\".* FROM \"channels\"  WHERE \"channels\".\"user_id\" = 1 AND \"channels\".\"being_deleted\" = 'f' ORDER BY channels.last_posted_to DESC NULLS LAST",
+        "name": "Channel Load",
+        "connection_id": 72793420,
+        "binds": [
+          
+        ],
+        "connection_name": "read_slave",
+        "etype": "sql.active_record",
+        "eduration": 0.613357,
+        "estart": 1437835549.999363,
+        "efinish": 1437835549.999976
+      },
+      {
+        "sql": "            SELECT a.attname, format_type(a.atttypid, a.atttypmod),\n                     pg_get_expr(d.adbin, d.adrelid), a.attnotnull, a.atttypid, a.atttypmod\n              FROM pg_attribute a LEFT JOIN pg_attrdef d\n                ON a.attrelid = d.adrelid AND a.attnum = d.adnum\n             WHERE a.attrelid = '\"backgrounds\"'::regclass\n               AND a.attnum > 0 AND NOT a.attisdropped\n             ORDER BY a.attnum\n",
+        "name": "SCHEMA",
+        "connection_id": 72793420,
+        "binds": [
+          
+        ],
+        "connection_name": "read_slave",
+        "etype": "sql.active_record",
+        "eduration": 0.501598,
+        "estart": 1437835550.00702,
+        "efinish": 1437835550.007521
+      },
+      {
+        "sql": "            SELECT COUNT(*)\n            FROM pg_class c\n            LEFT JOIN pg_namespace n ON n.oid = c.relnamespace\n            WHERE c.relkind in ('v','r')\n            AND c.relname = 'backgrounds'\n            AND n.nspname = ANY (current_schemas(false))\n",
+        "name": "SCHEMA",
+        "connection_id": 72793420,
+        "binds": [
+          
+        ],
+        "connection_name": "read_slave",
+        "etype": "sql.active_record",
+        "eduration": 0.35942,
+        "estart": 1437835550.008344,
+        "efinish": 1437835550.008704
+      },
+      {
+        "sql": "          SELECT attr.attname\n          FROM pg_attribute attr\n          INNER JOIN pg_constraint cons ON attr.attrelid = cons.conrelid AND attr.attnum = cons.conkey[1]\n          WHERE cons.contype = 'p'\n            AND cons.conrelid = '\"backgrounds\"'::regclass\n",
+        "name": "SCHEMA",
+        "connection_id": 72793420,
+        "binds": [
+          
+        ],
+        "connection_name": "read_slave",
+        "etype": "sql.active_record",
+        "eduration": 0.555432,
+        "estart": 1437835550.009208,
+        "efinish": 1437835550.009763
+      },
+      {
+        "sql": "SELECT \"backgrounds\".* FROM \"backgrounds\"  WHERE \"backgrounds\".\"channel_id\" IN (1) ORDER BY backgrounds.created_at DESC",
+        "name": "Background Load",
+        "connection_id": 72793420,
+        "binds": [
+          
+        ],
+        "connection_name": "read_slave",
+        "etype": "sql.active_record",
+        "eduration": 0.34265,
+        "estart": 1437835550.010813,
+        "efinish": 1437835550.011155
+      },
+      {
+        "sql": "            SELECT a.attname, format_type(a.atttypid, a.atttypmod),\n                     pg_get_expr(d.adbin, d.adrelid), a.attnotnull, a.atttypid, a.atttypmod\n              FROM pg_attribute a LEFT JOIN pg_attrdef d\n                ON a.attrelid = d.adrelid AND a.attnum = d.adnum\n             WHERE a.attrelid = '\"authentications\"'::regclass\n               AND a.attnum > 0 AND NOT a.attisdropped\n             ORDER BY a.attnum\n",
+        "name": "SCHEMA",
+        "connection_id": 72793420,
+        "binds": [
+          
+        ],
+        "connection_name": "read_slave",
+        "etype": "sql.active_record",
+        "eduration": 0.742708,
+        "estart": 1437835550.041909,
+        "efinish": 1437835550.042652
+      },
+      {
+        "sql": "            SELECT COUNT(*)\n            FROM pg_class c\n            LEFT JOIN pg_namespace n ON n.oid = c.relnamespace\n            WHERE c.relkind in ('v','r')\n            AND c.relname = 'authentications'\n            AND n.nspname = ANY (current_schemas(false))\n",
+        "name": "SCHEMA",
+        "connection_id": 72793420,
+        "binds": [
+          
+        ],
+        "connection_name": "read_slave",
+        "etype": "sql.active_record",
+        "eduration": 0.3838220000000001,
+        "estart": 1437835550.043439,
+        "efinish": 1437835550.043823
+      },
+      {
+        "sql": "          SELECT attr.attname\n          FROM pg_attribute attr\n          INNER JOIN pg_constraint cons ON attr.attrelid = cons.conrelid AND attr.attnum = cons.conkey[1]\n          WHERE cons.contype = 'p'\n            AND cons.conrelid = '\"authentications\"'::regclass\n",
+        "name": "SCHEMA",
+        "connection_id": 72793420,
+        "binds": [
+          
+        ],
+        "connection_name": "read_slave",
+        "etype": "sql.active_record",
+        "eduration": 0.354491,
+        "estart": 1437835550.044302,
+        "efinish": 1437835550.044656
+      },
+      {
+        "sql": "SELECT \"authentications\".* FROM \"authentications\"  WHERE \"authentications\".\"channel_id\" IN (1)",
+        "name": "Authentication Load",
+        "connection_id": 72793420,
+        "binds": [
+          
+        ],
+        "connection_name": "read_slave",
+        "etype": "sql.active_record",
+        "eduration": 0.485939,
+        "estart": 1437835550.045615,
+        "efinish": 1437835550.046101
+      },
+      {
+        "virtual_path": "editor/coubs/_sliding_doors_menu_item",
+        "etype": "!render_template.action_view",
+        "eduration": 1.234532,
+        "estart": 1437835550.090498,
+        "efinish": 1437835550.091733
+      },
+      {
+        "identifier": "/home/dev/apps/coub/current/app/views/editor/coubs/_sliding_doors_menu_item.haml",
+        "etype": "render_partial.action_view",
+        "eduration": 1.283189,
+        "estart": 1437835550.09049,
+        "efinish": 1437835550.091773
+      },
+      {
+        "virtual_path": "editor/coubs/_sliding_doors_menu_item",
+        "etype": "!render_template.action_view",
+        "eduration": 0.122758,
+        "estart": 1437835550.093079,
+        "efinish": 1437835550.093202
+      },
+      {
+        "identifier": "/home/dev/apps/coub/current/app/views/editor/coubs/_sliding_doors_menu_item.haml",
+        "etype": "render_partial.action_view",
+        "eduration": 0.14797,
+        "estart": 1437835550.093071,
+        "efinish": 1437835550.093219
+      },
+      {
+        "virtual_path": "editor/coubs/_sliding_doors_menu_item",
+        "etype": "!render_template.action_view",
+        "eduration": 0.121616,
+        "estart": 1437835550.094302,
+        "efinish": 1437835550.094423
+      },
+      {
+        "identifier": "/home/dev/apps/coub/current/app/views/editor/coubs/_sliding_doors_menu_item.haml",
+        "etype": "render_partial.action_view",
+        "eduration": 0.148259,
+        "estart": 1437835550.094294,
+        "efinish": 1437835550.094443
+      },
+      {
+        "virtual_path": "editor/coubs/_sliding_doors_menu_item",
+        "etype": "!render_template.action_view",
+        "eduration": 1.645702,
+        "estart": 1437835550.09551,
+        "efinish": 1437835550.097156
+      },
+      {
+        "identifier": "/home/dev/apps/coub/current/app/views/editor/coubs/_sliding_doors_menu_item.haml",
+        "etype": "render_partial.action_view",
+        "eduration": 1.675574,
+        "estart": 1437835550.095503,
+        "efinish": 1437835550.097179
+      },
+      {
+        "virtual_path": "editor/coubs/_sliding_doors_menu_item",
+        "etype": "!render_template.action_view",
+        "eduration": 0.136379,
+        "estart": 1437835550.098359,
+        "efinish": 1437835550.098496
+      },
+      {
+        "identifier": "/home/dev/apps/coub/current/app/views/editor/coubs/_sliding_doors_menu_item.haml",
+        "etype": "render_partial.action_view",
+        "eduration": 0.167543,
+        "estart": 1437835550.09835,
+        "efinish": 1437835550.098518
+      },
+      {
+        "virtual_path": "editor/coubs/_sliding_doors_menu_item",
+        "etype": "!render_template.action_view",
+        "eduration": 0.131113,
+        "estart": 1437835550.099617,
+        "efinish": 1437835550.099748
+      },
+      {
+        "identifier": "/home/dev/apps/coub/current/app/views/editor/coubs/_sliding_doors_menu_item.haml",
+        "etype": "render_partial.action_view",
+        "eduration": 0.167072,
+        "estart": 1437835550.099603,
+        "efinish": 1437835550.09977
+      },
+      {
+        "virtual_path": "editor/coubs/_sliding_doors_menu_item",
+        "etype": "!render_template.action_view",
+        "eduration": 0.123864,
+        "estart": 1437835550.100842,
+        "efinish": 1437835550.100965
+      },
+      {
+        "identifier": "/home/dev/apps/coub/current/app/views/editor/coubs/_sliding_doors_menu_item.haml",
+        "etype": "render_partial.action_view",
+        "eduration": 0.150028,
+        "estart": 1437835550.100833,
+        "efinish": 1437835550.100983
+      },
+      {
+        "virtual_path": "editor/coubs/_sliding_doors_menu_item",
+        "etype": "!render_template.action_view",
+        "eduration": 1.246867,
+        "estart": 1437835550.103933,
+        "efinish": 1437835550.10518
+      },
+      {
+        "identifier": "/home/dev/apps/coub/current/app/views/editor/coubs/_sliding_doors_menu_item.haml",
+        "etype": "render_partial.action_view",
+        "eduration": 1.279277,
+        "estart": 1437835550.103925,
+        "efinish": 1437835550.105204
+      },
+      {
+        "virtual_path": "editor/coubs/_sliding_doors_menu_item",
+        "etype": "!render_template.action_view",
+        "eduration": 0.277983,
+        "estart": 1437835550.106377,
+        "efinish": 1437835550.106656
+      },
+      {
+        "identifier": "/home/dev/apps/coub/current/app/views/editor/coubs/_sliding_doors_menu_item.haml",
+        "etype": "render_partial.action_view",
+        "eduration": 0.309089,
+        "estart": 1437835550.106369,
+        "efinish": 1437835550.106678
+      },
+      {
+        "virtual_path": "editor/coubs/_sliding_doors_menu_item",
+        "etype": "!render_template.action_view",
+        "eduration": 0.130513,
+        "estart": 1437835550.107801,
+        "efinish": 1437835550.107932
+      },
+      {
+        "identifier": "/home/dev/apps/coub/current/app/views/editor/coubs/_sliding_doors_menu_item.haml",
+        "etype": "render_partial.action_view",
+        "eduration": 0.156467,
+        "estart": 1437835550.107793,
+        "efinish": 1437835550.10795
+      },
+      {
+        "virtual_path": "editor/coubs/_sliding_doors_menu_item",
+        "etype": "!render_template.action_view",
+        "eduration": 0.132453,
+        "estart": 1437835550.108996,
+        "efinish": 1437835550.109128
+      },
+      {
+        "identifier": "/home/dev/apps/coub/current/app/views/editor/coubs/_sliding_doors_menu_item.haml",
+        "etype": "render_partial.action_view",
+        "eduration": 0.158305,
+        "estart": 1437835550.108988,
+        "efinish": 1437835550.109146
+      },
+      {
+        "virtual_path": "editor/coubs/_sliding_doors_menu_item",
+        "etype": "!render_template.action_view",
+        "eduration": 0.132524,
+        "estart": 1437835550.110249,
+        "efinish": 1437835550.110381
+      },
+      {
+        "identifier": "/home/dev/apps/coub/current/app/views/editor/coubs/_sliding_doors_menu_item.haml",
+        "etype": "render_partial.action_view",
+        "eduration": 0.160371,
+        "estart": 1437835550.11024,
+        "efinish": 1437835550.110401
+      },
+      {
+        "virtual_path": "editor/coubs/_sliding_doors_menu_item",
+        "etype": "!render_template.action_view",
+        "eduration": 0.13026,
+        "estart": 1437835550.11157,
+        "efinish": 1437835550.1117
+      },
+      {
+        "identifier": "/home/dev/apps/coub/current/app/views/editor/coubs/_sliding_doors_menu_item.haml",
+        "etype": "render_partial.action_view",
+        "eduration": 0.158778,
+        "estart": 1437835550.111562,
+        "efinish": 1437835550.111721
+      },
+      {
+        "virtual_path": "editor/coubs/_sliding_doors_menu_item",
+        "etype": "!render_template.action_view",
+        "eduration": 0.134738,
+        "estart": 1437835550.112908,
+        "efinish": 1437835550.113043
+      },
+      {
+        "identifier": "/home/dev/apps/coub/current/app/views/editor/coubs/_sliding_doors_menu_item.haml",
+        "etype": "render_partial.action_view",
+        "eduration": 0.162639,
+        "estart": 1437835550.1129,
+        "efinish": 1437835550.113062
+      },
+      {
+        "virtual_path": "editor/coubs/_sliding_doors_menu_item",
+        "etype": "!render_template.action_view",
+        "eduration": 0.115118,
+        "estart": 1437835550.114181,
+        "efinish": 1437835550.114296
+      },
+      {
+        "identifier": "/home/dev/apps/coub/current/app/views/editor/coubs/_sliding_doors_menu_item.haml",
+        "etype": "render_partial.action_view",
+        "eduration": 0.141979,
+        "estart": 1437835550.114171,
+        "efinish": 1437835550.114313
+      },
+      {
+        "virtual_path": "editor/coubs/_sliding_doors_menu_item",
+        "etype": "!render_template.action_view",
+        "eduration": 0.122852,
+        "estart": 1437835550.115363,
+        "efinish": 1437835550.115486
+      },
+      {
+        "identifier": "/home/dev/apps/coub/current/app/views/editor/coubs/_sliding_doors_menu_item.haml",
+        "etype": "render_partial.action_view",
+        "eduration": 0.149117,
+        "estart": 1437835550.115355,
+        "efinish": 1437835550.115504
+      },
+      {
+        "virtual_path": "editor/coubs/_sliding_doors_menu_item",
+        "etype": "!render_template.action_view",
+        "eduration": 0.120564,
+        "estart": 1437835550.116535,
+        "efinish": 1437835550.116656
+      },
+      {
+        "identifier": "/home/dev/apps/coub/current/app/views/editor/coubs/_sliding_doors_menu_item.haml",
+        "etype": "render_partial.action_view",
+        "eduration": 0.14522,
+        "estart": 1437835550.116528,
+        "efinish": 1437835550.116673
+      },
+      {
+        "virtual_path": "stats/_submenu",
+        "etype": "!render_template.action_view",
+        "eduration": 30.253447,
+        "estart": 1437835550.086583,
+        "efinish": 1437835550.116837
+      },
+      {
+        "identifier": "/home/dev/apps/coub/current/app/views/stats/_submenu.haml",
+        "etype": "render_partial.action_view",
+        "eduration": 30.283874,
+        "estart": 1437835550.086572,
+        "efinish": 1437835550.116856
+      },
+      {
+        "virtual_path": "stats/graphs",
+        "etype": "!render_template.action_view",
+        "eduration": 44.739706,
+        "estart": 1437835550.079496,
+        "efinish": 1437835550.124236
+      },
+      {
+        "identifier": "/home/dev/apps/coub/current/app/views/stats/graphs.haml",
+        "layout": "layouts/application",
+        "etype": "render_template.action_view",
+        "eduration": 44.796928,
+        "estart": 1437835550.079474,
+        "efinish": 1437835550.124271
+      },
+      {
+        "sql": "SELECT  \"channels\".* FROM \"channels\"  WHERE \"channels\".\"id\" IS NULL LIMIT 1",
+        "name": "Channel Load",
+        "connection_id": 72793420,
+        "binds": [
+          
+        ],
+        "connection_name": "read_slave",
+        "etype": "sql.active_record",
+        "eduration": 0.360967,
+        "estart": 1437835550.135067,
+        "efinish": 1437835550.135428
+      },
+      {
+        "sql": "SELECT  \"channels\".* FROM \"channels\"  WHERE \"channels\".\"user_id\" = 1 ORDER BY created_at ASC LIMIT 1",
+        "name": "Channel Load",
+        "connection_id": 72793420,
+        "binds": [
+          
+        ],
+        "connection_name": "read_slave",
+        "etype": "sql.active_record",
+        "eduration": 0.494673,
+        "estart": 1437835550.137131,
+        "efinish": 1437835550.137626
+      },
+      {
+        "virtual_path": "layouts/_app_head_javascripts",
+        "etype": "!render_template.action_view",
+        "eduration": 10.388285,
+        "estart": 1437835550.131316,
+        "efinish": 1437835550.141705
+      },
+      {
+        "identifier": "/home/dev/apps/coub/current/app/views/layouts/_app_head_javascripts.haml",
+        "etype": "render_partial.action_view",
+        "eduration": 10.452499,
+        "estart": 1437835550.131305,
+        "efinish": 1437835550.141758
+      },
+      {
+        "virtual_path": "layouts/_statistics",
+        "etype": "!render_template.action_view",
+        "eduration": 1.294307,
+        "estart": 1437835550.143679,
+        "efinish": 1437835550.144974
+      },
+      {
+        "identifier": "/home/dev/apps/coub/current/app/views/layouts/_statistics.html.erb",
+        "etype": "render_partial.action_view",
+        "eduration": 1.336184,
+        "estart": 1437835550.143668,
+        "efinish": 1437835550.145004
+      },
+      {
+        "virtual_path": "layouts/_honeybadger",
+        "etype": "!render_template.action_view",
+        "eduration": 1.577448,
+        "estart": 1437835550.14802,
+        "efinish": 1437835550.149597
+      },
+      {
+        "identifier": "/home/dev/apps/coub/current/app/views/layouts/_honeybadger.haml",
+        "etype": "render_partial.action_view",
+        "eduration": 1.616446,
+        "estart": 1437835550.148011,
+        "efinish": 1437835550.149627
+      },
+      {
+        "key": "views/http://_header_logos_key/76fdfc956dc33d072a05d6da7592d49f",
+        "etype": "read_fragment.action_controller",
+        "eduration": 1.171573,
+        "estart": 1437835550.22197,
+        "efinish": 1437835550.223142
+      },
+      {
+        "virtual_path": "search/_form",
+        "etype": "!render_template.action_view",
+        "eduration": 2.446653,
+        "estart": 1437835550.224475,
+        "efinish": 1437835550.226921
+      },
+      {
+        "identifier": "/home/dev/apps/coub/current/app/views/search/_form.haml",
+        "etype": "render_partial.action_view",
+        "eduration": 2.491716,
+        "estart": 1437835550.224463,
+        "efinish": 1437835550.226954
+      },
+      {
+        "key": "views/header_navigation_true_true_en_240615/76fdfc956dc33d072a05d6da7592d49f",
+        "etype": "read_fragment.action_controller",
+        "eduration": 1.146431,
+        "estart": 1437835550.227478,
+        "efinish": 1437835550.228625
+      },
+      {
+        "sql": "SELECT COUNT(*) FROM \"channels\"  WHERE \"channels\".\"user_id\" = 1",
+        "name": null,
+        "connection_id": 72793420,
+        "binds": [
+          
+        ],
+        "connection_name": "read_slave",
+        "etype": "sql.active_record",
+        "eduration": 0.416631,
+        "estart": 1437835550.237667,
+        "efinish": 1437835550.238083
+      },
+      {
+        "virtual_path": "layouts/_notifications_handler",
+        "etype": "!render_template.action_view",
+        "eduration": 10.033483,
+        "estart": 1437835550.230349,
+        "efinish": 1437835550.240382
+      },
+      {
+        "identifier": "/home/dev/apps/coub/current/app/views/layouts/_notifications_handler.haml",
+        "etype": "render_partial.action_view",
+        "eduration": 10.151071,
+        "estart": 1437835550.230336,
+        "efinish": 1437835550.240487
+      },
+      {
+        "key": "views/header_create_button_en/76fdfc956dc33d072a05d6da7592d49f",
+        "etype": "read_fragment.action_controller",
+        "eduration": 1.830236,
+        "estart": 1437835550.242777,
+        "efinish": 1437835550.244607
+      },
+      {
+        "virtual_path": "layouts/_header",
+        "etype": "!render_template.action_view",
+        "eduration": 94.545192,
+        "estart": 1437835550.15154,
+        "efinish": 1437835550.246085
+      },
+      {
+        "identifier": "/home/dev/apps/coub/current/app/views/layouts/_header.haml",
+        "etype": "render_partial.action_view",
+        "eduration": 94.580619,
+        "estart": 1437835550.151531,
+        "efinish": 1437835550.246111
+      },
+      {
+        "key": "views/footer_navigation_in_full_true_mode_for_users/1-20150618140035_user_10/7802364ab07fb5644eced951754a3b25",
+        "etype": "read_fragment.action_controller",
+        "eduration": 1.244714,
+        "estart": 1437835550.253299,
+        "efinish": 1437835550.254543
+      },
+      {
+        "virtual_path": "layouts/_footer",
+        "etype": "!render_template.action_view",
+        "eduration": 6.684557,
+        "estart": 1437835550.248142,
+        "efinish": 1437835550.254826
+      },
+      {
+        "identifier": "/home/dev/apps/coub/current/app/views/layouts/_footer.haml",
+        "etype": "render_partial.action_view",
+        "eduration": 6.725812,
+        "estart": 1437835550.248128,
+        "efinish": 1437835550.254854
+      },
+      {
+        "virtual_path": "shared/_js_breakpoints",
+        "etype": "!render_template.action_view",
+        "eduration": 1.464383,
+        "estart": 1437835550.257623,
+        "efinish": 1437835550.259087
+      },
+      {
+        "identifier": "/home/dev/apps/coub/current/app/views/shared/_js_breakpoints.haml",
+        "etype": "render_partial.action_view",
+        "eduration": 1.520462,
+        "estart": 1437835550.25761,
+        "efinish": 1437835550.259131
+      },
+      {
+        "key": "views/foot_js_150144041726544_key/95097b7bf49a3485f1382283af0c5e43",
+        "etype": "read_fragment.action_controller",
+        "eduration": 1.234189,
+        "estart": 1437835550.265608,
+        "efinish": 1437835550.266842
+      },
+      {
+        "key": "views/foot_session_stats_key/95097b7bf49a3485f1382283af0c5e43",
+        "etype": "read_fragment.action_controller",
+        "eduration": 1.108446,
+        "estart": 1437835550.267395,
+        "efinish": 1437835550.268504
+      },
+      {
+        "virtual_path": "layouts/_ab_test_params",
+        "etype": "!render_template.action_view",
+        "eduration": 2.946399,
+        "estart": 1437835550.269854,
+        "efinish": 1437835550.2728
+      },
+      {
+        "identifier": "/home/dev/apps/coub/current/app/views/layouts/_ab_test_params.haml",
+        "etype": "render_partial.action_view",
+        "eduration": 3.002292,
+        "estart": 1437835550.269841,
+        "efinish": 1437835550.272844
+      },
+      {
+        "virtual_path": "layouts/_foot",
+        "etype": "!render_template.action_view",
+        "eduration": 12.39099,
+        "estart": 1437835550.260689,
+        "efinish": 1437835550.273081
+      },
+      {
+        "identifier": "/home/dev/apps/coub/current/app/views/layouts/_foot.haml",
+        "etype": "render_partial.action_view",
+        "eduration": 12.425038,
+        "estart": 1437835550.260678,
+        "efinish": 1437835550.273103
+      },
+      {
+        "virtual_path": "layouts/_stats_events",
+        "etype": "!render_template.action_view",
+        "eduration": 0.654197,
+        "estart": 1437835550.274938,
+        "efinish": 1437835550.275592
+      },
+      {
+        "identifier": "/home/dev/apps/coub/current/app/views/layouts/_stats_events.html.erb",
+        "etype": "render_partial.action_view",
+        "eduration": 0.690852,
+        "estart": 1437835550.274926,
+        "efinish": 1437835550.275617
+      },
+      {
+        "virtual_path": "layouts/_site_only_analytics",
+        "etype": "!render_template.action_view",
+        "eduration": 0.6172000000000001,
+        "estart": 1437835550.277014,
+        "efinish": 1437835550.277632
+      },
+      {
+        "identifier": "/home/dev/apps/coub/current/app/views/layouts/_site_only_analytics.html.erb",
+        "etype": "render_partial.action_view",
+        "eduration": 0.655003,
+        "estart": 1437835550.277003,
+        "efinish": 1437835550.277658
+      },
+      {
+        "virtual_path": "layouts/application",
+        "etype": "!render_template.action_view",
+        "eduration": 154.497184,
+        "estart": 1437835550.124411,
+        "efinish": 1437835550.278908
+      }
+    ],
+    "time": "2015-07-25T14:45:50+00:00",
+    "start": 1437835548.726642,
+    "end": 1437835550.279088,
+    "duration": 1552.445491,
+    "event_name": "process_action.action_controller",
+    "meta": {
+      "client_version": "0.0.4",
+      "rails_version": "3.2.22"
+    }
+  }
+}
