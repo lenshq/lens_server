@@ -22,73 +22,7 @@ class Parsers::Rails::Rails3
 
   def parse_records(data)
     data.map do |record|
-      case record[:etype]
-      when 'sql.active_record'
-        fill_sql(record)
-      when '!render_template.action_view'
-        nil #fill_render_template!(record)
-      when 'render_template.action_view'
-        fill_render_template(record)
-      when 'render_partial.action_view'
-        fill_render_partial(record)
-      when 'read_fragment.action_controller'
-        fill_read_fragment(record)
-      else
-        p record[:etype]
-      end
+      Normalizer.new(record).normalize
     end.compact
-  end
-
-  def fill_read_fragment(record)
-    {
-      type: :cache_fetch,
-      content: record[:key]
-    }.merge(base_record_details(record))
-  end
-
-  def fill_render_partial(record)
-    identifier = record[:identifier].split('/')
-    identifier.slice!(0, identifier.index('app'))
-    path = identifier.join('/')
-    {
-      type: :partial,
-      content: path
-    }.merge(base_record_details(record))
-  end
-
-  def fill_render_template(record)
-    identifier = record[:identifier].split('/')
-    identifier.slice!(0, identifier.index('app'))
-    path = identifier.join('/')
-    {
-      type: :template,
-      content: path,
-      layout: record[:layout],
-    }.merge(base_record_details(record))
-  end
-
-  def fill_render_template!(record)
-    childs = []
-    {
-      type: :template,
-      content: record[:virtual_path],
-      childrens: childs
-    }.merge(base_record_details(record))
-  end
-
-  def fill_sql(record)
-    {
-      type: :sql,
-      content: PgQuery.normalize(record[:sql]),
-      source: record[:name] == 'SCHEMA' ? 'Rails' : 'Application'
-    }.merge(base_record_details(record))
-  end
-
-  def base_record_details(record)
-    {
-      duration: record[:eduration],
-      start: record[:estart],
-      finish: record[:efinish]
-    }
   end
 end
