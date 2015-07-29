@@ -20,6 +20,8 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.1)
+    active_model_serializers (0.10.0.rc2)
+      activemodel (>= 4.0)
     activejob (4.2.1)
       activesupport (= 4.2.1)
       globalid (>= 0.3.0)
@@ -148,6 +150,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_model_serializers (= 0.10.0rc2)
   database_cleaner
   factory_girl_rails
   pg
@@ -162,4 +165,4 @@ DEPENDENCIES
   unicorn
 
 BUNDLED WITH
-   1.10.4
+   1.10.6
