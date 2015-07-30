@@ -6,7 +6,7 @@ gem 'rails-api'
 gem 'pg'
 
 gem 'unicorn'
-
+gem 'omniauth-github'
 gem 'pg_query'
 
 group :development, :test do
