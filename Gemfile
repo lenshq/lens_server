@@ -10,9 +10,7 @@ gem 'omniauth-github'
 gem 'pg_query'
 
 group :development, :test do
-  gem 'pry'
-  gem 'pry-rails'
-  gem 'pry-nav'
+  gem 'pry-byebug'
 end
 
 group :test do

@@ -38,7 +38,10 @@ GEM
       tzinfo (~> 1.1)
     arel (6.0.2)
     builder (3.2.2)
+    byebug (4.0.5)
+      columnize (= 0.9.0)
     coderay (1.1.0)
+    columnize (0.9.0)
     database_cleaner (1.4.1)
     diff-lcs (1.2.5)
     docile (1.1.5)
@@ -92,10 +95,9 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    pry-nav (0.2.4)
-      pry (>= 0.9.10, < 0.11.0)
-    pry-rails (0.3.4)
-      pry (>= 0.9.10)
+    pry-byebug (3.1.0)
+      byebug (~> 4.0)
+      pry (~> 0.10)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -175,9 +177,7 @@ DEPENDENCIES
   omniauth-github
   pg
   pg_query
-  pry
-  pry-nav
-  pry-rails
+  pry-byebug
   rails (= 4.2.1)
   rails-api
   rspec-rails (~> 3.0)
