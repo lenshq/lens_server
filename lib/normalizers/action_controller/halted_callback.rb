@@ -1,8 +1,8 @@
 class Normalizers::ActionController
-  class ProcessAction < Normalizers::Base
+  class HaltedCallback < Normalizers::Base
     class << self
       def type
-        'app.controller.action.finish'.freeze
+        'app.controller.callback'.freeze
       end
 
       def normalize(record)

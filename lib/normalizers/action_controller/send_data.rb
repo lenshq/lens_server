@@ -1,8 +1,8 @@
 class Normalizers::ActionController
-  class ProcessAction < Normalizers::Base
+  class SendData < Normalizers::Base
     class << self
       def type
-        'app.controller.action.finish'.freeze
+        'app.controller.send_data'.freeze
       end
 
       def normalize(record)

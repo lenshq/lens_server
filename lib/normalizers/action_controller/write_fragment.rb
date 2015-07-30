@@ -1,8 +1,8 @@
 class Normalizers::ActionController
-  class ProcessAction < Normalizers::Base
+  class WriteFragment < Normalizers::Base
     class << self
       def type
-        'app.controller.action.finish'.freeze
+        'app.cache.write.fragment'.freeze
       end
 
       def normalize(record)

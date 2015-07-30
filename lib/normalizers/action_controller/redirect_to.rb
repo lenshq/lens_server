@@ -1,8 +1,8 @@
 class Normalizers::ActionController
-  class ProcessAction < Normalizers::Base
+  class RedirectTo < Normalizers::Base
     class << self
       def type
-        'app.controller.action.finish'.freeze
+        'app.controller.redirect'.freeze
       end
 
       def normalize(record)
