@@ -16,6 +16,16 @@ ActiveRecord::Schema.define(version: 20150730194638) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "applications", force: :cascade do |t|
+    t.string   "title",       null: false
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "token",       null: false
+  end
+
+  add_index "applications", ["token"], name: "index_applications_on_token", unique: true, using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email"
     t.datetime "created_at", null: false

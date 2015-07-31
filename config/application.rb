@@ -27,6 +27,11 @@ module LensServer
       helpers
     ).map { |path| config.root.join('lib', path) }
 
+    
+    config.autoload_paths += %w(
+      serializers
+    ).map { |path| config.root.join('app', path) }
+
     config.api_only = false
   end
 end
