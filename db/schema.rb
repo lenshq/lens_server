@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150817181839) do
+ActiveRecord::Schema.define(version: 20150817221127) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,26 @@ ActiveRecord::Schema.define(version: 20150817181839) do
   end
 
   add_index "applications", ["token"], name: "index_applications_on_token", unique: true, using: :btree
+
+  create_table "events", force: :cascade do |t|
+    t.integer  "page_id"
+    t.string   "event_type"
+    t.text     "content"
+    t.float    "duration"
+    t.integer  "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "pages", force: :cascade do |t|
+    t.integer  "application_id"
+    t.string   "controller"
+    t.string   "action"
+    t.float    "duration"
+    t.integer  "events_count"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
 
   create_table "raw_events", force: :cascade do |t|
     t.integer  "application_id"
