@@ -9,6 +9,7 @@ gem 'pg'
 gem 'unicorn'
 gem 'omniauth-github'
 gem 'pg_query'
+gem 'aasm'
 
 group :development, :test do
   gem 'pry-byebug'

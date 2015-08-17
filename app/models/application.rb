@@ -1,4 +1,6 @@
 class Application < ActiveRecord::Base
+  has_many :raw_events, dependent: :destroy
+
   validates :title, presence: true
   validates :token, presence: true, uniqueness: true
 
