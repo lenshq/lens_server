@@ -1,28 +1,36 @@
-class Parsers::Rails::Rails3
-  def initialize(row_data)
-    @row_data = JSON.parse(row_data).with_indifferent_access
-    @result = {}
-  end
+require 'json'
+require 'normalizer'
 
-  def parse
-    @result[:meta] =
-      {
-        controller: @row_data[:data][:controller],
-        action: @row_data[:data][:action],
-        url: @row_data[:data][:url],
-        start: @row_data[:data][:start],
-        finish: @row_data[:data][:end],
-        duration: @row_data[:data][:duration]
-      }
+module Parsers
+  module Rails
+    class Rails3
+      def initialize(row_data)
+        @row_data = ::JSON.parse(row_data).with_indifferent_access
+        @result = {}
+      end
 
-    @result[:details] = parse_records(@row_data[:data][:records])
+      def parse
+        wrapped_data = @raw_data[:data]
+        @result[:meta] =
+          {
+            controller: wrapped_data[:controller],
+            action: wrapped_data[:action],
+            url: wrapped_data[:url],
+            start: wrapped_data[:start],
+            finish: wrapped_data[:end],
+            duration: wrapped_data[:duration]
+          }
 
-    @result
-  end
+        @result[:details] = parse_records(wrapped_data[:records])
 
-  def parse_records(data)
-    data.map do |record|
-      Normalizer.new(record).normalize
-    end.compact
+        @result
+      end
+
+      def parse_records(data)
+        data.map do |record|
+          ::Normalizer.new(record).normalize
+        end.compact
+      end
+    end
   end
 end
