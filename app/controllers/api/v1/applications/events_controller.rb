@@ -1,14 +1,8 @@
 module Api::V1::Applications
   class EventsController < Api::V1::Applications::ApplicationController
     def create
-      event = application.raw_events.create(raw_event_params)
+      event = StoreRawEvent.call(application, params[:data].to_json)
       render json: event
-    end
-
-    private
-
-    def raw_event_params
-      { data: params[:data].to_json }
     end
   end
 end
