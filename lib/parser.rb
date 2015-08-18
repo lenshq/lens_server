@@ -12,7 +12,6 @@ class Parser
                  path_parts = ['parsers']
                  meta = @data[:meta]
 
-
                  if meta[:rails_version].present?
                    path_parts << 'rails'
                    path_parts << "rails#{meta[:rails_version].split('.').first}"

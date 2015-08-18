@@ -4,8 +4,8 @@ require 'normalizer'
 module Parsers
   module Rails
     class Rails3
-      def initialize(row_data)
-        @row_data = ::JSON.parse(row_data).with_indifferent_access
+      def initialize(raw_data)
+        @raw_data = ::JSON.parse(raw_data).with_indifferent_access
         @result = {}
       end
 
