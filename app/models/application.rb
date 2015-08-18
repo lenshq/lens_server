@@ -1,5 +1,6 @@
 class Application < ActiveRecord::Base
   has_many :raw_events, dependent: :destroy
+  has_many :event_sources, dependent: :destroy
   has_many :pages, dependent: :destroy
   has_many :events, through: :pages
 
