@@ -3,6 +3,7 @@ class Application < ActiveRecord::Base
   has_many :pages, dependent: :destroy
   has_many :events, through: :pages
 
+  validates :domain, presence: true, uniqueness: true
   validates :title, presence: true
   validates :token, presence: true, uniqueness: true
 
