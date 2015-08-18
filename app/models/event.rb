@@ -1,5 +1,6 @@
 class Event < ActiveRecord::Base
   belongs_to :application
+  belongs_to :page
 
   validates :page, presence: true
   validates :event_type, presence: true

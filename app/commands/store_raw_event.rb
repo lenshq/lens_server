@@ -6,9 +6,7 @@ class StoreRawEvent
 
   def call
     event = @application.raw_events.build(@data)
-    if event.save
-      # enqueue background task
-    end
+    ParseRawEventJob.perform_async(event.id) if event.save
     event
   end
 

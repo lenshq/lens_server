@@ -1,5 +1,6 @@
 class Page < ActiveRecord::Base
   belongs_to :application
+  has_many :events, dependent: :destroy
 
   validates :application, presence: true
   validates :controller, presence: true

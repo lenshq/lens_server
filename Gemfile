@@ -9,9 +9,14 @@ gem 'pg'
 gem 'unicorn'
 gem 'omniauth-github'
 gem 'pg_query'
+
+# State machine
 gem 'aasm'
 
+gem 'sidekiq'
+
 group :development, :test do
+  gem 'pry-rails'
   gem 'pry-byebug'
 end
 

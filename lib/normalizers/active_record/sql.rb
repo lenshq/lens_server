@@ -8,8 +8,10 @@ module Normalizers::ActiveRecord
       def normalize(record)
         source = ['SCHEMA', 'CACHE'].include?(record[:name]) ? 'rails' : 'app'
 
+        sql = record[:sql].dup
+        sql.gsub!('`', '"')
         {
-          content: cleanup(PgQuery.normalize(record[:sql])),
+          content: cleanup(PgQuery.normalize(sql)),
           source: source
         }.merge(super)
       end
