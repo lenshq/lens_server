@@ -3,10 +3,12 @@ Rails.application.routes.draw do
 
   get '/auth/github/callback', to: 'sessions#create'
 
-  scope module: :api do
-    namespace :v1 do
-      resources :applications
-      resources :events, only: [:create]
+  namespace :api do
+    scope module: :api do
+      namespace :v1 do
+        resources :applications
+        resources :events, only: [:create]
+      end
     end
   end
 
