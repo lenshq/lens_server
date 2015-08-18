@@ -2,8 +2,8 @@ module Api
   module V1
     class EventsController < Api::V1::ApplicationController
       def create
-        event = StoreRawEvent.call(application, params[:data].to_json)
-        render json: event
+        StoreRawEvent.call(application, params[:data].to_json)
+        render json: { status: :ok }
       end
 
       private
