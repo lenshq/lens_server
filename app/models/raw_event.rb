@@ -2,6 +2,7 @@ class RawEvent < ActiveRecord::Base
   include AASM
 
   belongs_to :application
+  has_one :page, dependent: :destroy
 
   validates :application, presence: true
   validates :data, presence: true

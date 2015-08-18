@@ -9,7 +9,7 @@ class ParseRawEventJob < BaseJob
       details = parsed_data[:details]
 
       application = re.application
-      page = application.pages.create(controller: meta[:controller], action: meta[:action], duration: meta[:duration])
+      page = application.pages.create(controller: meta[:controller], action: meta[:action], duration: meta[:duration], raw_event_id: re.id)
       details.each_with_index do |row, index|
         page.events.create(event_type: row[:type],
                            content: row[:content],
