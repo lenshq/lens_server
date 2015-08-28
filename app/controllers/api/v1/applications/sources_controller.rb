@@ -5,7 +5,8 @@ module Api
         def index
           sources = EventSourceFinder.new(application: application, filter_options: {}).get
 
-          render json: { event_sources: sources[:event_sources], pages: sources[:pages] }, each_serializer: EventSourceSerializer
+          response.headers["Access-Control-Allow-Origin"] = "*"
+          render json: { event_sources: sources[:event_sources].map { |es| EventSourceSerializer.new(es).as_json }, pages: sources[:pages] }
         end
 
         def show

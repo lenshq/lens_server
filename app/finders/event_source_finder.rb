@@ -27,7 +27,7 @@ class EventSourceFinder
     ) d LEFT JOIN pages ON date_trunc('hour', pages.created_at) = d.date GROUP BY d.date ORDER BY d.date ASC;
     "
 
-    ActiveRecord::Base.connection.execute(sql).values.flatten
+    ActiveRecord::Base.connection.execute(sql).values.map {|k,v| { date: k, count: v} }
   end
 
   def default_filter_options
