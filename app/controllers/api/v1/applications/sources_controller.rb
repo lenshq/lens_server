@@ -3,9 +3,9 @@ module Api
     module Applications
       class SourcesController < Api::V1::Applications::ApplicationController
         def index
-          sources = application.event_sources
+          sources = EventSourceFinder.new(application: application, filter_options: {}).get
 
-          render json: sources, each_serializer: EventSourceSerializer
+          render json: { event_sources: sources[:event_sources], pages: sources[:pages] }, each_serializer: EventSourceSerializer
         end
 
         def show

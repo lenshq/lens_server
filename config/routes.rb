@@ -5,7 +5,11 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :applications
+      resources :applications do
+        scope module: :applications do
+          resources :sources
+        end
+      end
       resources :events, only: [:create]
     end
   end
