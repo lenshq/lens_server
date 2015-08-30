@@ -1,0 +1,33 @@
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "bootstrap-material-design";
+
+.page--index {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.promo__content {
+  margin-bottom: 3em;
+}
+
+.promo__title {
+  margin: 0;
+  font-size: 4em;
+  text-transform: uppercase;
+  text-shadow: rgba(0, 0, 0, 0.3) 0.1em 0.2em 0;
+}
+
+.promo__desc {
+  margin: 0 0 1em 0;
+}
+
+.logo {
+  background: url(logo.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}

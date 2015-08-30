@@ -6,9 +6,16 @@ gem 'active_model_serializers', '= 0.10.0rc2' # TODO: fix it after release!
 
 gem 'pg'
 
+gem 'jquery-rails'
+gem 'sass-rails'
+gem 'uglifier'
+
 gem 'unicorn'
 gem 'omniauth-github'
 gem 'pg_query'
+gem 'haml-rails'
+gem 'bootstrap-sass'
+gem 'bootstrap-material-design'
 
 # State machine
 gem 'aasm'

@@ -1,5 +1,5 @@
 module Api
-  class ApplicationController < ::ApplicationController
+  class ApplicationController < ::ActionController::API
 
     protected
 

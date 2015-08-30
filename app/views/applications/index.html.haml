@@ -1,0 +1,14 @@
+%h2 Applications
+
+= link_to 'Create application', new_application_path, class: 'btn btn-primary'
+
+%table.table.table-striped.table-hover
+  %tbody
+    - @applications.each do |application|
+      %tr
+        %td= link_to application.title, application_path(application)
+        %td
+          = link_to edit_application_path(application) do
+            %i.mdi-editor-mode-edit
+          = link_to application_path(application), method: :delete, confirm: 'Are you sure?' do
+            %i.mdi-action-delete
