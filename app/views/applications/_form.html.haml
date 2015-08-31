@@ -1,0 +1,17 @@
+= form_for @application, html: { class: 'form-horizontal' } do |f|
+  %fieldset
+    .form-group
+      = label :domain, 'Domain', class: 'col-lg-2 control-label'
+      .col-lg-10
+        = f.text_field :domain, placeholder: "lenshq.pro", class: 'form-control'
+    .form-group
+      = label :title, 'Title', class: 'col-lg-2 control-label'
+      .col-lg-10
+        = f.text_field :title, placeholder: "Lens HQ App", class: 'form-control'
+    .form-group
+      = label :description, 'Description', class: 'col-lg-2 control-label'
+      .col-lg-10
+        = f.text_area :description, placeholder: "Lens HQ super duper mega app!", class: 'form-control'
+    .form-group
+      .col-lg-10.col-lg-offset-2
+        = f.submit 'Submit', class: 'btn btn-primary'
