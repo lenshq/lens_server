@@ -37,7 +37,7 @@ class ApplicationsController < ApplicationController
   def destroy
     @application = current_user.applications.find params[:id]
     @application.destroy
-    redirect_to :index
+    redirect_to applications_path
   end
 
   private
