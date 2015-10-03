@@ -1,0 +1,11 @@
+= form_for :collaborator, path: application_team_index_path(@application), method: :post, html: { class: 'form-horizontal' } do |f|
+  %fieldset
+    .form-group
+      .col-md-4
+        = label :user, Application.human_attribute_name(:collaborator), class: 'col-lg-2 control-label'
+      .col-md-8
+        = f.select :email, @avaliable_collaborators.map { |c| [c.name, c.email] }, { include_blank: true }, class: 'form-control'
+
+    .form-group
+      .col-lg-10.col-lg-offset-2
+        = f.submit t('.submit'), class: 'btn btn-primary'
