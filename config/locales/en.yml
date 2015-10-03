@@ -33,3 +33,7 @@ en:
   application:
     title: "Title"
     domain: "Domain"
+
+  applications:
+    applications:
+      shure: "Are you sure?"
