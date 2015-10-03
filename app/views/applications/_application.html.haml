@@ -1,12 +1,16 @@
-%p
-  Title:
-  = application.title
-%p
-  Domain:
-  = application.domain
-%p
-  Description:
-  = application.description
-%p
-  Token:
-  = application.token
+%table.table.table-striped.table-hover
+  %tbody
+    %tr
+      %td Title
+      %td= application.title
+
+    %tr
+      %td Domain
+      %td= application.domain
+
+    %tr
+      %td Description
+      %td= application.description
+
+    %tr
+      %td Instructions

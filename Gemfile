@@ -22,6 +22,8 @@ gem 'aasm'
 
 gem 'sidekiq'
 
+gem 'rails-i18n', '~> 4.0.0'
+
 group :development, :test do
   gem 'pry-rails'
   gem 'pry-byebug'
