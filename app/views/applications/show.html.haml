@@ -3,7 +3,13 @@
     %h2= @application.title
 
   .panel-body
-    = render @application
+    .alert.alert-dismissable.alert-info
+      = t('.token', token: @application.token)
+    .row
+      .col-md-8
+        = t('graphs')
+      .col-md-4
+        = render @application
 
   .panel-footer
     = link_to t('.back'), applications_path

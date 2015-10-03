@@ -22,6 +22,6 @@
                     = link_to application_path(application), method: :delete, confirm: 'Are you sure?' do
                       %i.mdi-action-delete
     - else
-      .alertalert-dismissable.alert-info
+      .alert.alert-dismissable.alert-info
         = t('.no_applications_yet')
     = link_to t('.new'), new_application_path, class: 'btn btn-primary'

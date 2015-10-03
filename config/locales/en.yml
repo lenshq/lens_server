@@ -13,6 +13,7 @@ en:
       new: "Create new application"
       no_applications_yet: "Here you will see a list of applications"
     show:
+      token: "You must use this token: %{token}"
       back: "Back"
     new:
       new_application: "Create new application"
