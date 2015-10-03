@@ -23,8 +23,8 @@ class EventSourceFinder
   def get_pages
     sql = "
     SELECT d.date, COUNT(pages.id) FROM (
-      SELECT * FROM generate_series(date_trunc('hour', '#{@filter_options[:from_date].to_s(:db)}'::timestamp with time zone),date_trunc('hour', '#{@filter_options[:to_date].to_s(:db)}'::text::date::timestamp with time zone), '1 hour') date_trunc(date)
-    ) d LEFT JOIN pages ON date_trunc('hour', pages.created_at) = d.date GROUP BY d.date ORDER BY d.date ASC;
+      SELECT * FROM generate_series(date_trunc('#{@filter_options[:period]}', '#{@filter_options[:from_date].to_s(:db)}'::timestamp with time zone),date_trunc('#{@filter_options[:period]}', '#{@filter_options[:to_date].to_s(:db)}'::text::date::timestamp with time zone), '1 #{@filter_options[:period]}') date_trunc(date)
+    ) d LEFT JOIN pages ON date_trunc('#{@filter_options[:period]}', pages.created_at) = d.date GROUP BY d.date ORDER BY d.date ASC;
     "
 
     ActiveRecord::Base.connection.execute(sql).values.map {|k,v| { date: k, count: v} }
@@ -33,8 +33,9 @@ class EventSourceFinder
   def default_filter_options
     {
       from_date: 1.week.ago,
-      to_date: Time.now
-    }
+      to_date: Time.now,
+      period: 'hour'
+    }.with_indifferent_access
   end
 
   def filter_sources(scope)
