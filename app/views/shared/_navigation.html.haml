@@ -1,0 +1,48 @@
+.navbar.navbar-default
+  .navbar-header
+    %button.navbar-toggle{"data-target" => ".navbar-responsive-collapse", "data-toggle" => "collapse", :type => "button"}
+      %span.icon-bar
+      %span.icon-bar
+      %span.icon-bar
+    = link_to 'LensHQ', root_path, class: 'navbar-brand'
+
+  .navbar-collapse.collapse.navbar-responsive-collapse
+    %ul.nav.navbar-nav
+      = navigation_element t('navigation.applications'), applications_path
+      -# = navigation_element "Settings", applications_path
+      -# %li.dropdown
+      -#   %a.dropdown-toggle{"data-target" => "#", "data-toggle" => "dropdown", :href => "bootstrap-elements.html"}
+      -#     Dropdown
+      -#     %b.caret
+      -#   %ul.dropdown-menu
+      -#     %li
+      -#       %a{:href => "javascript:void(0)"} Action
+      -#     %li
+      -#       %a{:href => "javascript:void(0)"} Another action
+      -#     %li
+      -#       %a{:href => "javascript:void(0)"} Something else here
+      -#     %li.divider
+      -#     %li.dropdown-header Dropdown header
+      -#     %li
+      -#       %a{:href => "javascript:void(0)"} Separated link
+      -#     %li
+      -#       %a{:href => "javascript:void(0)"} One more separated link
+    -# %form.navbar-form.navbar-left
+    -#   %input.form-control.col-lg-8{:placeholder => "Search", :type => "text"}/
+    -# %ul.nav.navbar-nav.navbar-right
+    -#   %li
+    -#     %a{:href => "javascript:void(0)"} Link
+    -#   %li.dropdown
+    -#     %a.dropdown-toggle{"data-target" => "#", "data-toggle" => "dropdown", :href => "bootstrap-elements.html"}
+    -#       Dropdown
+    -#       %b.caret
+    -#     %ul.dropdown-menu
+    -#       %li
+    -#         %a{:href => "javascript:void(0)"} Action
+    -#       %li
+    -#         %a{:href => "javascript:void(0)"} Another action
+    -#       %li
+    -#         %a{:href => "javascript:void(0)"} Something else here
+    -#       %li.divider
+    -#       %li
+    -#         %a{:href => "javascript:void(0)"} Separated link
