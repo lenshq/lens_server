@@ -12,21 +12,36 @@ class EventSource < ActiveRecord::Base
     "#{source}##{endpoint}"
   end
 
-  def sum_duration
-    pages.sum(:duration)
-  end
-  alias_method :time, :sum_duration
-
-  def avg_duration
-    pages.average(:duration).to_f
-  end
-  alias_method :duration, :avg_duration
-
-  def min_duration
-    pages.minimum(:duration).to_f
+  def sum_duration(from: nil, to: nil)
+    pages_scope = pages
+    pages_scope = pages_scope.where(created_at: from..to) if from && to
+    pages_scope.sum(:duration)
   end
 
-  def max_duration
-    pages.maximum(:duration).to_f
+  def avg_duration(from: nil, to: nil)
+    pages_scope = pages
+    pages_scope = pages_scope.where(created_at: from..to) if from && to
+    pages_scope.average(:duration).to_f
+  end
+
+  def min_duration(from: nil, to: nil)
+    pages_scope = pages
+    pages_scope = pages_scope.where(created_at: from..to) if from && to
+    pages_scope.minimum(:duration).to_f
+  end
+
+  def max_duration(from: nil, to: nil)
+    pages_scope = pages
+    pages_scope = pages_scope.where(created_at: from..to) if from && to
+    pages_scope.maximum(:duration).to_f
+  end
+
+  def requests_count(from: nil, to: nil)
+    if from.present?
+      to = Time.now if to.blank?
+      pages.where(created_at: from..to).count
+    else
+      pages_count
+    end
   end
 end

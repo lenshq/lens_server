@@ -12,8 +12,22 @@ module Api
 
           response.headers["Access-Control-Allow-Origin"] = "*"
 
+          event_sources = sources[:event_sources].map do |es|
+            {
+              id: es.id,
+              path: "#{es.source}##{es.endpoint}",
+              source: es.source,
+              endpoint: es.endpoint,
+              duration: es.avg_duration(from: filter_options[:from_date], to: filter_options[:to_date]),
+              time: es.sum_duration(from: filter_options[:from_date], to: filter_options[:to_date]),
+              count: es.requests_count(from: filter_options[:from_date], to: filter_options[:to_date])
+            }
+          end.sort_by do |es|
+            -(es[:duration] * es[:count])
+          end
+
           render json: {
-            event_sources: sources[:event_sources].sort_by { |es| -(es.time * es.pages_count) }.map { |es| EventSourceSerializer.new(es).as_json },
+            event_sources: event_sources,
             pages: sources[:pages]
           }
         end
