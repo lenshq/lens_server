@@ -1,0 +1,15 @@
+.panel.panel-default
+  .panel-heading
+    %h2= t('.team')
+  .panel-body
+    .col-md-9
+      = render 'collaborators'
+    .col-md-3
+      .panel.panel-primary
+        .panel-heading
+          = t('.add_new_collaborator')
+        .panel-body
+          = render 'form'
+
+  .panel-footer
+    = link_to t('.back'), applications_path, class: 'btn btn-primary'

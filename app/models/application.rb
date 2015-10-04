@@ -1,6 +1,6 @@
 class Application < ActiveRecord::Base
   has_many :application_users, dependent: :destroy
-  has_many :collaborators, through: :application_users
+  has_many :collaborators, through: :application_users, source: :user
   has_many :raw_events, dependent: :destroy
   has_many :event_sources, dependent: :destroy
   has_many :pages, dependent: :destroy

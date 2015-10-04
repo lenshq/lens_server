@@ -1,0 +1,22 @@
+.row
+  .col-md-12
+    %table.table.table-striped.table-hover
+      %thead
+        %tr
+          %th= User.human_attribute_name(:avatar)
+          %th= User.human_attribute_name(:name)
+          %th= User.human_attribute_name(:nickname)
+          %th= User.human_attribute_name(:email)
+
+          %th= t('.actions')
+      %tbody
+        - @collaborators.each do |collaborator|
+          %tr
+            %td= image_tag collaborator.image, height: 24, width: 24
+            %td= collaborator.name
+            %td= collaborator.nickname
+            %td= mail_to collaborator.email
+
+            %td
+              = link_to application_team_path(@application, collaborator.id), method: :delete, confirm: t('.sure') do
+                %i.mdi-action-delete
