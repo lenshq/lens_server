@@ -31,13 +31,6 @@ module Api
             pages: sources[:pages]
           }
         end
-
-        def show
-          source = application.event_sources.find params[:id]
-          pages = source.pages
-
-          #render json: pages, each_serializer: EventSourceSerializer
-        end
       end
     end
   end

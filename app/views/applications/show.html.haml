@@ -7,9 +7,14 @@
       = t('.token', token: @application.token)
     .row
       .col-md-8
-        = t('graphs')
+        %svg#requests-chart.chart
       .col-md-4
         = render @application
 
   .panel-footer
     = link_to t('.back'), applications_path, class: 'btn btn-primary'
+
+:javascript
+  window.onload = function() {
+    renderChart("#{@application.token}");
+  };
