@@ -6,8 +6,8 @@ class Applications::TeamController < Applications::ApplicationController
   end
 
   def create
-    @collaborator = User.find_by(email: params[:collaborator][:email])
-    application.application_users.create(user_id: @collaborator.id)
+    collaborator = User.find_by(email: params[:collaborator][:email])
+    application.application_users.create(user_id: collaborator.id)
 
     redirect_to application_team_index_path(application)
   end
