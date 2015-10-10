@@ -1,6 +1,6 @@
 class EventSource < ActiveRecord::Base
   belongs_to :application
-  has_many :pages
+  has_many :pages, dependent: :destroy
   has_many :events, through: :pages
 
   validates :application, presence: true

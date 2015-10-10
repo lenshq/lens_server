@@ -23,6 +23,8 @@ class ParseRawEventJob < BaseJob
         page.events.create(event_type: row[:type],
                            content: row[:content],
                            duration: row[:duration],
+                           started_at: row[:start],
+                           finished_at: row[:finish],
                            position: index)
       end
     end
