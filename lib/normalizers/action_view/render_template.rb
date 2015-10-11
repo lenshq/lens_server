@@ -6,9 +6,14 @@ module Normalizers::ActionView
       end
 
       def normalize(record)
-        identifier = record[:identifier].split('/')
-        identifier.slice!(0, identifier.index('app'))
-        path = identifier.join('/')
+        path = case record[:identifier]
+               when "text template"
+                 "text template"
+               else
+                 identifier = record[:identifier].split('/')
+                 identifier.slice!(0, identifier.index('app'))
+                 identifier.join('/')
+               end
 
         {
           content: path,
