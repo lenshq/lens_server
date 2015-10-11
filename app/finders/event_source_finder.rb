@@ -24,7 +24,7 @@ class EventSourceFinder
     sql = "
     SELECT d.date, COUNT(pages.id) FROM (
       SELECT * FROM generate_series(date_trunc('#{@filter_options[:period]}', '#{@filter_options[:from_date].to_s(:db)}'::timestamp with time zone),date_trunc('#{@filter_options[:period]}', '#{@filter_options[:to_date].to_s(:db)}'::text::date::timestamp with time zone), '1 #{@filter_options[:period]}') date_trunc(date)
-    ) d LEFT JOIN pages ON date_trunc('#{@filter_options[:period]}', pages.created_at) = d.date GROUP BY d.date ORDER BY d.date ASC;
+    ) d LEFT JOIN pages ON date_trunc('#{@filter_options[:period]}', to_timestamp(pages.started_at)) = d.date GROUP BY d.date ORDER BY d.date ASC;
     "
 
     ActiveRecord::Base.connection.execute(sql).values.map {|k,v| { date: k, count: v} }

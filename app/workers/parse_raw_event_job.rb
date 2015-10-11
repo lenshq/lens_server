@@ -17,6 +17,8 @@ class ParseRawEventJob < BaseJob
                                       controller: meta[:controller],
                                       action: meta[:action],
                                       duration: meta[:duration],
+                                      started_at: meta[:start],
+                                      finished_at: meta[:finish],
                                       raw_event_id: re.id)
 
       details.each_with_index do |row, index|
