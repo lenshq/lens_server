@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::ApplicationsController do
+  before(:each) do
+    api_token 'my_token'
+  end
+
   describe 'GET index' do
     subject { get :index, format: :json }
 
