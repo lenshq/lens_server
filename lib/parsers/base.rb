@@ -3,8 +3,8 @@ require 'normalizer'
 
 module Parsers
   class Base
-    def initialize(row_data)
-      @row_data = ::JSON.parse(row_data).with_indifferent_access
+    def initialize(raw_data)
+      @raw_data = ::JSON.parse(raw_data).with_indifferent_access
       @result = {}
     end
 
