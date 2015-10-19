@@ -1,7 +1,8 @@
 class EventSource < ActiveRecord::Base
   belongs_to :application
-  has_many :pages, dependent: :destroy
-  has_many :events, through: :pages
+
+  has_many :requests, dependent: :destroy
+  has_many :events, through: :requests
   has_many :scenarios, dependent: :destroy
 
   validates :application, presence: true
@@ -14,35 +15,35 @@ class EventSource < ActiveRecord::Base
   end
 
   def sum_duration(from: nil, to: nil)
-    pages_scope = pages
-    pages_scope = pages_scope.where(created_at: from..to) if from && to
-    pages_scope.sum(:duration)
+    requests_scope = requests
+    requests_scope = requests_scope.where(created_at: from..to) if from && to
+    requests_scope.sum(:duration)
   end
 
   def avg_duration(from: nil, to: nil)
-    pages_scope = pages
-    pages_scope = pages_scope.where(created_at: from..to) if from && to
-    pages_scope.average(:duration).to_f
+    requests_scope = requests
+    requests_scope = requests_scope.where(created_at: from..to) if from && to
+    requests_scope.average(:duration).to_f
   end
 
   def min_duration(from: nil, to: nil)
-    pages_scope = pages
-    pages_scope = pages_scope.where(created_at: from..to) if from && to
-    pages_scope.minimum(:duration).to_f
+    requests_scope = requests
+    requests_scope = requests_scope.where(created_at: from..to) if from && to
+    requests_scope.minimum(:duration).to_f
   end
 
   def max_duration(from: nil, to: nil)
-    pages_scope = pages
-    pages_scope = pages_scope.where(created_at: from..to) if from && to
-    pages_scope.maximum(:duration).to_f
+    requests_scope = requests
+    requests_scope = requests_scope.where(created_at: from..to) if from && to
+    requests_scope.maximum(:duration).to_f
   end
 
   def requests_count(from: nil, to: nil)
     if from.present?
       to = Time.now if to.blank?
-      pages.where(created_at: from..to).count
+      requests.where(created_at: from..to).count
     else
-      pages_count
+      requests_count
     end
   end
 end

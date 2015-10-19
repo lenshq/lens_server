@@ -28,7 +28,7 @@ module Api
 
           render json: {
             event_sources: event_sources,
-            pages: sources[:pages]
+            requests: sources[:requests]
           }
         end
       end

@@ -3,8 +3,8 @@ class Application < ActiveRecord::Base
   has_many :collaborators, through: :application_users, source: :user
   has_many :raw_events, dependent: :destroy
   has_many :event_sources, dependent: :destroy
-  has_many :pages, dependent: :destroy
-  has_many :events, through: :pages
+  has_many :requests, dependent: :destroy
+  has_many :events, through: :requests
 
   validates :domain, presence: true, uniqueness: true
   validates :title, presence: true

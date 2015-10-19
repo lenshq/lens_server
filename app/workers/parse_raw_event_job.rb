@@ -16,22 +16,26 @@ class ParseRawEventJob < BaseJob
       hash = Scenario.hash_from_string(details.inject("") { |a, d| a << d[:type] })
       scenario = event_source.scenarios.find_or_create_by(events_hash: hash)
 
-      page = scenario.pages.create(event_source_id: event_source.id,
-                                   application_id: application.id,
-                                   controller: meta[:controller],
-                                   action: meta[:action],
-                                   duration: meta[:duration],
-                                   started_at: meta[:start],
-                                   finished_at: meta[:finish],
-                                   raw_event_id: re.id)
+      new_request = scenario.requests.create(
+        event_source_id: event_source.id,
+        application_id: application.id,
+        controller: meta[:controller],
+        action: meta[:action],
+        duration: meta[:duration],
+        started_at: meta[:start],
+        finished_at: meta[:finish],
+        raw_event_id: re.id
+      )
 
       details.each_with_index do |row, index|
-        page.events.create(event_type: row[:type],
-                           content: row[:content],
-                           duration: row[:duration],
-                           started_at: row[:start],
-                           finished_at: row[:finish],
-                           position: index)
+        new_request.events.create(
+          event_type: row[:type],
+          content: row[:content],
+          duration: row[:duration],
+          started_at: row[:start],
+          finished_at: row[:finish],
+          position: index
+        )
       end
     end
   end
