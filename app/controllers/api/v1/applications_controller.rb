@@ -1,7 +1,7 @@
 module Api
   module V1
     class ApplicationsController < Api::V1::ApplicationController
-      before_filter :authenticate!
+      before_action :authenticate!
 
       def index
         apps = current_user.applications.all
