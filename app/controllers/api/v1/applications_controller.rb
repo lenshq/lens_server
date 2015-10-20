@@ -29,7 +29,7 @@ module Api
       end
 
       def current_user
-        @current_user ||= User.find_by token: api_token
+        @current_user ||= User.find_by api_token: api_token
       end
     end
   end

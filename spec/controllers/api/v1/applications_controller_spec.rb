@@ -4,7 +4,7 @@ RSpec.describe Api::V1::ApplicationsController do
   let(:user) { create :user }
 
   before(:each) do
-    api_token user.token
+    api_token user.api_token
   end
 
   describe 'GET index' do
