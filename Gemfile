@@ -26,7 +26,6 @@ gem 'rails-i18n', '~> 4.0.0'
 
 group :development do
   gem 'pry-rails'
-  gem 'pry-byebug'
 end
 
 group :test do
