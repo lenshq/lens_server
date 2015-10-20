@@ -10,6 +10,8 @@
 # Ignore database.yml
 /config/database.yml
 
+/coverage/*
+
 # Ignore all logfiles and tempfiles.
 /log/*
 !/log/.keep
