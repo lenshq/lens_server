@@ -3,4 +3,12 @@ rvm:
   - "1.9.3"
   - "2.2.0"
   - "2.2.3"
+
+addons:
+  postgresql: "9.3"
+
+before_script:
+  - cp config/database.example.yml config/database.yml
+  - RAILS_ENV=test rake db:create db:migrate
+
 script: bundle exec rspec
