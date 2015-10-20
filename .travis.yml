@@ -7,6 +7,9 @@ rvm:
 addons:
   postgresql: "9.3"
 
+services:
+  - redis-server
+
 before_script:
   - cp config/database.example.yml config/database.yml
   - RAILS_ENV=test rake db:create db:migrate
