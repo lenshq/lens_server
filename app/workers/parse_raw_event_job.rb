@@ -17,13 +17,13 @@ class ParseRawEventJob < BaseJob
       scenario = event_source.scenarios.find_or_create_by(events_hash: hash)
 
       page = scenario.pages.create(event_source_id: event_source.id,
-                                      application_id: application.id,
-                                      controller: meta[:controller],
-                                      action: meta[:action],
-                                      duration: meta[:duration],
-                                      started_at: meta[:start],
-                                      finished_at: meta[:finish],
-                                      raw_event_id: re.id)
+                                   application_id: application.id,
+                                   controller: meta[:controller],
+                                   action: meta[:action],
+                                   duration: meta[:duration],
+                                   started_at: meta[:start],
+                                   finished_at: meta[:finish],
+                                   raw_event_id: re.id)
 
       details.each_with_index do |row, index|
         page.events.create(event_type: row[:type],
