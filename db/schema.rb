@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151011215228) do
+ActiveRecord::Schema.define(version: 20151020205720) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,7 +70,10 @@ ActiveRecord::Schema.define(version: 20151011215228) do
     t.integer  "event_source_id"
     t.float    "started_at"
     t.float    "finished_at"
+    t.integer  "scenario_id"
   end
+
+  add_index "pages", ["scenario_id"], name: "index_pages_on_scenario_id", using: :btree
 
   create_table "raw_events", force: :cascade do |t|
     t.integer  "application_id"
@@ -79,6 +82,16 @@ ActiveRecord::Schema.define(version: 20151011215228) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
   end
+
+  create_table "scenarios", force: :cascade do |t|
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "events_hash"
+    t.integer  "event_source_id"
+  end
+
+  add_index "scenarios", ["event_source_id"], name: "index_scenarios_on_event_source_id", using: :btree
+  add_index "scenarios", ["events_hash", "event_source_id"], name: "index_scenarios_on_events_hash_and_event_source_id", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email"

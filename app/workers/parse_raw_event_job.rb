@@ -10,10 +10,14 @@ class ParseRawEventJob < BaseJob
 
       application = re.application
 
-      event_source = application.event_sources.find_by(source: meta[:controller], endpoint: meta[:action])
-      event_source = application.event_sources.create(source: meta[:controller], endpoint: meta[:action]) if event_source.nil?
+      event_source = application.event_sources.find_or_create_by(source: meta[:controller],
+                                                                 endpoint: meta[:action])
 
-      page = application.pages.create(event_source_id: event_source.id,
+      hash = Scenario.hash_from_string(details.inject("") { |a, d| a << d[:type] })
+      scenario = event_source.scenarios.find_or_create_by(events_hash: hash)
+
+      page = scenario.pages.create(event_source_id: event_source.id,
+                                      application_id: application.id,
                                       controller: meta[:controller],
                                       action: meta[:action],
                                       duration: meta[:duration],
