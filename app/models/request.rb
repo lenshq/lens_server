@@ -1,4 +1,4 @@
-class Page < ActiveRecord::Base
+class Request < ActiveRecord::Base
   belongs_to :application
   belongs_to :event_source, counter_cache: true
   belongs_to :raw_event

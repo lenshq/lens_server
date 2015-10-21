@@ -3,7 +3,7 @@ class EventSourceSerializer < ActiveModel::Serializer
 
   attribute :avg_duration, key: :duration
   attribute :sum_duration, key: :time
-  attribute :pages_count, key: :count
+  attribute :requests_count, key: :count
 
-  has_many :pages
+  has_many :requests
 end

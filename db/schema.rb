@@ -41,13 +41,13 @@ ActiveRecord::Schema.define(version: 20151020205720) do
     t.integer  "application_id"
     t.string   "source"
     t.string   "endpoint"
-    t.integer  "pages_count"
+    t.integer  "requests_count"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
   end
 
   create_table "events", force: :cascade do |t|
-    t.integer  "page_id"
+    t.integer  "request_id"
     t.string   "event_type"
     t.text     "content"
     t.float    "duration"
@@ -58,7 +58,15 @@ ActiveRecord::Schema.define(version: 20151020205720) do
     t.float    "finished_at"
   end
 
-  create_table "pages", force: :cascade do |t|
+  create_table "raw_events", force: :cascade do |t|
+    t.integer  "application_id"
+    t.text     "data"
+    t.string   "state"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "requests", force: :cascade do |t|
     t.integer  "application_id"
     t.string   "controller"
     t.string   "action"
@@ -73,15 +81,7 @@ ActiveRecord::Schema.define(version: 20151020205720) do
     t.integer  "scenario_id"
   end
 
-  add_index "pages", ["scenario_id"], name: "index_pages_on_scenario_id", using: :btree
-
-  create_table "raw_events", force: :cascade do |t|
-    t.integer  "application_id"
-    t.text     "data"
-    t.string   "state"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-  end
+  add_index "requests", ["scenario_id"], name: "index_requests_on_scenario_id", using: :btree
 
   create_table "scenarios", force: :cascade do |t|
     t.datetime "created_at",      null: false

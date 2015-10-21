@@ -8,23 +8,23 @@ class EventSourceFinder
 
   def get
     {
-      event_sources: get_sources,
-      pages: get_pages
+      event_sources: event_sources,
+      requests: requests
     }
   end
 
   private
 
-  def get_sources
-    sources = @application.event_sources.includes(:pages)
+  def event_sources
+    sources = @application.event_sources.includes(:requests)
     filter_sources(sources)
   end
 
-  def get_pages
+  def requests
     sql = "
-    SELECT d.date, COUNT(pages.id) FROM (
+    SELECT d.date, COUNT(requests.id) FROM (
       SELECT * FROM generate_series(date_trunc('#{@filter_options[:period]}', '#{@filter_options[:from_date].to_s(:db)}'::timestamp with time zone),date_trunc('#{@filter_options[:period]}', '#{@filter_options[:to_date].to_s(:db)}'::text::date::timestamp with time zone), '1 #{@filter_options[:period]}') date_trunc(date)
-    ) d LEFT JOIN pages ON date_trunc('#{@filter_options[:period]}', to_timestamp(pages.started_at)) = d.date GROUP BY d.date ORDER BY d.date ASC;
+    ) d LEFT JOIN requests ON date_trunc('#{@filter_options[:period]}', to_timestamp(requests.started_at)) = d.date GROUP BY d.date ORDER BY d.date ASC;
     "
 
     ActiveRecord::Base.connection.execute(sql).values.map {|k,v| { date: k, count: v} }

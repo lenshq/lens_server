@@ -12,7 +12,7 @@ var renderChart = function(token) {
   var apiEndpoint = '/api/v1/applications/1/sources?api_token=' + token + '&from=' + from + '&to=' + to + '&period=' + period;
 
   d3.json(apiEndpoint, function(error, json) {
-    var data = json.pages;
+    var data = json.requests;
 
     var countFn = function(d) { return parseInt(d.count); }
     var parseDate = d3.time.format('%Y-%m-%d %X+00').parse;
