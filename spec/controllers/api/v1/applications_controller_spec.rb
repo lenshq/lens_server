@@ -1,8 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::ApplicationsController do
+  let(:user) { create :user }
+
   before(:each) do
-    api_token 'my_token'
+    api_token user.api_token
   end
 
   describe 'GET index' do
@@ -21,6 +23,7 @@ RSpec.describe Api::V1::ApplicationsController do
 
   describe 'GET show' do
     let(:application) { create :application }
+    before { user.applications << application }
     subject { get :show, id: application.id, format: :json }
 
     it { is_expected.to be_success }
