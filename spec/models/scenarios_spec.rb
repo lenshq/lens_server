@@ -7,7 +7,7 @@ RSpec.describe Scenario, type: :model do
 
     # associations
     it { is_expected.to respond_to :event_source }
-    it { is_expected.to respond_to :pages }
+    it { is_expected.to respond_to :requests }
     # others
   end
 end

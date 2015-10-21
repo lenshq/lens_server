@@ -19,10 +19,10 @@ RSpec.describe "Scenarios" do
   end
 
   it "pages scenario should be eq" do
-    expect(raw_event_1.page.scenario).to eq(raw_event_2.page.scenario)
+    expect(raw_event_1.request.scenario).to eq(raw_event_2.request.scenario)
   end
 
   it "page scenario should not be eq" do
-    expect(raw_event_1.page.scenario).not_to eq(raw_event_3.page.scenario)
+    expect(raw_event_1.request.scenario).not_to eq(raw_event_3.request.scenario)
   end
 end
