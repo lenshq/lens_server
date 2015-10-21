@@ -2,6 +2,8 @@ AllCops:
   Exclude:
     - "vendor/**/*"
     - "db/schema.rb"
+    - "spec/*_helper.rb"
+    - "bin/*"
   UseCache: false
 Style/CollectionMethods:
   Description: Preferred collection methods.
@@ -29,8 +31,8 @@ Style/FileName:
 Style/GuardClause:
   Description: Check for conditionals that can be replaced with guard clauses
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#no-nested-conditionals
-  Enabled: false
-  MinBodyLength: 1
+  Enabled: true
+  MinBodyLength: 5
 Style/IfUnlessModifier:
   Description: Favor modifier if/unless usage when you have a single-line body.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#if-as-a-modifier
@@ -96,7 +98,7 @@ Style/SingleLineBlockParams:
 Style/SingleLineMethods:
   Description: Avoid single-line methods.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#no-single-line-methods
-  Enabled: false
+  Enabled: true
   AllowIfMethodIsEmpty: true
 Style/StringLiterals:
   Description: Checks if uses of quotes match the configured preference.
@@ -117,11 +119,13 @@ Style/StringLiteralsInInterpolation:
 Style/TrailingComma:
   Description: Checks for trailing comma in parameter lists and literals.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#no-trailing-array-commas
-  Enabled: false
+  Enabled: true
   EnforcedStyleForMultiline: no_comma
   SupportedStyles:
   - comma
   - no_comma
+Metrics/LineLength:
+  Max: 100
 Metrics/AbcSize:
   Description: A calculated magnitude based on number of assignments, branches, and
     conditions.
@@ -145,13 +149,13 @@ Metrics/CyclomaticComplexity:
 Metrics/MethodLength:
   Description: Avoid methods longer than 10 lines of code.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#short-methods
-  Enabled: false
+  Enabled: true
   CountComments: false
-  Max: 10
+  Max: 20
 Metrics/ParameterLists:
   Description: Avoid parameter lists longer than three or four parameters.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#too-many-params
-  Enabled: false
+  Enabled: true
   Max: 5
   CountKeywordArgs: true
 Metrics/PerceivedComplexity:
@@ -224,7 +228,7 @@ Lint/EachWithObjectArgument:
 Lint/HandleExceptions:
   Description: Don't suppress exception.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#dont-hide-exceptions
-  Enabled: false
+  Enabled: true
 Lint/LiteralInCondition:
   Description: Checks of literals used in conditions.
   Enabled: false
