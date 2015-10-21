@@ -81,6 +81,8 @@ ActiveRecord::Schema.define(version: 20151020205720) do
     t.integer  "scenario_id"
   end
 
+  add_index "requests", ["scenario_id"], name: "index_requests_on_scenario_id", using: :btree
+
   create_table "scenarios", force: :cascade do |t|
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
