@@ -1,8 +1,6 @@
 module Api
   module V1
     class ApplicationsController < Api::V1::ApplicationController
-      before_action :authenticate!
-
       def index
         apps = current_user.applications.all
         render json: apps, each_serializer: ApplicationSerializer
@@ -22,14 +20,6 @@ module Api
 
       def application_params
         params.require(:application).permit(:title, :description, :domain)
-      end
-
-      def authenticate!
-        render json: { error: 'Unathorized' }, status: 401 unless current_user
-      end
-
-      def current_user
-        @current_user ||= User.find_by api_token: api_token
       end
     end
   end

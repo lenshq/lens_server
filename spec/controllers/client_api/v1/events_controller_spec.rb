@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Api::V1::EventsController do
+RSpec.describe ClientApi::V1::EventsController do
   describe 'POST create with api_token' do
     let(:application) { create(:application, attributes_for(:application)) }
     let(:raw_event_attrs) { { api_token: application.token }.merge(attributes_for(:raw_event)) }

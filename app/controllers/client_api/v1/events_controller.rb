@@ -1,6 +1,6 @@
-module Api
+module ClientApi
   module V1
-    class EventsController < Api::V1::ApplicationController
+    class EventsController < ClientApi::V1::ApplicationController
       def create
         if application
           StoreRawEvent.call(application, params[:data].to_json)

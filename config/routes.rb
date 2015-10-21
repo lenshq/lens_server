@@ -16,7 +16,13 @@ Rails.application.routes.draw do
           resources :sources
         end
       end
-      resources :events, only: [:create]
+      resources :events, only: [:create], controller: '/client_api/v1/events'
+    end
+  end
+
+  namespace :client_api do
+    namespace :v1 do
+      resources :events, only: :create
     end
   end
 
