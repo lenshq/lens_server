@@ -21,4 +21,10 @@ RSpec.describe ClientApi::V1::EventsController do
     it { is_expected.to be_success }
     it { expect { subject }.to change { RawEvent.count }.by 1 }
   end
+
+  describe 'request without token' do
+    subject { post(:create, format: :json).status }
+
+    it { is_expected.to eq 401 }
+  end
 end
