@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: scenarios
+#
+#  id              :integer          not null, primary key
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  events_hash     :string
+#  event_source_id :integer
+#
+
 class Scenario < ActiveRecord::Base
   belongs_to :event_source
   has_many :requests, dependent: :destroy

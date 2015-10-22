@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: applications
+#
+#  id          :integer          not null, primary key
+#  title       :string           not null
+#  description :text
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  token       :string           not null
+#  domain      :string
+#
+
 class Application < ActiveRecord::Base
   has_many :application_users, dependent: :destroy
   has_many :collaborators, through: :application_users, source: :user

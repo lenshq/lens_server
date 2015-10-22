@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: raw_events
+#
+#  id             :integer          not null, primary key
+#  application_id :integer
+#  data           :text
+#  state          :string
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#
+
 class RawEvent < ActiveRecord::Base
   include AASM
 
