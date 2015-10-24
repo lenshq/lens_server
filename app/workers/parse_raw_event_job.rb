@@ -7,6 +7,7 @@ class ParseRawEventJob < BaseJob
 
       meta = parsed_data[:meta]
       details = parsed_data[:details]
+      details = add_transactions_to_details(details)
 
       application = re.application
 
@@ -38,5 +39,32 @@ class ParseRawEventJob < BaseJob
         )
       end
     end
+  end
+
+  def add_transactions_to_details(details)
+    position = nil
+    details.each_with_object({}).with_index do |(row, memo), index|
+      case row[:content]
+      when transaction_begin?
+        memo[:type] = row[:type]
+        memo[:start] = row[:start]
+        position = index
+      when transaction_end?
+        memo[:content] = "BEGIN #{row[:content]} transaction"
+        memo[:finish] = row[:finish]
+        memo[:duration] = ((memo[:finish] - memo[:start]) * 1000)
+        details.insert(position, memo) if position
+        position = nil
+      end
+    end
+    details
+  end
+
+  def transaction_begin?
+    ->(content) { content == 'BEGIN' }
+  end
+
+  def transaction_end?
+    ->(content) { %w(ROLLBACK COMMIT).include? content }
   end
 end
