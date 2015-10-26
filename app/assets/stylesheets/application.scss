@@ -8,7 +8,7 @@ html, body, .landing {
 }
 
 .page--index {
-    background: asset_path('cover.jpg');
+    background: url(asset_path('cover.jpg'));
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -40,7 +40,7 @@ html, body, .landing {
 .logo {
     width: 244px;
     height: 249px;
-    background: asset_path('logo.svg');
+    background: url(asset_path('logo.svg'));
     background-size: cover;
     background-repeat: no-repeat;
 }
