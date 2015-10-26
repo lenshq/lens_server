@@ -25,6 +25,9 @@ gem 'sidekiq'
 
 gem 'rails-i18n', '~> 4.0.0'
 
+# Configuration
+gem "persey", '>= 0.0.8'
+
 group :development do
   gem 'pry-rails'
   gem 'pry-byebug'

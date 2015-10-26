@@ -6,7 +6,15 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+require "persey"
+require File.expand_path('../config', __FILE__)
+
 module LensServer
+
+  def self.config
+    Persey.config
+  end
+
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -26,7 +34,7 @@ module LensServer
       helpers
     ).map { |path| config.root.join('lib', path) }
 
-    
+
     config.autoload_paths += %w(
       serializers
     ).map { |path| config.root.join('app', path) }
