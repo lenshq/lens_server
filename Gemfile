@@ -9,6 +9,7 @@ gem 'pg'
 gem 'jquery-rails'
 gem 'sass-rails'
 gem 'uglifier'
+gem 'therubyracer'
 
 gem 'unicorn'
 gem 'omniauth-github'
