@@ -30,15 +30,7 @@ class ProcessRawEvent
       event_hash(scenario: scenario, details: row, meta: meta, index: index)
     end
 
-    store_events(events)
-  end
-
-  def store_events(events)
-    messages = events.map do |hash|
-      Poseidon::MessageToSend.new(LensServer.config.kafka.topic, hash.to_json)
-    end
-
-    kafka_producer.send_messages(messages)
+    StoreProcessedEvents.call events
   end
 
   def parse_raw_data(raw_event)
@@ -71,16 +63,6 @@ class ProcessRawEvent
 
   def generate_scenario_hash(details)
     Scenario.hash_from_string(details.inject('') { |a, d| a << d[:type] })
-  end
-
-  def kafka_producer
-    @producer ||= begin
-                    klass = LensServer.config.service_locator.kafka_producer
-                    klass.new(
-                      ["#{LensServer.config.kafka.host}:#{LensServer.config.kafka.port}"],
-                      'lens_bg_producer'
-                    )
-                  end
   end
 
   def base_hash(scenario:, meta:)
