@@ -27,7 +27,7 @@ class ProcessRawEvent
     create_request(scenario: scenario, raw_event: raw_event, meta: meta)
 
     events = details.each_with_index.map do |row, index|
-      event_hash(scenario: scenario, details: row, index: index)
+      event_hash(scenario: scenario, details: row, meta: meta, index: index)
     end
 
     store_events(events)
@@ -74,10 +74,13 @@ class ProcessRawEvent
   end
 
   def kafka_producer
-    @producer ||= Poseidon::Producer.new(
-      ["#{LensServer.config.kafka.host}:#{LensServer.config.kafka.port}"],
-      'lens_bg_producer'
-    )
+    @producer ||= begin
+                    klass = LensServer.config.service_locator.kafka_producer
+                    klass.new(
+                      ["#{LensServer.config.kafka.host}:#{LensServer.config.kafka.port}"],
+                      'lens_bg_producer'
+                    )
+                  end
   end
 
   def base_hash(scenario:, meta:)
@@ -90,7 +93,7 @@ class ProcessRawEvent
       }
   end
 
-  def event_hash(scenario:, details:, index:)
+  def event_hash(scenario:, details:, meta:, index:)
     base_hash(scenario: scenario, meta: meta).merge({
       timestamp: Time.at(details[:start]).to_s(:iso8601),
       event_type: details[:type],
