@@ -35,7 +35,7 @@ class ParseRawEventJob < BaseJob
 
       base_hash = {
         application: application.id,
-        scenario: scenario.event_hash,
+        scenario: scenario.events_hash,
         conroller: meta[:controller],
         action: meta[:action]
       }
