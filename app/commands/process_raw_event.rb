@@ -9,7 +9,9 @@ class ProcessRawEvent
 
   def call
     raw_event = RawEvent.find_by(id: @raw_event_id)
-    process_raw_event(raw_event) if raw_event.present?
+    return unless raw_event
+
+    process_raw_event(raw_event)
   end
 
   def process_raw_event(raw_event)
@@ -62,17 +64,17 @@ class ProcessRawEvent
   end
 
   def generate_scenario_hash(details)
-    Scenario.hash_from_string(details.inject('') { |a, d| a << d[:type] })
+    scenario_key = details.map { |d| d[:type] }.join
+    Scenario.hash_from_string(scenario_key)
   end
 
   def base_hash(scenario:, meta:)
-    @base_hash ||=
-      {
-        application: scenario.event_source.application.id,
-        scenario: scenario.events_hash,
-        conroller: meta[:controller],
-        action: meta[:action]
-      }
+    @base_hash ||= {
+      application: scenario.event_source.application.id,
+      scenario: scenario.events_hash,
+      conroller: meta[:controller],
+      action: meta[:action]
+    }
   end
 
   def event_hash(scenario:, details:, meta:, index:)
@@ -89,6 +91,7 @@ class ProcessRawEvent
 
   def add_transactions_to_details(details)
     position = nil
+
     details.each_with_object({}).with_index do |(row, memo), index|
       case row[:content]
       when transaction_begin?
@@ -103,6 +106,7 @@ class ProcessRawEvent
         position = nil
       end
     end
+
     details
   end
 
