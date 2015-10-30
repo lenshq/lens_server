@@ -141,6 +141,7 @@ GEM
     pg (0.18.2)
     pg_query (0.6.3)
       json (~> 1.8)
+    poseidon (0.0.5)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -273,6 +274,7 @@ DEPENDENCIES
   persey (>= 0.0.8)
   pg
   pg_query
+  poseidon
   pry-byebug
   pry-rails
   rails (= 4.2.1)

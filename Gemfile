@@ -25,6 +25,8 @@ gem 'sidekiq'
 
 gem 'rails-i18n', '~> 4.0.0'
 
+gem 'poseidon'
+
 # Configuration
 gem "persey", '>= 0.0.8'
 
