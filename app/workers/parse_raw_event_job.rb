@@ -30,7 +30,7 @@ class ParseRawEventJob < BaseJob
 
       producer = Poseidon::Producer.new(
         ["#{LensServer.config.kafka.host}:#{LensServer.config.kafka.port}"],
-        "lens_bg_producer"
+        'lens_bg_producer'
       )
 
       base_hash = {
@@ -42,16 +42,18 @@ class ParseRawEventJob < BaseJob
 
       messages = []
       details.each_with_index do |row, index|
-        hash = base_hash.merge({
-          timestamp: Time.at(row[:start]).to_s(:iso8601),
-          event_type: row[:type],
-          content: row[:content],
-          duration: row[:duration],
-          started_at: row[:start],
-          finished_at: row[:finish],
-          position: index
-        })
-        messages << Poseidon::MessageToSend.new("lens_test", hash.to_json)
+        hash = base_hash.merge(
+          {
+            timestamp: Time.at(row[:start]).to_s(:iso8601),
+            event_type: row[:type],
+            content: row[:content],
+            duration: row[:duration],
+            started_at: row[:start],
+            finished_at: row[:finish],
+            position: index
+          }
+        )
+        messages << Poseidon::MessageToSend.new('lens_test', hash.to_json)
       end
       producer.send_messages(messages)
     end
