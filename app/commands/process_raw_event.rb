@@ -25,7 +25,7 @@ class ProcessRawEvent
     scenario_hash = generate_scenario_hash(details)
 
     event_source = find_or_create_event_source(application: application, meta: meta)
-    scenario = find_or_create_scnario(event_source: event_source, hash: scenario_hash)
+    scenario = find_or_create_scenario(event_source: event_source, hash: scenario_hash)
     create_request(scenario: scenario, raw_event: raw_event, meta: meta)
 
     events = details.each_with_index.map do |row, index|
@@ -44,7 +44,7 @@ class ProcessRawEvent
     application.event_sources.find_or_create_by(source: meta[:controller], endpoint: meta[:action])
   end
 
-  def find_or_create_scnario(event_source:, hash:)
+  def find_or_create_scenario(event_source:, hash:)
     event_source.scenarios.find_or_create_by(events_hash: hash)
   end
 
