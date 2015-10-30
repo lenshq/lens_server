@@ -1,5 +1,8 @@
 ---
 defaults: &defaults
+  kafka:
+    host: localhost
+    port: 9092
 
 production:
   <<: *defaults

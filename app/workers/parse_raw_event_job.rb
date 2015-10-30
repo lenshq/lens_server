@@ -17,7 +17,7 @@ class ParseRawEventJob < BaseJob
       hash = Scenario.hash_from_string(details.inject("") { |a, d| a << d[:type] })
       scenario = event_source.scenarios.find_or_create_by(events_hash: hash)
 
-      new_request = scenario.requests.create(
+      scenario.requests.create(
         event_source_id: event_source.id,
         application_id: application.id,
         controller: meta[:controller],
@@ -28,16 +28,32 @@ class ParseRawEventJob < BaseJob
         raw_event_id: re.id
       )
 
+      producer = Poseidon::Producer.new(
+        ["#{LensServer.config.kafka.host}:#{LensServer.config.kafka.port}"],
+        "lens_bg_producer"
+      )
+
+      base_hash = {
+        application: application.id,
+        scenario: scenario.event_hash,
+        conroller: meta[:controller],
+        action: meta[:action]
+      }
+
+      messages = []
       details.each_with_index do |row, index|
-        new_request.events.create(
+        hash = base_hash.merge({
+          timestamp: Time.at(row[:start]).to_s(:iso8601),
           event_type: row[:type],
           content: row[:content],
           duration: row[:duration],
           started_at: row[:start],
           finished_at: row[:finish],
           position: index
-        )
+        })
+        messages << Poseidon::MessageToSend.new("lens_test", hash.to_json)
       end
+      producer.send_messages(messages)
     end
   end
 
