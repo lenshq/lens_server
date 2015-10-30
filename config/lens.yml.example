@@ -3,6 +3,7 @@ defaults: &defaults
   kafka:
     host: localhost
     port: 9092
+    topic: lens_test
 
 production:
   <<: *defaults
