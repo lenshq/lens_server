@@ -1,7 +1,7 @@
 ---
 defaults: &defaults
   kafka:
-    host: localhost
+    host: localhost.localdomain
     port: 9092
     topic: lens_test
 
