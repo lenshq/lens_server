@@ -78,7 +78,7 @@ class ProcessRawEvent
   end
 
   def event_hash(scenario:, details:, meta:, index:)
-    base_hash(scenario: scenario, meta: meta).merge({
+    base_hash(scenario: scenario, meta: meta).merge(
       timestamp: Time.at(details[:start]).to_s(:iso8601),
       event_type: details[:type],
       content: details[:content],
@@ -86,7 +86,7 @@ class ProcessRawEvent
       started_at: details[:start],
       finished_at: details[:finish],
       position: index
-    })
+    )
   end
 
   def add_transactions_to_details(details)
@@ -103,6 +103,7 @@ class ProcessRawEvent
         memo[:finish] = row[:finish]
         memo[:duration] = ((memo[:finish] - memo[:start]) * 1000)
         details.insert(position, memo) if position
+        memo.clear
         position = nil
       end
     end

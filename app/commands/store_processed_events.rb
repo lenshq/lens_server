@@ -16,12 +16,6 @@ class StoreProcessedEvents
   end
 
   def kafka_producer
-    @producer ||= begin
-      klass = LensServer.config.service_locator.kafka_producer
-      klass.new(
-        ["#{LensServer.config.kafka.host}:#{LensServer.config.kafka.port}"],
-        'lens_bg_producer'
-      )
-    end
+    SerivceLocator.kafka_producer
   end
 end
