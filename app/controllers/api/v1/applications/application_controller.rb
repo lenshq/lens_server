@@ -6,7 +6,7 @@ module Api
         protected
 
         def application
-          @application ||= Application.find_by(token: api_token)
+          @application ||= current_user.applications.find(params[:application_id])
         end
       end
     end
