@@ -99,12 +99,14 @@ class ProcessRawEvent
         memo[:start] = row[:start]
         position = index
       when transaction_end?
-        memo[:content] = "BEGIN #{row[:content]} transaction"
-        memo[:finish] = row[:finish]
-        memo[:duration] = ((memo[:finish] - memo[:start]) * 1000)
-        details.insert(position, memo) if position
-        memo.clear
-        position = nil
+        if position
+          memo[:content] = "BEGIN #{row[:content]} transaction"
+          memo[:finish] = row[:finish]
+          memo[:duration] = ((memo[:finish] - memo[:start]) * 1000)
+          details.insert(position, memo.dup)
+          memo.clear
+          position = nil
+        end
       end
     end
 
