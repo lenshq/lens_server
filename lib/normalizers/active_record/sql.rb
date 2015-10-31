@@ -19,6 +19,7 @@ module Normalizers::ActiveRecord
       private
 
       def cleanup(query)
+        query.gsub!(', ?', '')
         arr = query.split("\n")
         arr = arr.map { |line| line.strip }
         arr.join(' ')
