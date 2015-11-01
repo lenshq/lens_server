@@ -4,8 +4,8 @@ class StoreProcessedEvents
   end
 
   def call
-    messages = @events.map do |hash|
-      Poseidon::MessageToSend.new(LensServer.config.kafka.topic, hash.to_json)
+    messages = @events.map do |event|
+      Poseidon::MessageToSend.new(LensServer.config.kafka.topic, event.to_json)
     end
 
     kafka_producer.send_messages(messages)
@@ -16,6 +16,6 @@ class StoreProcessedEvents
   end
 
   def kafka_producer
-    SerivceLocator.kafka_producer
+    ServiceLocator.kafka_producer
   end
 end

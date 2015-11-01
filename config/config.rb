@@ -16,6 +16,7 @@ Persey.init Rails.env do # set current environment
   env :default do
     service_locator do
       kafka_producer -> { Poseidon::Producer }
+      druid_client -> { Druid::Client }
     end
   end
 
@@ -34,6 +35,7 @@ Persey.init Rails.env do # set current environment
   env :test, parent: :development do
     service_locator do
       kafka_producer -> { Test::Poseidon::Producer }
+      druid_client -> { Test::Druid::Client }
     end
   end
 end

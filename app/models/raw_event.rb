@@ -14,7 +14,7 @@ class RawEvent < ActiveRecord::Base
   include AASM
 
   belongs_to :application
-  has_one :request, dependent: :destroy
+  belongs_to :scenario
 
   validates :application, presence: true
   validates :data, presence: true

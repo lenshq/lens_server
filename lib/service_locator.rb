@@ -1,5 +1,5 @@
 require 'pry'
-class SerivceLocator
+class ServiceLocator
   @settings = {}
 
   def self.setup(&block)

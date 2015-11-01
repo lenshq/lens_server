@@ -16,13 +16,17 @@ RSpec.describe "Scenarios" do
     worker.perform raw_event_1.id
     worker.perform raw_event_2.id
     worker.perform raw_event_3.id
+
+    raw_event_1.reload
+    raw_event_2.reload
+    raw_event_3.reload
   end
 
   it "pages scenario should be eq" do
-    expect(raw_event_1.request.scenario).to eq(raw_event_2.request.scenario)
+    expect(raw_event_1.scenario).to eq(raw_event_2.scenario)
   end
 
   it "page scenario should not be eq" do
-    expect(raw_event_1.request.scenario).not_to eq(raw_event_3.request.scenario)
+    expect(raw_event_1.scenario).not_to eq(raw_event_3.scenario)
   end
 end

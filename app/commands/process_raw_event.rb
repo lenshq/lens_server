@@ -26,12 +26,14 @@ class ProcessRawEvent
 
     event_source = find_or_create_event_source(application: application, meta: meta)
     scenario = find_or_create_scenario(event_source: event_source, hash: scenario_hash)
-    create_request(scenario: scenario, raw_event: raw_event, meta: meta)
+    raw_event.scenario = scenario
+    raw_event.save
 
     events = details.each_with_index.map do |row, index|
-      event_hash(scenario: scenario, details: row, meta: meta, index: index)
+      Event.new(event_hash(scenario: scenario, details: row, meta: meta, index: index))
     end
 
+    StoreProcessedRequests.call [Request.new(request_hash(scenario: scenario, raw_event: raw_event, meta: meta))]
     StoreProcessedEvents.call events
   end
 
@@ -48,19 +50,21 @@ class ProcessRawEvent
     event_source.scenarios.find_or_create_by(events_hash: hash)
   end
 
-  def create_request(scenario:, raw_event:, meta:)
+  def request_hash(scenario:, raw_event:, meta:)
     event_source = scenario.event_source
 
-    scenario.requests.create(
-      event_source_id: event_source.id,
-      application_id: event_source.application.id,
+    {
+      timestamp: Time.at(meta[:start]).to_s(:iso8601),
+      scenario: scenario.events_hash,
+      event_source: event_source.id,
+      application: event_source.application.id,
       controller: meta[:controller],
       action: meta[:action],
       duration: meta[:duration],
       started_at: meta[:start],
       finished_at: meta[:finish],
-      raw_event_id: raw_event.id
-    )
+      raw_event: raw_event.id
+    }
   end
 
   def generate_scenario_hash(details)
@@ -72,7 +76,7 @@ class ProcessRawEvent
     @base_hash ||= {
       application: scenario.event_source.application.id,
       scenario: scenario.events_hash,
-      conroller: meta[:controller],
+      controller: meta[:controller],
       action: meta[:action]
     }
   end

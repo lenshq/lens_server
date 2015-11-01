@@ -1,16 +1,81 @@
-class Request < ActiveRecord::Base
-  belongs_to :application
-  belongs_to :event_source, counter_cache: true
-  belongs_to :raw_event
-  belongs_to :scenario
+class Request
+  include ActiveModel::Model
 
-  has_many :events, dependent: :destroy
+  attr_accessor :application, :scenario, :event_source, :controller, :action,
+    :timestamp, :duration, :started_at, :finished_at, :raw_event
 
-  validates :application, presence: true
-  validates :event_source, presence: true
-  validates :raw_event, presence: true
-  validates :controller, presence: true
-  validates :action, presence: true
-  validates :duration, presence: true
-  validates :scenario, presence: true
+  class << self
+    def sum_duration(event_source:, from:, to:)
+      from ||= Time.now - 1.week
+      to ||= Time.now
+
+      query = Druid::Query::Builder.new
+      query.double_sum(:duration).
+        interval(from, to).
+        granularity(:all).
+        filter(event_source: event_source.id)
+
+      result = get(query)
+
+      result.first['result']['duration']
+    end
+
+    def avg_duration(event_source:, from:, to:)
+      from ||= Time.now - 1.week
+      to ||= Time.now
+
+      query = Druid::Query::Builder.new
+
+      query.double_sum(:duration).count(:count).
+        interval(from, to).
+        granularity(:all).
+        filter(event_source: event_source.id).
+        postagg { (duration / count).as avg }
+
+      result = get(query)
+
+      result.first['result']['avg']
+    end
+
+    def count(event_source:, from:, to:)
+      from ||= Time.now - 1.week
+      to ||= Time.now
+
+      query = Druid::Query::Builder.new
+
+      query.count(:count).
+        interval(from, to).
+        granularity(:all).
+        filter(event_source: event_source.id)
+
+      result = get(query)
+
+      result.first['result']['count']
+    end
+
+    def by_application(application)
+      from = Time.now - 1.week
+      to = Time.now
+
+      query = Druid::Query::Builder.new
+
+      query.count(:duration).
+        granularity(:minute).
+#        group_by(:event_source).
+        interval(from, to).
+        filter(application: application.id)
+
+      get(query)
+    end
+
+    private
+
+    def datasource
+      "broker/#{LensServer.config.druid.datasource.requests}"
+    end
+
+    def get(query)
+      ServiceLocator.druid_client.data_source(datasource).post(query)
+    end
+  end
 end
