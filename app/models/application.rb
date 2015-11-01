@@ -24,11 +24,9 @@ class Application < ActiveRecord::Base
   before_validation :generate_token, on: :create
 
   def requests
-
   end
 
   def events
-
   end
 
   protected

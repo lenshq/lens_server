@@ -20,6 +20,5 @@ class Scenario < ActiveRecord::Base
   end
 
   def requests
-
   end
 end

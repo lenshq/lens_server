@@ -6,8 +6,8 @@ class Request
 
   class << self
     def sum_duration(event_source:, from:, to:)
-      from ||= Time.now - 1.week
-      to ||= Time.now
+      from ||= Time.now.utc - 1.week
+      to ||= Time.now.utc
 
       query = Druid::Query::Builder.new
       query.double_sum(:duration).
@@ -21,8 +21,8 @@ class Request
     end
 
     def avg_duration(event_source:, from:, to:)
-      from ||= Time.now - 1.week
-      to ||= Time.now
+      from ||= Time.now.utc - 1.week
+      to ||= Time.now.utc
 
       query = Druid::Query::Builder.new
 
@@ -38,8 +38,8 @@ class Request
     end
 
     def count(event_source:, from:, to:)
-      from ||= Time.now - 1.week
-      to ||= Time.now
+      from ||= Time.now.utc - 1.week
+      to ||= Time.now.utc
 
       query = Druid::Query::Builder.new
 
@@ -54,14 +54,14 @@ class Request
     end
 
     def by_application(application)
-      from = Time.now - 1.week
-      to = Time.now
+      from = Time.now.utc - 1.week
+      to = Time.now.utc
 
       query = Druid::Query::Builder.new
 
       query.count(:duration).
         granularity(:minute).
-#        group_by(:event_source).
+        # group_by(:event_source).
         interval(from, to).
         filter(application: application.id)
 
