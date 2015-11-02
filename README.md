@@ -4,7 +4,10 @@
 [![Code Climate](https://codeclimate.com/github/lenshq/lens_server/badges/gpa.svg)](https://codeclimate.com/github/lenshq/lens_server)
 [![Test Coverage](https://codeclimate.com/github/lenshq/lens_server/badges/coverage.svg)](https://codeclimate.com/github/lenshq/lens_server/coverage)
 
-### Tests
+## Dependencies
+* [PostgreSQL](http://www.postgresql.org/)
+
+## Tests
 
 ```sh
 COVERAGE=true rspec
