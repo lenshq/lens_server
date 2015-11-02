@@ -64,13 +64,17 @@ class ProcessRawEvent
     raw_event.scenario = scenario
     raw_event.save
 
-    request = Request.new(request_hash(scenario: scenario, raw_event: raw_event, meta: meta))
-    StoreProcessedRequests.call request
+    request = Request.new(
+      request_hash(scenario: scenario, raw_event: raw_event, meta: meta)
+    ).to_json
+    Commands::SendToKafka.call request
 
     events = details.each_with_index.map do |row, index|
-      Event.new(event_hash(scenario: scenario, details: row, meta: meta, index: index))
+      Event.new(
+        event_hash(scenario: scenario, details: row, meta: meta, index: index)
+      ).to_json
     end
-    StoreProcessedEvents.call events
+    Commands::SendToKafka.call events
   end
 
   def find_or_create_event_source(application:, meta:)
