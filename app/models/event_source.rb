@@ -21,12 +21,6 @@ class EventSource < ActiveRecord::Base
   validates :endpoint, presence: true
   validates :application_id, uniqueness: { scope: [:source, :endpoint] }
 
-  def requests
-  end
-
-  def events
-  end
-
   def path
     "#{source}##{endpoint}"
   end

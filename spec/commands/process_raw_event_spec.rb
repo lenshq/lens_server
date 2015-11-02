@@ -1,11 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe 'ProcessRawEventCommand' do
-  let(:application) { create :application }
+RSpec.describe ProcessRawEvent do
   let(:raw_event) { create(:raw_event) }
-  let(:sender) { spy }
 
-  it 'Process Raw Evnt Command work and store final data' do
+  it 'process raw event command work and store final data' do
     klass = LensServer.config.service_locator.kafka_producer
     expect_any_instance_of(klass).to receive(:send_messages).twice
     ProcessRawEvent.call(raw_event.id)

@@ -18,7 +18,4 @@ class Scenario < ActiveRecord::Base
   def self.hash_from_string(str)
     Digest::MD5.hexdigest(str)
   end
-
-  def requests
-  end
 end
