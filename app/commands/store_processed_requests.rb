@@ -1,6 +1,6 @@
 class StoreProcessedRequests
   def initialize(requests)
-    @requests = requests
+    @requests = Array(requests)
   end
 
   def call

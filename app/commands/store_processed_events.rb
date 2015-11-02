@@ -1,6 +1,6 @@
 class StoreProcessedEvents
   def initialize(events)
-    @events = events
+    @events = Array(events)
   end
 
   def call
