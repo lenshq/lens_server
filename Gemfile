@@ -30,7 +30,6 @@ gem "persey", '>= 0.0.8'
 
 group :development do
   gem 'pry-rails'
-  gem 'pry-byebug'
   gem 'annotate'
 end
 
@@ -40,4 +39,9 @@ group :test do
   gem 'database_cleaner'
   gem 'rspec-rails', '~> 3.0'
   gem 'factory_girl_rails'
+end
+
+group :test, :development do
+  gem 'byebug'
+  gem 'pry-byebug'
 end

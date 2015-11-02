@@ -264,6 +264,7 @@ DEPENDENCIES
   annotate
   bootstrap-material-design
   bootstrap-sass
+  byebug
   codeclimate-test-reporter
   database_cleaner
   factory_girl_rails
