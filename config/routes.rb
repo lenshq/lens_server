@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   root to: 'welcome#index'
 
+  get 'sign_in', to: 'sessions#new'
+  get 'sign_up', to: 'registrations#new'
+  delete 'sign_out' => 'sessions#destroy'
+  resources :registrations, only: [:create]
+  resources :sessions, only: [:create]
   get '/auth/github/callback', to: 'sessions#create'
 
   resources :applications do

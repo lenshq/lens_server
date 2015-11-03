@@ -17,6 +17,7 @@ gem 'pg_query'
 gem 'haml-rails'
 gem 'bootstrap-sass'
 gem 'bootstrap-material-design'
+gem 'bcrypt', '~> 3.1', '>= 3.1.10'
 
 # State machine
 gem 'aasm'

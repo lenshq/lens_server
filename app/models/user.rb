@@ -12,11 +12,13 @@
 #  uid        :integer
 #  token      :string
 #  api_token  :string
+#  password_digest :string
 #
 
 class User < ActiveRecord::Base
   has_many :application_users
   has_many :applications, through: :application_users
+  has_secure_password validations: false
 
   before_create :generate_api_token
 

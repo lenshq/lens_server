@@ -47,3 +47,18 @@ en:
     title: "Title"
     domain: "Domain"
 
+  registrations:
+    new:
+      submit: "Submit"
+      header: "Sign Up"
+
+  sessions:
+    new:
+      submit: "Submit"
+      header: "Sign In"
+
+  flash:
+    authentication_error: "Invalid email/password combination."
+    signed_in: "Signed in successfully."
+    signed_up: "Signed up successfully."
+    restrict_registration: "You are already regsitered."

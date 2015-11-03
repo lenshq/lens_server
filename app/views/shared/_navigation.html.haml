@@ -9,3 +9,7 @@
   .navbar-collapse.collapse.navbar-responsive-collapse
     %ul.nav.navbar-nav
       = navigation_element t('navigation.applications'), applications_path
+    - if signed_in?
+      %ul.nav.navbar-nav.navbar-right
+        %li
+          = link_to "Sign out", sign_out_path, method: "delete"
