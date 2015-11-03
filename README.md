@@ -8,8 +8,8 @@
 
 Lens server is a Ruby on Rails application that runs on the following software:
 
-Ubuntu/Debian/CentOS/RHEL
-Ruby (MRI) 2.2
+* Ubuntu/Debian/CentOS/RHEL
+* Ruby (MRI) 2.2
 * [Redis](http://redis.io/)
 * [PostgreSQL](http://www.postgresql.org/)
 
