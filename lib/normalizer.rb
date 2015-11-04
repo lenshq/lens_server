@@ -1,26 +1,26 @@
 class Normalizer
-  def initialize(record, skip_initial_events = true)
+  def initialize(record)
     @record = record
-    @skip_initial_events = skip_initial_events
   end
 
   def normalize
-    return nil if @record[:etype].starts_with?('!') && @skip_initial_events
-
+    return if initial_event?(@record[:etype])
     klass.normalize(@record)
   end
 
   def klass
     @klass ||= begin
-                 source_type = @record[:etype].dup
+      source_type = @record[:etype].dup
 
-                 unless @skip_initial_events
-                   source_type.gsub!('!', 'initial_')
-                 end
+      (['normalizers'] + source_type.split('.').reverse).join('/').camelize.constantize
+    rescue
+      Normalizers::Base
+    end
+  end
 
-                 (['normalizers'] + source_type.split('.').reverse).join('/').camelize.constantize
-               rescue
-                 Normalizers::Base
-               end
+  protected
+
+  def initial_event?(type)
+    type.starts_with?('!')
   end
 end

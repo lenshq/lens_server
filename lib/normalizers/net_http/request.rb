@@ -1,12 +1,14 @@
-module Normalizers::NetHttp
-  class Request < Normalizers::Base
-    class << self
-      def type
-        'ruby.net.request'.freeze
-      end
+module Normalizers
+  module NetHttp
+    class Request < Normalizers::Base
+      class << self
+        def type
+          'ruby.net.request'.freeze
+        end
 
-      def normalize(record)
-        super
+        def normalize(record)
+          super
+        end
       end
     end
   end
