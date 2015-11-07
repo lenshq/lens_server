@@ -14,49 +14,14 @@ class ProcessRawEvent
     process_raw_event(raw_event)
   end
 
-  # NOTE: not private because it user in the unit test.
-  # TODO: refactor this method and test and move it to private section
-  def add_transactions_to_details(details)
-    position = nil
-
-    details.each_with_object({}).with_index do |(row, memo), index|
-      case row[:content]
-      when transaction_begin?
-        memo[:type] = row[:type]
-        memo[:start] = row[:start]
-        position = index
-      when transaction_end?
-        if position
-          memo[:content] = "BEGIN #{row[:content]} transaction"
-          memo[:finish] = row[:finish]
-          memo[:duration] = ((memo[:finish] - memo[:start]) * 1000)
-          details.insert(position, memo.dup)
-          memo.clear
-          position = nil
-        end
-      end
-    end
-
-    details
-  end
-
-  # NOTE: not private because it user in the unit test.
-  # TODO: refactor this method and test and move it to private section
-  def parse_raw_data(raw_event)
-    data = JSON.parse(raw_event.data)
-    Parser.new(data).parse
-  end
-
   private
 
   def process_raw_event(raw_event)
     application = raw_event.application
+    parsed_raw_event = ParsedRawEvent.new(raw_event)
 
-    parsed_data = parse_raw_data(raw_event)
-
-    meta = parsed_data[:meta]
-    details = parsed_data[:details]
-    details = add_transactions_to_details(details)
+    meta = parsed_raw_event.meta
+    details = parsed_raw_event.details
     scenario_hash = generate_scenario_hash(details)
 
     event_source = find_or_create_event_source(application: application, meta: meta)
@@ -75,6 +40,11 @@ class ProcessRawEvent
       ).to_json
     end
     Commands::SendToKafka.call events
+  end
+
+  def generate_scenario_hash(details)
+    scenario_key = details.map { |d| d[:type] }.join
+    Scenario.hash_from_string(scenario_key)
   end
 
   def find_or_create_event_source(application:, meta:)
@@ -121,18 +91,5 @@ class ProcessRawEvent
       finished_at: meta[:finish],
       raw_event: raw_event.id
     }
-  end
-
-  def generate_scenario_hash(details)
-    scenario_key = details.map { |d| d[:type] }.join
-    Scenario.hash_from_string(scenario_key)
-  end
-
-  def transaction_begin?
-    ->(content) { content == 'BEGIN' }
-  end
-
-  def transaction_end?
-    ->(content) { %w(ROLLBACK COMMIT).include? content }
   end
 end
