@@ -16,8 +16,8 @@ class ParsedRawEvent
   private
 
   def extract_data
-    data = JSON.parse(raw_event.data)
-    Parser.new(data).parse
+    raw_data = JSON.parse(raw_event.data)
+    Parser.new(raw_data).parse
   end
 
   def data
