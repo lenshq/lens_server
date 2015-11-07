@@ -38,4 +38,18 @@ class RawEvent < ActiveRecord::Base
       transitions from: :in_process, to: :failed
     end
   end
+
+  def details
+    parsed_raw_event.details
+  end
+
+  def meta
+    parsed_raw_event.meta
+  end
+
+  private
+
+  def parsed_raw_event
+    @parsed_raw_event ||= ParsedRawEvent.new(self)
+  end
 end
