@@ -52,7 +52,7 @@ class Request
     private
 
     def query_by_period(from: nil, to: nil)
-      from ||= Time.now.utc - 1.week
+      from ||= Time.now.utc - LensServer.config.graphs.period
       to ||= Time.now.utc
 
       query = Druid::Query::Builder.new

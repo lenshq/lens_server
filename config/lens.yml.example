@@ -16,6 +16,8 @@ defaults: &defaults
       events: events
     datasource:
       requests: requests
+  graphs:
+    period: 604800 # seconds
 
 production:
   <<: *defaults
