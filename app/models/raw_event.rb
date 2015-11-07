@@ -19,6 +19,8 @@ class RawEvent < ActiveRecord::Base
   validates :application, presence: true
   validates :data, presence: true
 
+  delegate :meta, :details, to: :parsed_raw_event
+
   aasm column: :state do
     state :created, initial: true
     state :in_process
@@ -37,14 +39,6 @@ class RawEvent < ActiveRecord::Base
     event :to_fail do
       transitions from: :in_process, to: :failed
     end
-  end
-
-  def details
-    parsed_raw_event.details
-  end
-
-  def meta
-    parsed_raw_event.meta
   end
 
   private
