@@ -22,6 +22,7 @@ gem 'bootstrap-material-design'
 gem 'aasm'
 
 gem 'sidekiq'
+gem 'sinatra', require: false
 
 gem 'rails-i18n', '~> 4.0.0'
 
