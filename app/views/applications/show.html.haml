@@ -3,10 +3,10 @@
     %h2= @application.title
 
   .panel-body
-    .alert.alert-dismissable.alert-info
-      = t('.token', token: @application.token)
     .row
       .col-md-8
+        %pre{ class: 'brush: ruby'}
+          = preserve "# config/initializers/lens.rb\nLens.configure do |config|\n  config.app_key = '#{@application.token}'\nend"
         %svg#requests-chart.chart
       .col-md-4
         = render @application
