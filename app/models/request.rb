@@ -51,7 +51,7 @@ class Request
 
     private
 
-    def query_by_period(from: nil, to: nil)
+    def query_by_period(from = nil, to = nil)
       from ||= Time.now.utc - LensServer.config.graphs.period
       to ||= Time.now.utc
 
