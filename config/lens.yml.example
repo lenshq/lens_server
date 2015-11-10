@@ -14,7 +14,6 @@ defaults: &defaults
     query_path: druid/v2
     datasource:
       events: events
-    datasource:
       requests: requests
   graphs:
     period: 604800 # seconds
