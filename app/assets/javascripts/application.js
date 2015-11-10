@@ -4,12 +4,12 @@
 //= require d3
 //= require moment
 
-var renderChart = function(token) {
+var renderChart = function(app, token) {
   var from = moment().subtract(7, 'days').format('YYYY-MM-DD');
   var to = moment().format('YYYY-MM-DD');
   var period = 'day';
 
-  var apiEndpoint = '/api/v1/applications/1/sources?api_token=' + token + '&from=' + from + '&to=' + to + '&period=' + period;
+  var apiEndpoint = '/api/v1/applications/' + app + '/sources?api_token=' + token;
 
   d3.json(apiEndpoint, function(error, json) {
     var data = json.requests;

@@ -16,5 +16,5 @@
 
 :javascript
   window.onload = function() {
-    renderChart("#{current_user.api_token}");
+    renderChart("#{@application.id}", "#{current_user.api_token}");
   };
