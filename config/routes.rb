@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
+
   root to: 'welcome#index'
 
   get '/auth/github/callback', to: 'sessions#create'
