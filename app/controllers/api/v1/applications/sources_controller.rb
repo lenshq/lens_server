@@ -6,7 +6,7 @@ module Api
           filter_options = {}
           filter_options[:from_date] = Date.parse(params[:from])  if params[:from].present?
           filter_options[:to_date] = Date.parse(params[:to])      if params[:to].present?
-          filter_options[:period] = params[:period]              if params[:period].present?
+          filter_options[:period] = params[:period]               if params[:period].present?
 
           sources = EventSourceFinder.new(application: application, filter_options: filter_options).get
 

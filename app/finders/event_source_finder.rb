@@ -16,18 +16,15 @@ class EventSourceFinder
   private
 
   def event_sources
-    sources = @application.event_sources.includes(:requests)
+    sources = @application.event_sources
     filter_sources(sources)
   end
 
   def requests
-    sql = "
-    SELECT d.date, COUNT(requests.id) FROM (
-      SELECT * FROM generate_series(date_trunc('#{@filter_options[:period]}', '#{@filter_options[:from_date].to_s(:db)}'::timestamp with time zone),date_trunc('#{@filter_options[:period]}', '#{@filter_options[:to_date].to_s(:db)}'::text::date::timestamp with time zone), '1 #{@filter_options[:period]}') date_trunc(date)
-    ) d LEFT JOIN requests ON date_trunc('#{@filter_options[:period]}', to_timestamp(requests.started_at)) = d.date GROUP BY d.date ORDER BY d.date ASC;
-    "
-
-    ActiveRecord::Base.connection.execute(sql).values.map {|k,v| { date: k, count: v} }
+    result = Request.by_application(@application)
+    result.map do |row|
+      { date: row['timestamp'], count: row['result']['duration'] }
+    end
   end
 
   def default_filter_options

@@ -14,7 +14,10 @@ Persey.init Rails.env do # set current environment
   source :yaml, override_secret_config_path, :secret
 
   env :default do
-    # declare here some config option for all environments
+    service_locator do
+      kafka_producer -> { Poseidon::Producer }
+      druid_client -> { Druid::Client }
+    end
   end
 
   env :production, parent: :default do
@@ -30,6 +33,9 @@ Persey.init Rails.env do # set current environment
   end
 
   env :test, parent: :development do
-    # redeclare here some specific keys for test environment
+    service_locator do
+      kafka_producer -> { Test::Poseidon::Producer }
+      druid_client -> { Test::Druid::Client }
+    end
   end
 end

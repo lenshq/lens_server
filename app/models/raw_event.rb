@@ -14,10 +14,12 @@ class RawEvent < ActiveRecord::Base
   include AASM
 
   belongs_to :application
-  has_one :request, dependent: :destroy
+  belongs_to :scenario
 
   validates :application, presence: true
   validates :data, presence: true
+
+  delegate :meta, :details, to: :parsed_raw_event
 
   aasm column: :state do
     state :created, initial: true
@@ -37,5 +39,11 @@ class RawEvent < ActiveRecord::Base
     event :to_fail do
       transitions from: :in_process, to: :failed
     end
+  end
+
+  private
+
+  def parsed_raw_event
+    @parsed_raw_event ||= ParsedRawEvent.new(self)
   end
 end

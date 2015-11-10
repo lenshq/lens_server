@@ -10,8 +10,9 @@ module Normalizers::ActiveRecord
 
         sql = record[:sql].dup
         sql.gsub!('`', '"')
+        normalized_sql = PgQuery.normalize(sql) rescue sql
         {
-          content: cleanup(PgQuery.normalize(sql)),
+          content: cleanup(normalized_sql),
           source: source
         }.merge(super)
       end

@@ -1,13 +1,11 @@
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe Scenario, type: :model do
-  context 'instance attributes and methods' do
-    # db
-    it { is_expected.to respond_to :events_hash }
-
-    # associations
+  describe 'relations' do
     it { is_expected.to respond_to :event_source }
-    it { is_expected.to respond_to :requests }
-    # others
+  end
+
+  describe 'attributes' do
+    it { is_expected.to respond_to :events_hash }
   end
 end

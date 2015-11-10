@@ -11,7 +11,6 @@
 
 class Scenario < ActiveRecord::Base
   belongs_to :event_source
-  has_many :requests, dependent: :destroy
 
   validates :events_hash, presence: true
   validates :events_hash, uniqueness: { scope: [:event_source] }

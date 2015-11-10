@@ -1,5 +1,23 @@
 ---
 defaults: &defaults
+  kafka:
+    host: lenshq.io
+    port: 9092
+    topic: lens_test
+  zookeper:
+    host: lenshq.io
+    port: 2181
+    discovery_path: /discovery
+  druid:
+    host: lenshq.io
+    port: 8084
+    query_path: druid/v2
+    datasource:
+      events: events
+    datasource:
+      requests: requests
+  graphs:
+    period: 604800 # seconds
 
 production:
   <<: *defaults
