@@ -35,10 +35,17 @@ class EventSourceFinder
   # {"version"=>"v1", "timestamp"=>"2015-11-10T18:54:00.000Z", "event"=>{"duration"=>1, "event_source"=>"11"}}
   # ]
   def requests
-    data_from_druid.inject({}) do |acc, row|
-      acc[row['timestamp']] = acc[row['timestamp']].to_i + row['event']['count']
-      acc
-    end.each_pair.map { |k, v| { date: k, count: v } }
+    grouped_by_date = data_from_druid.group_by do |row|
+      row['timestamp']
+    end
+
+    grouped_by_date.map do |(date, entries)|
+      {
+        date: date,
+        count: entries.inject(0) { |sum, e| sum + e['event']['count'] },
+        event_source_ids: entries.map { |e| e['event']['event_source'] }.compact.map(&:to_i)
+      }
+    end
   end
 
   def data_from_druid
