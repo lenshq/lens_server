@@ -36,7 +36,7 @@ class EventSourceFinder
   # ]
   def requests
     data_from_druid.inject({}) do |acc, row|
-      acc[row['timestamp']] = acc[row['timestamp']].to_i + row['event']['duration']
+      acc[row['timestamp']] = acc[row['timestamp']].to_i + row['event']['count']
       acc
     end.each_pair.map { |k, v| { date: k, count: v } }
   end

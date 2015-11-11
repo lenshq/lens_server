@@ -40,7 +40,7 @@ class Request
 
     def by_application(application)
       result = query_by_period do |query|
-        query.count(:duration).
+        query.count(:count).
           granularity(:minute).
           group_by(:event_source).
           filter(application: application.id)
