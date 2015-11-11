@@ -53,9 +53,16 @@ class ProcessRawEvent
   end
 
   def store_events(raw_event)
+    started_at = raw_event.details.first[:start]
     events = raw_event.details.each_with_index.map do |row, index|
       Event.new(
-        event_hash(scenario: raw_event.scenario, details: row, meta: raw_event.meta, index: index)
+        event_hash(
+          scenario: raw_event.scenario,
+          details: row,
+          meta: raw_event.meta,
+          index: index,
+          started_at: started_at
+        )
       ).to_json
     end
 
@@ -90,14 +97,14 @@ class ProcessRawEvent
     }
   end
 
-  def event_hash(scenario:, details:, meta:, index:)
+  def event_hash(scenario:, details:, meta:, index:, started_at:)
     base_hash(scenario: scenario, meta: meta).merge(
       timestamp: Time.at(details[:start]).to_s(:iso8601),
       event_type: details[:type],
       content: details[:content],
       duration: details[:duration],
-      started_at: details[:start],
-      finished_at: details[:finish],
+      started_at: details[:start] - started_at,
+      finished_at: details[:finish] - started_at,
       position: index
     )
   end
