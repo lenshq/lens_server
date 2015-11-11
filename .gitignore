@@ -10,6 +10,10 @@
 # Ignore database.yml
 /config/database.yml
 
+# Ignore server configs
+/config/lens.yml
+/config/lens_secret.yml
+
 /coverage/*
 
 # Ignore all logfiles and tempfiles.

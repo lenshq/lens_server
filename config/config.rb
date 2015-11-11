@@ -1,11 +1,11 @@
 # Rails.root are not initialized here
 app_path = File.expand_path('../../', __FILE__)
 
-config_path = File.join(app_path, 'config', 'lens.yml.example')
+config_path = File.join(app_path, 'config', 'lens.default.yml')
 override_config_path = File.join(app_path, 'config', 'lens.yml')
 
-secret_config_path = File.join(app_path, 'config', 'lens_secret.yml.example')
-override_secret_config_path = File.join(app_path, '../../shared/config', 'lens_secret.yml')
+secret_config_path = File.join(app_path, 'config', 'lens_secret.default.yml')
+override_secret_config_path = File.join(app_path, 'config', 'lens_secret.yml')
 
 Persey.init Rails.env do # set current environment
   source :yaml, config_path
