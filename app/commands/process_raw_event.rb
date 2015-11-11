@@ -103,8 +103,8 @@ class ProcessRawEvent
       event_type: details[:type],
       content: details[:content],
       duration: details[:duration],
-      started_at: details[:start] - started_at,
-      finished_at: details[:finish] - started_at,
+      started_at: (details[:start] - started_at) * 1000,
+      finished_at: (details[:finish] - started_at) * 1000,
       position: index
     )
   end
