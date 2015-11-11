@@ -12,6 +12,8 @@ var renderChart = function(app, token) {
   var apiEndpoint = '/api/v1/applications/' + app + '/sources?api_token=' + token;
 
   d3.json(apiEndpoint, function(error, json) {
+    renderTable(json.event_sources);
+
     var data = json.requests;
 
     var countFn = function(d) { return parseInt(d.count); }
@@ -59,4 +61,17 @@ var renderChart = function(app, token) {
       .attr('transform', 'translate(0,' + height + ')')
       .call(xAxis);
   });
+}
+
+var renderTable = function(event_sources) {
+  var thead = d3.select('#event-sources thead').selectAll('th')
+    .data(d3.keys(event_sources[0])).
+    enter().append('th').text(function(d) { return d; });
+
+  var tr = d3.select('#event-sources tbody').selectAll('tr')
+    .data(event_sources).enter().append('tr');
+
+  var td = tr.selectAll('td')
+    .data(function(d) { return d3.values(d); })
+    .enter().append('td').text(function(d) { return d; });
 }
