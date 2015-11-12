@@ -23,15 +23,8 @@ class EventSourceFinder
   # [
   # {"version"=>"v1", "timestamp"=>"2015-11-10T18:48:00.000Z", "event"=>{"duration"=>14, "event_source"=>nil}},
   # {"version"=>"v1", "timestamp"=>"2015-11-10T18:48:00.000Z", "event"=>{"duration"=>1, "event_source"=>"11"}},
-  # {"version"=>"v1", "timestamp"=>"2015-11-10T18:48:00.000Z", "event"=>{"duration"=>1, "event_source"=>"12"}},
-  # {"version"=>"v1", "timestamp"=>"2015-11-10T18:48:00.000Z", "event"=>{"duration"=>1, "event_source"=>"13"}},
   # {"version"=>"v1", "timestamp"=>"2015-11-10T18:48:00.000Z", "event"=>{"duration"=>1, "event_source"=>"14"}},
-  # {"version"=>"v1", "timestamp"=>"2015-11-10T18:48:00.000Z", "event"=>{"duration"=>1, "event_source"=>"15"}},
-  # {"version"=>"v1", "timestamp"=>"2015-11-10T18:49:00.000Z", "event"=>{"duration"=>7, "event_source"=>nil}},
-  # {"version"=>"v1", "timestamp"=>"2015-11-10T18:49:00.000Z", "event"=>{"duration"=>1, "event_source"=>"11"}},
-  # {"version"=>"v1", "timestamp"=>"2015-11-10T18:49:00.000Z", "event"=>{"duration"=>1, "event_source"=>"12"}},
   # {"version"=>"v1", "timestamp"=>"2015-11-10T18:49:00.000Z", "event"=>{"duration"=>1, "event_source"=>"13"}},
-  # {"version"=>"v1", "timestamp"=>"2015-11-10T18:54:00.000Z", "event"=>{"duration"=>4, "event_source"=>nil}},
   # {"version"=>"v1", "timestamp"=>"2015-11-10T18:54:00.000Z", "event"=>{"duration"=>1, "event_source"=>"11"}}
   # ]
   def requests
@@ -40,11 +33,7 @@ class EventSourceFinder
     end
 
     grouped_by_date.map do |(date, entries)|
-      {
-        date: date,
-        count: entries.inject(0) { |sum, e| sum + e['event']['count'] },
-        event_source_ids: entries.map { |e| e['event']['event_source'] }.compact.map(&:to_i)
-      }
+      request_to_hash date, entries
     end
   end
 
@@ -58,5 +47,13 @@ class EventSourceFinder
       to_date: Time.now,
       period: 'hour'
     }.with_indifferent_access
+  end
+
+  def request_to_hash(date, entries)
+    {
+      date: date,
+      count: entries.inject(0) { |sum, e| sum + e['event']['count'] },
+      event_source_ids: entries.map { |e| e['event']['event_source'] }.compact.map(&:to_i)
+    }
   end
 end

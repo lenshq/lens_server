@@ -4,6 +4,19 @@
 //= require d3
 //= require moment
 
+var renderTable = function(eventSources) {
+  d3.select('#event-sources thead').selectAll('th')
+    .data(d3.keys(eventSources[0])).
+    enter().append('th').text(function(d) { return d; });
+
+  var tr = d3.select('#event-sources tbody').selectAll('tr')
+    .data(eventSources).enter().append('tr');
+
+  tr.selectAll('td')
+    .data(function(d) { return d3.values(d); })
+    .enter().append('td').text(function(d) { return d; });
+};
+
 var renderChart = function(app, token) {
   var from = moment().subtract(7, 'days').format('YYYY-MM-DD');
   var to = moment().format('YYYY-MM-DD');
@@ -61,17 +74,4 @@ var renderChart = function(app, token) {
       .attr('transform', 'translate(0,' + height + ')')
       .call(xAxis);
   });
-}
-
-var renderTable = function(event_sources) {
-  var thead = d3.select('#event-sources thead').selectAll('th')
-    .data(d3.keys(event_sources[0])).
-    enter().append('th').text(function(d) { return d; });
-
-  var tr = d3.select('#event-sources tbody').selectAll('tr')
-    .data(event_sources).enter().append('tr');
-
-  var td = tr.selectAll('td')
-    .data(function(d) { return d3.values(d); })
-    .enter().append('td').text(function(d) { return d; });
 }
