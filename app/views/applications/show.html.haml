@@ -8,6 +8,9 @@
         %pre{ class: 'brush: ruby'}
           = preserve "# config/initializers/lens.rb\nLens.configure do |config|\n  config.app_key = '#{@application.token}'\nend"
         %svg#requests-chart.chart
+        %table.table.table-striped.table-hover#event-sources
+          %thead
+          %tbody
       .col-md-4
         = render @application
 

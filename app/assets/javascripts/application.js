@@ -4,6 +4,19 @@
 //= require d3
 //= require moment
 
+var renderTable = function(eventSources) {
+  d3.select('#event-sources thead').selectAll('th')
+    .data(d3.keys(eventSources[0])).
+    enter().append('th').text(function(d) { return d; });
+
+  var tr = d3.select('#event-sources tbody').selectAll('tr')
+    .data(eventSources).enter().append('tr');
+
+  tr.selectAll('td')
+    .data(function(d) { return d3.values(d); })
+    .enter().append('td').text(function(d) { return d; });
+};
+
 var renderChart = function(app, token) {
   var from = moment().subtract(7, 'days').format('YYYY-MM-DD');
   var to = moment().format('YYYY-MM-DD');
@@ -12,6 +25,8 @@ var renderChart = function(app, token) {
   var apiEndpoint = '/api/v1/applications/' + app + '/sources?api_token=' + token;
 
   d3.json(apiEndpoint, function(error, json) {
+    renderTable(json.event_sources);
+
     var data = json.requests;
 
     var countFn = function(d) { return parseInt(d.count); }

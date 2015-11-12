@@ -16,10 +16,8 @@ module Api
             {
               id: es.id,
               path: "#{es.source}##{es.endpoint}",
-              source: es.source,
-              endpoint: es.endpoint,
-              duration: es.avg_duration(from: filter_options[:from_date], to: filter_options[:to_date]),
-              time: es.sum_duration(from: filter_options[:from_date], to: filter_options[:to_date]),
+              duration: es.avg_duration(from: filter_options[:from_date], to: filter_options[:to_date]).round(2),
+              time: es.sum_duration(from: filter_options[:from_date], to: filter_options[:to_date]).round(2),
               count: es.requests_count(from: filter_options[:from_date], to: filter_options[:to_date])
             }
           end.sort_by do |es|
