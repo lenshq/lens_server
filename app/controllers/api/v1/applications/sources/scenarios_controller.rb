@@ -32,7 +32,7 @@ module Api
                 finished_at: event['finished_at'],
                 duration: event['avg_duration'],
                 event_type: event['event_type'],
-                position: event['position'],
+                position: event['position'].to_i,
                 content: event['content']
               }
             end.sort_by { |k, v| k[:position] }
