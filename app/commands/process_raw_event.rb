@@ -49,7 +49,7 @@ class ProcessRawEvent
   def store_request(raw_event)
     request = Request.new(request_hash(raw_event)).to_json
 
-    Commands::SendToKafka.call request
+    Commands::SendToKafka.call request, 'requests'
   end
 
   def store_events(raw_event)
@@ -59,7 +59,7 @@ class ProcessRawEvent
       ).to_json
     end
 
-    Commands::SendToKafka.call events
+    Commands::SendToKafka.call events, 'events'
   end
 
   def request_hash(raw_event)

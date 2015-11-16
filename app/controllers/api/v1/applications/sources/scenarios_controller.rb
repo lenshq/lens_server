@@ -37,7 +37,7 @@ module Api
               }
             end.sort_by { |k, v| k[:position] }
 
-            render json: events
+            render json: { events: events }
           end
         end
       end

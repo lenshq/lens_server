@@ -18,7 +18,7 @@ class Event
     def find_by(application:, scenario:)
       query = Druid::Query::Builder.new
       query
-      .group_by([:position, :event_type])
+      .group_by([:position, :event_type, :content])
       .granularity(:all)
       .filter(application: application.id)
       .filter(scenario: scenario.events_hash)

@@ -1,7 +1,8 @@
 module Commands
   class SendToKafka
-    def initialize(messages)
+    def initialize(messages, type)
       @messages = Array(messages)
+      @type = type
     end
 
     def call
@@ -19,7 +20,7 @@ module Commands
     private
 
     def topic
-      LensServer.config.kafka.topic
+      LensServer.config.kafka.topic + "_#{@type}"
     end
 
     def producer
