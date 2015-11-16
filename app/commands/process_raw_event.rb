@@ -84,6 +84,7 @@ class ProcessRawEvent
   def base_hash(scenario:, meta:)
     @base_hash ||= {
       application: scenario.event_source.application.id,
+      event_source: scenario.event_source.id,
       scenario: scenario.events_hash,
       controller: meta[:controller],
       action: meta[:action]

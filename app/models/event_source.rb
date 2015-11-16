@@ -36,4 +36,8 @@ class EventSource < ActiveRecord::Base
   def requests_count(from: nil, to: nil)
     Request.count(event_source: self, from: from, to: to)
   end
+
+  def current_scenarios
+    Scenario.in_period(from: from, to: to)
+  end
 end

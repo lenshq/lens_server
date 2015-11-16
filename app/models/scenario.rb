@@ -15,7 +15,29 @@ class Scenario < ActiveRecord::Base
   validates :events_hash, presence: true
   validates :events_hash, uniqueness: { scope: [:event_source] }
 
-  def self.hash_from_string(str)
-    Digest::MD5.hexdigest(str)
+  class << self
+    def hash_from_string(str)
+      Digest::MD5.hexdigest(str)
+    end
+
+    def self.in_period
+      query = Druid::Query::Builder.new
+      query
+      .group_by([:scenario])
+      .granularity(:all)
+      .filter(application: event_source.application.id)
+      .filter(event_source: event_source.id)
+      .long_sum(:count)
+
+      get(query)
+    end
+
+    def datasource
+      "broker/#{LensServer.config.druid.datasource.events}"
+    end
+
+    def get(query)
+      ServiceLocator.druid_client.data_source(datasource).post(query)
+    end
   end
 end
