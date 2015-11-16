@@ -3,7 +3,7 @@ module Api
     module Applications
       module Sources
         class ScenariosController < Api::V1::Applications::Sources::ApplicationController
-          def index
+          def show
             scenario = event_source.scenarios.find(params[:id])
 
             rows = Event.find_by(application: application, scenario: scenario)
