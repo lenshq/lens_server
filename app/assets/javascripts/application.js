@@ -33,11 +33,11 @@ var renderChart = function(app, token) {
     var parseDate = d3.time.format('%Y-%m-%d %X+00').parse;
 
     var svg = d3.select('#requests-chart');
-    var container = d3.select(svg.node().parentNode);
+    // var container = d3.select(svg.node().parentNode);
 
     var margin = {top: 20, right: 40, bottom: 30, left: 20}
-    var width = parseInt(container.style('width')) - margin.left - margin.right;
-    var height = parseInt(container.style('height')) - margin.top - margin.bottom;
+    var width = parseInt(d3.select(svg.node().parentNode).style('width')) - margin.left - margin.right;
+    var height = parseInt(d3.select(svg.node()).style('height')) - margin.top - margin.bottom;
     var barWidth = width / data.length;
 
     var x = d3.time.scale()
