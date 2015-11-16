@@ -20,7 +20,10 @@ class Scenario < ActiveRecord::Base
       Digest::MD5.hexdigest(str)
     end
 
-    def self.in_period
+    def in_period(event_source, from: nil, to: nil)
+      from ||= Time.now.utc - LensServer.config.graphs.period
+      to ||= Time.now.utc
+
       query = Druid::Query::Builder.new
       query
       .group_by([:scenario])
@@ -28,6 +31,7 @@ class Scenario < ActiveRecord::Base
       .filter(application: event_source.application.id)
       .filter(event_source: event_source.id)
       .long_sum(:count)
+      .interval(from, to)
 
       get(query)
     end

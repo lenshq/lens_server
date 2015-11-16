@@ -38,6 +38,7 @@ class EventSource < ActiveRecord::Base
   end
 
   def current_scenarios
-    Scenario.in_period(from: from, to: to)
+    arr = Scenario.in_period(from: from, to: to).map {|a| a['event']['scenario'] }.compact
+    scenarios.where(events_hash: arr)
   end
 end
