@@ -59,7 +59,7 @@ var renderTreeChart = function(app, source, scenario, token) {
       .append("rect")
         .attr("x", function(d) { return x(timeStartFn(d)) })
         .attr("y", function(d) { return 0 })
-        .attr("width", function(d) { return x(d.finished_at - d.started_at) })
+        .attr("width", function(d) { return x(d.duration) })
         .attr("height", 20)
         .attr('class', function(d) { return rectClassFn(d) });
 
