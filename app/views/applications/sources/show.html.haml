@@ -1,0 +1,19 @@
+.panel.panel-default
+  .panel-heading
+    %h2= t('.scenarios')
+  .panel-body
+    .row
+      .col-md-9
+        - @scenarios.each do |row|
+          - row.each_pair do |id, count|
+            = link_to count, api_v1_application_source_scenario_path(@application.id, @event_source.id, id, api_token: current_user.api_token)
+
+        %svg#events-chart.chart
+
+  .panel-footer
+    = link_to t('.back'), application_path(@application.id), class: 'btn btn-primary'
+
+:javascript
+  window.onload = function() {
+    renderTreeChart("#{@application.id}", "#{@event_source.id}", "#{@scenarios.first.first.first}", "#{current_user.api_token}");
+  };

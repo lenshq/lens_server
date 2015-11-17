@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :applications do
     scope module: :applications do
       resources :team, only: [:index, :create, :destroy]
+      resources :sources, only: [:show]
     end
   end
 

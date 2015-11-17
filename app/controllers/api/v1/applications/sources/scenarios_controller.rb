@@ -26,16 +26,18 @@ module Api
             #   }
             # }
             events = rows.map do |row|
+              row if row['event']['duration'].round > 0
+            end.compact.sort_by { |k| k['event']['started_at'].to_f }.each_with_index.map do |row, index|
               event = row['event']
               {
-                started_at: event['started_at'],
-                finished_at: event['finished_at'],
-                duration: event['avg_duration'],
+                started_at: event['started_at'].to_f,
+                finished_at: event['finished_at'].to_f,
+                duration: event['avg_duration'].to_f,
                 event_type: event['event_type'],
-                position: event['position'].to_i,
+                position: index,
                 content: event['content']
               }
-            end.sort_by { |k, v| k[:position] }
+            end
 
             render json: { events: events }
           end

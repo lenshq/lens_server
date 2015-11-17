@@ -36,9 +36,4 @@ class EventSource < ActiveRecord::Base
   def requests_count(from: nil, to: nil)
     Request.count(event_source: self, from: from, to: to)
   end
-
-  def current_scenarios
-    arr = Scenario.in_period(from: from, to: to).map {|a| a['event']['scenario'] }.compact
-    scenarios.where(events_hash: arr)
-  end
 end
