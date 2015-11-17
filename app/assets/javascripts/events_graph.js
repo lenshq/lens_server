@@ -59,7 +59,7 @@ var renderTreeChart = function(app, source, scenario, token) {
       .append("rect")
         .attr("x", function(d) { return x(timeStartFn(d)) })
         .attr("y", function(d) { return 0 })
-        .attr("width", function(d) { return x(d.duration) })
+        .attr("width", function(d) { return x(d.finished_at - d.started_at) })
         .attr("height", 20)
         .attr('class', function(d) { return rectClassFn(d) });
 
@@ -70,7 +70,7 @@ var renderTreeChart = function(app, source, scenario, token) {
     .append("rect")
       .attr("x", function(d) { return x(timeStartFn(d)) })
       .attr("y", function(d) { return (d.position * 20) + 10})
-      .attr("width", function(d) { return x(d.duration) })
+      .attr("width", function(d) { return x(d.finished_at - d.started_at) })
       .attr("height", 20)
       .attr('class', function(d) { return rectClassFn(d) })
       .attr('data-start', function(d) { return d.started_at })
