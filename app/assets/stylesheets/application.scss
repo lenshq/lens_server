@@ -92,3 +92,11 @@ html, body, .landing {
   stroke: #000;
   shape-rendering: crispEdges;
 }
+
+table#event-sources .left {
+  text-align: left;
+}
+
+table#event-sources .right {
+  text-align: right;
+}

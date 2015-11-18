@@ -1,23 +1,76 @@
 var renderTable = function(app, eventSources) {
-  d3.select('#event-sources thead').selectAll('th')
-    .data(d3.keys(eventSources[0])).
-    enter().append('th').text(function(d) { return d; });
+  var totalTime = d3.sum(eventSources, function(d) { return d.time });
+  var totalDuration = d3.sum(eventSources, function(d) { return d.duration });
+  var totalCount = d3.sum(eventSources, function(d) { return d.count });
 
-  var tr = d3.select('#event-sources tbody').selectAll('tr')
-    .data(eventSources).enter().append('tr');
+  var medianTime = d3.median(eventSources, function(d) { return d.time });
+  var medianDuration = d3.median(eventSources, function(d) { return d.duration });
+  var medianCount = d3.median(eventSources, function(d) { return d.count });
 
+  var tableValues = function(d) { return [d[0], [d[0], d[1]], d[2], d[3], d[4]] };
+
+  var tdClassName = function(i) { return (i == 0 || i == 1) ? 'left' : 'right' }
   var linkOrDataFn = function(i, e) {
-    if(i == 0) {
-      return '<a href="/applications/' + app + '/sources/' + e +'">' + e + '</a>';
-    } else {
-      return e;
+    switch(i) {
+        case 1:
+            return '<a href="/applications/' + app + '/sources/' + e[0] +'">' + e[1] + '</a>';
+            break;
+        case 2:
+            return (e > medianDuration) ? '<strong>' + e + '</strong>' : e;
+            break;
+        case 3:
+            return (e > medianTime) ? '<strong>' + e + '</strong>' : e;
+            break;
+        case 4:
+            return (e > medianCount) ? '<strong>' + e + '</strong>' : e;
+            break;
+        default:
+            return e;
     }
   };
+
+  var tableLabelFn = function(key) {
+    switch(key) {
+     case 'id':
+         return '#';
+         break;
+     case 'path':
+         return 'Controller#action';
+         break;
+     case 'duration':
+         return 'Response time (avg)';
+         break;
+     case 'time':
+         return 'Response time (sum)';
+         break;
+     case 'count':
+         return 'Requests count';
+         break;
+    };
+  };
+
+  d3.select('#event-sources thead')
+    .selectAll('th')
+    .data(d3.keys(eventSources[0]))
+    .enter()
+    .append('th')
+    .text(function(d) { return tableLabelFn(d); })
+    .attr('class', function(d, i) { return tdClassName(i); });
+
+  var tr = d3.select('#event-sources tbody')
+    .selectAll('tr')
+    .data(eventSources)
+    .enter()
+    .append('tr');
+
   tr.selectAll('td')
-    .data(function(d) { return d3.values(d); })
-    .enter().append('td').html(function(d, i) {
+    .data(function(d) { return tableValues(d3.values(d)); })
+    .enter()
+    .append('td')
+    .html(function(d, i) {
       return linkOrDataFn(i, d);
-    });
+    })
+    .attr('class', function(d, i) { return tdClassName(i); });
 };
 
 var renderChart = function(app, token) {
