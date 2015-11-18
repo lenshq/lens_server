@@ -15,7 +15,7 @@ var renderTreeHistogram = function(data) {
   var barWidth = width / data.probabilities.length;
 
   var x = d3.scale.linear()
-    .domain(d3.extent(data.quantiles, function(d) { return d }))
+    .domain(d3.extent(data.probabilities, function(d) { return d }))
     .range([barWidth / 2, width - barWidth / 2]);
 
   var y = d3.scale.linear()

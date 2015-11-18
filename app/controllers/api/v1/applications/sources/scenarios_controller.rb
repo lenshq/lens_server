@@ -56,7 +56,12 @@ module Api
               }
             end
 
-            render json: { events: events, quantiles: raw_quantiles['result']['duration'] }
+            quantiles = {
+              probabilities: raw_quantiles['result']['duration']['probabilities'].map { |pr| pr * 100 },
+              quantiles: raw_quantiles['result']['duration']['quantiles']
+            }
+
+            render json: { events: events, quantiles: quantiles }
           end
         end
       end
