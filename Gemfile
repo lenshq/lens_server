@@ -27,7 +27,7 @@ gem 'sinatra', require: false
 gem 'rails-i18n', '~> 4.0.0'
 
 gem 'poseidon'   # kafka
-gem 'ruby-druid' , github: 'ruby-druid/ruby-druid'
+gem 'ruby-druid' , github: 'lenshq/ruby-druid'
 
 # Configuration
 gem "persey", '>= 0.0.8'

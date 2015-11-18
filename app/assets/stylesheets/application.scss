@@ -50,7 +50,11 @@ html, body, .landing {
 }
 
 .chart rect {
-  fill: darkorange;
+  fill: lightgray;
+}
+
+.chart rect:hover {
+  fill: gray;
 }
 
 .chart .global-time rect {
@@ -74,6 +78,10 @@ html, body, .landing {
   background-color: #C8D7DB;
   padding: 10px;
   width: 400px;
+}
+
+.d3-tip .histogram-tooltip {
+  padding: 3px;
 }
 
 .chart text {

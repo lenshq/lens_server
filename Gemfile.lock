@@ -1,6 +1,6 @@
 GIT
-  remote: git://github.com/ruby-druid/ruby-druid.git
-  revision: a752166b9dc2cac8c100010c20a30a86048e7a6e
+  remote: git://github.com/lenshq/ruby-druid.git
+  revision: dd724cd1d64650d9fba3699b1a82ac47d340213d
   specs:
     ruby-druid (0.2.0.rc3)
       activemodel

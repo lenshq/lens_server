@@ -49,6 +49,17 @@ class Request
       result
     end
 
+    def find_quantiles_by(application:, scenario:)
+      result = query_by_period do |query|
+        query.granularity(:all)
+          .filter(application: application.id)
+          .filter(scenario: scenario.events_hash)
+          .histogram(:duration, 'quantiles', {"probabilities" => (0.01...1.0).step(0.01).map {|n| n.round(2)} })
+      end
+
+      result
+    end
+
     private
 
     def query_by_period(from = nil, to = nil)

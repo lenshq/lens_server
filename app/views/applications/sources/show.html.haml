@@ -4,6 +4,7 @@
   .panel-body
     .row
       .col-md-8
+        %svg#quantiles-chart.chart
         %svg#events-chart.chart
       .col-md-4
         .panel.panel-default
@@ -32,5 +33,5 @@
 
 :javascript
   window.onload = function() {
-    renderTreeChart("#{@application.id}", "#{@event_source.id}", "#{@scenarios.first.first.first}", "#{current_user.api_token}");
+    renderScenariosChart("#{@application.id}", "#{@event_source.id}", "#{@scenarios.first.first.first}", "#{current_user.api_token}");
   };
