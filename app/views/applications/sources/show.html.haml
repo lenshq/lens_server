@@ -1,16 +1,33 @@
 .panel.panel-default
   .panel-heading
-    %h2= t('.scenarios')
+    %h2= @event_source.path
   .panel-body
     .row
-      .col-md-9
-        - @scenarios.each do |row|
-          - row.each_pair do |id, count|
-            = link_to count, api_v1_application_source_scenario_path(@application.id, @event_source.id, id, api_token: current_user.api_token)
-
+      .col-md-8
         %svg#events-chart.chart
+      .col-md-4
+        .panel.panel-default
+          .panel-heading
+            %h3 Scenarios
+          .panel-body
+            %table.table.table-hover.table-mc-light-blue
+              %thead
+                %tr
+                  %th #
+                  %th Events
+                  %th Duration
+                  %th Acion
+              %tbody
+                - @scenarios.each_with_index do |row, index|
+                  - id = row.keys.first
+                  - values = row.values.first
+                  %tr
+                    %td= index
+                    %td= values[:count]
+                    %td= "#{values[:duration].round(2)} ms"
+                    %td= link_to 'Show', api_v1_application_source_scenario_path(@application.id, @event_source.id, id, api_token: current_user.api_token)
+          .panel-footer
 
-  .panel-footer
     = link_to t('.back'), application_path(@application.id), class: 'btn btn-primary'
 
 :javascript
