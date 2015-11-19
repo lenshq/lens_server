@@ -29,7 +29,7 @@ class ProcessRawEvent
   end
 
   def generate_scenario_hash(details)
-    scenario_key = details.map { |d| d[:type] }.join
+    scenario_key = details.map { |d| d[:type] + d[:content].to_s }.join
     Scenario.hash_from_string(scenario_key)
   end
 
