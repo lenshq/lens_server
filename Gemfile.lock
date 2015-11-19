@@ -121,6 +121,7 @@ GEM
     libv8 (3.16.14.13)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
+    lz4-ruby (0.3.3)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     method_source (0.8.2)
@@ -305,6 +306,7 @@ DEPENDENCIES
   factory_girl_rails
   haml-rails
   jquery-rails
+  lz4-ruby
   omniauth-github
   persey (>= 0.0.8)
   pg

@@ -30,7 +30,9 @@ gem 'poseidon'   # kafka
 gem 'ruby-druid' , github: 'lenshq/ruby-druid'
 
 # Configuration
-gem "persey", '>= 0.0.8'
+gem 'persey', '>= 0.0.8'
+
+gem 'lz4-ruby'
 
 group :development do
   gem 'pry-rails'
