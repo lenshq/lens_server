@@ -43,7 +43,7 @@
             "estart": 1439918867.672921,
             "etype": "sql.active_record",
             "name": "Coub Load",
-            "sql": "SELECT  \"coubs\".* FROM \"coubs\"  WHERE \"coubs\".\"permalink\" in ('4ac6', '6fa2') LIMIT 1"
+            "sql": "SELECT  \"coubs\".* FROM \"coubs\"  WHERE \"coubs\".\"permalink\" in ('4ac6', '6fa2', 'aaaa') LIMIT 1"
         },
         {
             "binds": null,

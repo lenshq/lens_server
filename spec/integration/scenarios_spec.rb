@@ -8,7 +8,7 @@ RSpec.describe "Scenarios" do
 
   let(:application) { create :application }
   let(:raw_event_1) { create_raw_event 2 }
-  let(:raw_event_2) { create_raw_event 3 }
+  let(:raw_event_2) { create_raw_event 5 }
   let(:raw_event_3) { create_raw_event 4 }
 
   before do
