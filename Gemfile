@@ -31,6 +31,7 @@ gem 'ruby-druid' , github: 'lenshq/ruby-druid'
 
 # Configuration
 gem 'persey', '>= 0.0.8'
+gem 'rollbar', '~> 2.4.0'
 
 gem 'lz4-ruby'
 
