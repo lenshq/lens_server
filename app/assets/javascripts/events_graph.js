@@ -2,6 +2,9 @@ var renderTreeHistogram = function(data, element) {
   var countFn = function(d) { return d; }
 
   var svg = d3.select(element);
+
+  svg.selectAll('*').remove();
+
   var tip = d3.tip()
     .attr('class', 'd3-tip')
     .direction('n')
@@ -65,6 +68,8 @@ var renderTreeChart = function(data) {
   var timeFinishFn = function(d) { return d.finished_at - startTime };
 
   var svg = d3.select('#events-chart');
+
+  svg.selectAll('*').remove();
   var container = d3.select(svg.node().parentNode);
 
   var margin = {top: 20, right: 40, bottom: 30, left: 20}

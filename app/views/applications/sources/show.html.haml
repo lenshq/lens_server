@@ -18,7 +18,7 @@
                   %th #
                   %th Events
                   %th Duration
-                  %th Acion
+                  %th Action
               %tbody
                 - @scenarios.each_with_index do |row, index|
                   - id = row.keys.first
@@ -27,7 +27,7 @@
                     %td= index
                     %td= values[:count]
                     %td= "#{values[:duration].round(2)} ms"
-                    %td= link_to 'Show', api_v1_application_source_scenario_path(@application.id, @event_source.id, id, api_token: current_user.api_token)
+                    %td= link_to 'Show', '#', onclick: "renderScenariosChart(#{@application.id}, #{@event_source.id}, #{id}, '#{current_user.api_token}')"
           .panel-footer
 
     = link_to t('.back'), application_path(@application.id), class: 'btn btn-primary'
