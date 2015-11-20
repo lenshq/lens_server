@@ -3,6 +3,10 @@ class Applications::SourcesController < Applications::ApplicationController
     @application = application
     @event_source = application.event_sources.find(params[:id])
 
+    # scenarios = in_period(@event_source).first['result'].inject({}) do |acc, row|
+    #   acc[row['scenario']] = {
+    #     count: row['count'],
+    #     duration: row['duration']
     scenarios = in_period(@event_source).inject({}) do |acc, row|
       acc[row['event']['scenario']] = {
         count: row['event']['count'],
@@ -22,6 +26,7 @@ class Applications::SourcesController < Applications::ApplicationController
     to ||= Time.now.utc
 
     query = Druid::Query::Builder.new
+    #query.topn(:scenario, :duration, 100)
     query.group_by([:scenario])
       .granularity(:all)
       .filter(application: event_source.application.id)

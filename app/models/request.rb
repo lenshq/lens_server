@@ -60,6 +60,17 @@ class Request
       result
     end
 
+    def find_distribution_by(application:, scenario:)
+      result = query_by_period do |query|
+        query.granularity(:all)
+          .filter(application: application.id)
+          .filter(scenario: scenario.events_hash)
+          .histogram(:duration, 'equalBuckets', {"numBuckets" => 50 })
+      end
+
+      result
+    end
+
     private
 
     def query_by_period(from = nil, to = nil)

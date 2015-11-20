@@ -1,7 +1,7 @@
-var renderTreeHistogram = function(data) {
+var renderTreeHistogram = function(data, element) {
   var countFn = function(d) { return d; }
 
-  var svg = d3.select('#quantiles-chart');
+  var svg = d3.select(element);
   var tip = d3.tip()
     .attr('class', 'd3-tip')
     .direction('n')
@@ -19,7 +19,7 @@ var renderTreeHistogram = function(data) {
     .range([barWidth / 2, width - barWidth / 2]);
 
   var y = d3.scale.linear()
-    .domain([0, d3.max(data.quantiles)])
+    .domain([d3.min(data.quantiles), d3.max(data.quantiles)])
     .range([height, 0])
 
   var xAxis = d3.svg.axis().scale(x).orient('bottom');
@@ -135,8 +135,10 @@ var renderScenariosChart = function(app, source, scenario, token) {
   d3.json(apiEndpoint, function(error, json) {
     var treeData = json.events.sort(function(a, b) { return a.started_at - b.started_at});
     var histogramData = json.quantiles;
+    var distributionData = json.distributions;
 
-    renderTreeHistogram(histogramData);
+    renderTreeHistogram(histogramData, '#quantiles-chart');
+    renderTreeHistogram(distributionData, '#distribution-chart');
     renderTreeChart(treeData);
   });
 }

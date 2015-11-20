@@ -42,6 +42,8 @@ module Api
             # }
             raw_quantiles = Request.find_quantiles_by(application: application, scenario: scenario).first
 
+            raw_distributions = Request.find_distribution_by(application: application, scenario: scenario).first
+
             events = rows.map do |row|
               row if row['event']['duration'].round > 0
             end.compact.sort_by { |k| k['event']['started_at'].to_f }.each_with_index.map do |row, index|
@@ -58,10 +60,15 @@ module Api
 
             quantiles = {
               probabilities: raw_quantiles['result']['duration']['probabilities'].map { |pr| pr * 100 },
-              quantiles: raw_quantiles['result']['duration']['quantiles']
+              quantiles: raw_quantiles['result']['duration']['quantiles'].map {|pr| pr.round(2) }
             }
 
-            render json: { events: events, quantiles: quantiles }
+            distributions = {
+              probabilities: raw_distributions['result']['duration']['breaks'].map { |pr| pr.round },
+              quantiles: raw_distributions['result']['duration']['counts'].map { |pr| pr.round }
+            }
+
+            render json: { events: events, quantiles: quantiles, distributions: distributions }
           end
         end
       end
