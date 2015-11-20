@@ -158,7 +158,7 @@ GEM
       toml (~> 0.1.0)
       yajl-ruby
     pg (0.18.2)
-    pg_query (0.6.3)
+    pg_query (0.7.1)
       json (~> 1.8)
     poseidon (0.0.5)
     pry (0.10.1)
