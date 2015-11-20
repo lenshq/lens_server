@@ -16,9 +16,12 @@ class Event
     #   "started_at": 1440509586.217243
     # },
     def find_by(application:, scenario:)
+      from ||= Time.now.utc - LensServer.config.graphs.period
+      to ||= Time.now.utc
+
       query = Druid::Query::Builder.new
-      query
-      .group_by([:position, :event_type, :content])
+      query.interval(from, to)
+      .group_by([:position, :event_type]) #, :content])
       .granularity(:all)
       .filter(application: application.id)
       .filter(scenario: scenario.events_hash)

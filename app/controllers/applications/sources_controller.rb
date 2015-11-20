@@ -34,7 +34,7 @@ class Applications::SourcesController < Applications::ApplicationController
   end
 
   def datasource
-    "broker/#{LensServer.config.druid.datasource.requests}"
+    "broker/#{LensServer.config.druid.datasource.events}"
   end
 
   def get(query)
