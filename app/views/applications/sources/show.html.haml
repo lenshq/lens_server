@@ -16,7 +16,7 @@
               %thead
                 %tr
                   %th #
-                  %th Events
+                  %th Requests
                   %th Duration
                   %th Action
               %tbody
@@ -24,9 +24,9 @@
                   - id = row.keys.first
                   - values = row.values.first
                   %tr
-                    %td= index
-                    %td= values[:count]
-                    %td= "#{values[:duration].round(2)} ms"
+                    %td= index + 1
+                    %td= "#{values[:count]} (#{(values[:count] * 100.0 / @requests_count).round(2) }%)"
+                    %td= "#{values[:duration].round(2)} ms (#{(values[:duration] * 100.0 / @duration_count).round(2) }%)"
                     %td= link_to 'Show', '#', onclick: "renderScenariosChart(#{@application.id}, #{@event_source.id}, #{id}, '#{current_user.api_token}')"
           .panel-footer
 

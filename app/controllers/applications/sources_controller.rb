@@ -9,6 +9,9 @@ class Applications::SourcesController < Applications::ApplicationController
     @scenarios = @event_source.scenarios.where(events_hash: scenarios.keys).map do |scenario|
       { scenario.id => scenarios[scenario.events_hash] }
     end.sort_by {|k| -k.values.first[:duration] }
+
+    @requests_count = @scenarios.inject(0) { |a, r| a += r.values.first[:count]; a }
+    @duration_count = @scenarios.inject(0) { |a, r| a += r.values.first[:duration]; a }
   end
 
 end
