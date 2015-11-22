@@ -10,6 +10,7 @@ gem 'jquery-rails'
 gem 'sass-rails'
 gem 'uglifier'
 gem 'therubyracer'
+gem 'oj', '~> 2.12.14'
 
 gem 'unicorn'
 gem 'omniauth-github'
