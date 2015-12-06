@@ -13,5 +13,4 @@ class Applications::SourcesController < Applications::ApplicationController
     @requests_count = @scenarios.inject(0) { |a, r| a += r.values.first[:count]; a }
     @duration_count = @scenarios.inject(0) { |a, r| a += r.values.first[:duration]; a }
   end
-
 end
