@@ -1,4 +1,4 @@
-class SessionsController < SignedApplicationController
+class SessionsController < ApplicationController
   def create
     user = RegisterGithubUser.call auth_hash
     sign_in user
