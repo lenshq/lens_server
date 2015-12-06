@@ -1,4 +1,4 @@
-class ApplicationsController < ApplicationController
+class ApplicationsController < SignedApplicationController
   def index
     @applications = current_user.applications
   end
