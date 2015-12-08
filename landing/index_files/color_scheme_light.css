@@ -1,0 +1,101 @@
+/*------------------------------------------------------------------
+[Stylesheet]
+Color Scheme - Light
+-------------------------------------------------------------------*/
+
+
+.hero_fullscreen,
+nav a,
+#message,
+.cta_button_area a,
+.color_bg{
+	color:white;
+}
+
+.hero_fullscreen {
+	background-color: #212121;
+	
+}
+
+.preloader_header,
+.subsection.darker_bg,
+.nivo-lightbox-theme-default.nivo-lightbox-overlay {
+	background-color: #fafafa;	
+}
+
+.preloader_header .preloader_loader svg path.preloader_loader_circlebg {
+    stroke: rgba(0, 0, 0, .1);
+}
+
+.preloader_header .preloader_loader svg path.preloader_loader_circle {
+    transition: stroke-dashoffset 0.2s;
+    stroke: rgba(0, 0, 0, .3);
+    
+
+    
+    
+    
+}
+
+.contact_form .input-field label,
+.menu_bar_navigation ul li a{
+	color:black;
+}
+.newsletter_form input[type=text],
+.newsletter_form input[type=password],
+.newsletter_form input[type=email],
+.newsletter_form input[type=date],
+.newsletter_form textarea{
+	border-bottom: 1px solid rgba(255, 255, 255, .7);
+}
+ 
+.contact_form input[type=text],
+.contact_form input[type=password],
+.contact_form input[type=email],
+.contact_form input[type=date],
+.contact_form textarea {
+	border-bottom: 1px solid rgba(0, 0, 0, .4);
+}
+
+.countdown_part {
+	border-right: 1px solid rgba(255, 255, 255, .7);
+}
+
+.input-field label {
+	color:white;
+}
+
+.menu_bar {
+	background-color:white;
+}
+
+.logo_dark {
+	display:block;
+}
+
+.logo_light {
+	display:none;
+}
+
+.iconbox_icon {
+    color: rgba(0,0,0,0.5)
+}
+
+.nivo-lightbox-theme-default .nivo-lightbox-close,
+.nivo-lightbox-theme-default .nivo-lightbox-nav {
+	color:black
+}
+
+#reviews .owl-theme .owl-controls .owl-page span {border-color:white !important; background: rgba(255,255,255,0)}
+#reviews .owl-theme .owl-controls .owl-page.active span,
+#reviews .owl-theme .owl-controls.clickable .owl-page:hover span {
+	background: rgba(255,255,255,1);
+	border-color:white !important
+}
+
+#screenshots_gallery .owl-theme .owl-controls .owl-page span {border-color:black !important; background: rgba(0,0,0,0)}
+#screenshots_gallery .owl-theme .owl-controls .owl-page.active span,
+#screenshots_gallery .owl-theme .owl-controls.clickable .owl-page:hover span {
+	background: rgba(0,0,0,1);
+	border-color:black !important
+}

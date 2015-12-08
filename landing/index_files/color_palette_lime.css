@@ -1,0 +1,23 @@
+/*------------------------------------------------------------------
+[Stylesheet]
+Color Palette - Lime
+-------------------------------------------------------------------*/
+
+.btn,
+.btn-large {
+	background-color: #43a047;
+}
+
+.btn:hover,
+.btn-large:hover {
+	background-color: #4caf50;
+}
+
+.hero_fullscreen.background_solid,
+.color_bg   {
+	background-color: #c0ca33;
+}
+
+a {
+	color:#4caf50
+}

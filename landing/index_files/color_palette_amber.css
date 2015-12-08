@@ -1,0 +1,23 @@
+/*------------------------------------------------------------------
+[Stylesheet]
+Color Palette - Amber
+-------------------------------------------------------------------*/
+
+.btn,
+.btn-large {
+	background-color: #e53935;
+}
+
+.btn:hover,
+.btn-large:hover {
+	background-color: #f44336;
+}
+
+.hero_fullscreen.background_solid,
+.color_bg {
+	background-color: #ff8f00;
+}
+
+a {
+	color:#f44336;
+}

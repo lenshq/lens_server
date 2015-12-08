@@ -5,12 +5,247 @@
     %meta{name: "google-site-verification", content: "E0UG-Of2okcNlQj9QZ0HTT8rs_Oqwip1Y3bvL4zsyJ0"}
     %title= content_for?(:title) ? yield(:title) : "LensHQ"
     %meta{:content => content_for?(:description) ? yield(:description) : t('.lens_description'), name: "description"}
-    = stylesheet_link_tag :application, :media => "all"
+    = stylesheet_link_tag :landing, :media => "all"
     = csrf_meta_tags
     = yield(:head)
   %body
     #main.landing{:role => "main"}
-      = yield
-    %footer
+      -# = yield
+      %section.hero_fullscreen.background_solid
+        / Logo and navigation
+        .container
+          .row
+            .col-xs-12.col-sm-12.col-md-12.col-lg-12.outher
+              = image_tag(asset_path('logo.svg'))
+        / //Logo and navigation
+        / Main content
+        #main_content.container.align-center
+          .content_container.row
+            .col-xs-12.col-sm-12.col-md-12.col-lg-12.home_content
+              %h2.slogan A very clear statement of your offer.
+              %h6
+                A supporting statement of your value proposition. Entive your visitor to keep reading
+                %br.visible-lg.visible-md/
+                the heigh level details of your offering.
+              / CTA Button
+              .cta_button_area
+                %div
+                  %button.btn.waves-effect.waves-light.subscribe-submit
+                    Cta button
+              / //CTA Button
+              .home_mockups.align-center
+                %img.img_responsive.home_mockups_3{:alt => "", :src => "home_mockups_3.png"}/
+                %img.img_responsive.home_mockups_2{:alt => "", :src => "home_mockups_2.png"}/
+                %img.img_responsive.home_mockups_1{:alt => "", :src => "home_mockups_1.png"}/
+        / //Main content
+      / //Homepage
+      / Subsection: More info
+      %section#more_info.subsection.darker_bg.align-center
+        .container
+          .row
+            .col-xs-12.col-sm-4.col-md-4.col-lg-4
+              .iconbox.content_anim1.animated.fadeInUp
+                .iconbox_icon{"data-icon" => ""}
+                .iconbox_content
+                  %h5 First Feature
+                  %p Lorem ipsum dolor sit amet, consectetur elit, sed do tempor incididunt dolore.
+            .col-xs-12.col-sm-4.col-md-4.col-lg-4
+              .iconbox.content_anim2.animated.fadeInUp
+                .iconbox_icon{"data-icon" => ""}
+                .iconbox_content
+                  %h5 Second Feature
+                  %p Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu pariatur.
+            .col-xs-12.col-sm-4.col-md-4.col-lg-4
+              .iconbox.content_anim3.animated.fadeInUp
+                .iconbox_icon{"data-icon" => ""}
+                .iconbox_content
+                  %h5 Third Feature
+                  %p Excepteur sint occaecat cupidatat non proptate velit ident, sunt in culpa qui officia.
+      / //Subsection: More info
+      / Subsection: Features
+      %section#features.subsection
+        .container
+          .row.feature_row
+            .col-xs-12.col-sm-6.col-md-6.col-lg-6.content_anim4.animated.fadeInUp
+              %h3 This is your first amazing feature and it's awesome!
+              %p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+              %p Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            .col-xs-12.col-sm-6.col-md-6.col-lg-6.align-center.content_anim5.deatures_image.animated.fadeInUp
+              %img.img_responsive{:alt => "", :src => "feature_mockup_1.png"}/
+          .row
+            .col-xs-12.col-sm-6.col-md-6.col-lg-6.align-center.content_anim6.features_image.animated.fadeInUp
+              %img.img_responsive{:alt => "", :src => "feature_mockup_2.png"}/
+            .col-xs-12.col-sm-6.col-md-6.col-lg-6.content_anim7.animated.fadeInUp
+              %h3 And this is your second amazing feature!
+              %p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+              %p Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      / //Subsection: Features
+      / Subsection: Newspapers
+      %section#newspapers.subsection.darker_bg
+        .container
+          .row
+            .col-xs-12.col-sm-12.col-md-12.col-lg-12.align-center
+              .intro.content_anim8.animated.fadeInUp
+                %h3 Some of the world’s most respected companies trust MDLP!
+                %p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          .row
+            .col-xs-6.col-sm-4.col-md-2.col-lg-2.reviews_logo.content_anim9.animated.fadeInUp
+              %img{:alt => "", :src => "logo1.png"}/
+            .col-xs-6.col-sm-4.col-md-2.col-lg-2.reviews_logo.content_anim10.animated.fadeInUp
+              %img{:alt => "", :src => "logo2.png"}/
+            .col-xs-6.col-sm-4.col-md-2.col-lg-2.reviews_logo.content_anim11.animated.fadeInUp
+              %img{:alt => "", :src => "logo3.png"}/
+            .col-xs-6.col-sm-4.col-md-2.col-lg-2.reviews_logo.content_anim12.animated.fadeInUp
+              %img{:alt => "", :src => "logo4.png"}/
+            .col-xs-6.col-sm-4.col-md-2.col-lg-2.reviews_logo.content_anim13.animated.fadeInUp
+              %img{:alt => "", :src => "logo5.png"}/
+            .col-xs-6.col-sm-4.col-md-2.col-lg-2.reviews_logo.content_anim14.animated.fadeInUp
+              %img{:alt => "", :src => "logo6.png"}/
+      / //Subsection: Newspapers
+      / Subsection: Screenshots
+      %section#screenshots.subsection
+        .container
+          .row
+            .col-xs-12.col-sm-12.col-md-12.col-lg-12.align-center.content_anim15.animated.fadeInUp
+              .intro
+                %h3 Screenshots
+                %p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          .row.screenshots_gallery
+            .col-xs-6.col-sm-3.col-md-3.col-lg-3.content_anim16.animated.fadeInUp
+              %a{"data-lightbox-gallery" => "gallery1", :href => "1.jpg"}
+                %img.shadow.img_responsive{:alt => "", :src => "1.jpg", :width => "320"}/
+            .col-xs-6.col-sm-3.col-md-3.col-lg-3.content_anim17.animated.fadeInUp
+              %a{"data-lightbox-gallery" => "gallery1", :href => "2.jpg"}
+                %img.shadow.img_responsive{:alt => "", :src => "2.jpg", :width => "320"}/
+            .col-xs-6.col-sm-3.col-md-3.col-lg-3.content_anim18.animated.fadeInUp
+              %a{"data-lightbox-gallery" => "gallery1", :href => "3.jpg"}
+                %img.shadow.img_responsive{:alt => "", :src => "3.jpg", :width => "320"}/
+            .col-xs-6.col-sm-3.col-md-3.col-lg-3.content_anim19.animated.fadeInUp
+              %a{"data-lightbox-gallery" => "gallery1", :href => "4.jpg"}
+                %img.shadow.img_responsive{:alt => "", :src => "4.jpg", :width => "320"}/
+            .col-xs-6.col-sm-2.col-md-2.col-lg-2.content_anim20.animated.fadeInUp
+              %a{"data-lightbox-gallery" => "gallery1", :href => "5.jpg"}
+                %img.shadow.img_responsive{:alt => "", :src => "5.jpg", :width => "320"}/
+            .col-xs-6.col-sm-2.col-md-2.col-lg-2.content_anim21.animated.fadeInUp
+              %a{"data-lightbox-gallery" => "gallery1", :href => "6.jpg"}
+                %img.shadow.img_responsive{:alt => "", :src => "6.jpg", :width => "320"}/
+            .col-xs-6.col-sm-2.col-md-2.col-lg-2.content_anim22.animated.fadeInUp
+              %a{"data-lightbox-gallery" => "gallery1", :href => "7.jpg"}
+                %img.shadow.img_responsive{:alt => "", :src => "7.jpg", :width => "320"}/
+            .col-xs-6.col-sm-2.col-md-2.col-lg-2.content_anim23.animated.fadeInUp
+              %a{"data-lightbox-gallery" => "gallery1", :href => "8.jpg"}
+                %img.shadow.img_responsive{:alt => "", :src => "8.jpg", :width => "320"}/
+            .col-xs-6.col-sm-2.col-md-2.col-lg-2.content_anim24.animated.fadeInUp
+              %a{"data-lightbox-gallery" => "gallery1", :href => "7.jpg"}
+                %img.shadow.img_responsive{:alt => "", :src => "9.jpg", :width => "320"}/
+            .col-xs-6.col-sm-2.col-md-2.col-lg-2.content_anim25.animated.fadeInUp
+              %a{"data-lightbox-gallery" => "gallery1", :href => "10.jpg"}
+                %img.shadow.img_responsive{:alt => "", :src => "10.jpg", :width => "320"}/
+      / //Subsection: Screenshots
+      / Subsection: Reviews
+      %section#reviews.subsection.color_bg
+        .container
+          .row
+            .col-xs-12.col-sm-8.col-md-8.col-lg-8.col-sm-offset-2.col-md-offset-2.col-lg-offset-2.content_anim26.animated.fadeInUp
+              .owl-carousel.align-center.owl-theme{:style => "opacity: 1; display: block;"}
+                / Review 1
+                .owl-wrapper-outer
+                  .owl-wrapper{:style => "width: 6000px; left: 0px; display: block;"}
+                    .owl-item{:style => "width: 750px;"}
+                      .single_review
+                        %img.img-circle{:alt => "", :src => "review_01.jpg"}/
+                        .review_content
+                          %h6 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.
+                          %p - Jenny McLane, Microsoft
+                    .owl-item{:style => "width: 750px;"}
+                      .single_review
+                        %img.img-circle{:alt => "", :src => "review_02.jpg"}/
+                        .review_content
+                          %h6 Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto.
+                          %p - Jahn Kovalsky, Apple
+                    .owl-item{:style => "width: 750px;"}
+                      .single_review
+                        %img.img-circle{:alt => "", :src => "review_03.jpg"}/
+                        .review_content
+                          %h6 At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos.
+                          %p - Meggie Patterson, Google
+                    .owl-item{:style => "width: 750px;"}
+                      .single_review
+                        %img.img-circle{:alt => "", :src => "review_04.jpg"}/
+                        .review_content
+                          %h6 Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est.
+                          %p - Billy McDillon
+                / //Review 1
+                .owl-controls.clickable
+                  .owl-pagination
+                    .owl-page.active
+                      %span
+                    .owl-page
+                      %span
+                    .owl-page
+                      %span
+                    .owl-page
+                      %span
+      / //Subsection: Reviews
+      / Subsection: FAQ
+      %section#faq.subsection
+        .container
+          .row
+            .col-xs-12.col-sm-12.col-md-12.col-lg-12.align-center.content_anim27.animated.fadeInUp
+              .intro
+                %h3 Frequently Asked Questions
+                %p Got questions? We have answers.
+          .row.align-left.content_anim28.animated.fadeInUp
+            / Q1
+            .col-xs-12.col-sm-6.col-md-6.col-lg-6
+              .iconbox.content_anim1.animated.fadeInUp
+                %h5 How does the free trial work?
+                %p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+            / //Q1
+            / Q2
+            .col-xs-12.col-sm-6.col-md-6.col-lg-6
+              .iconbox.content_anim1.animated.fadeInUp
+                %h5 Do I need to choose plan now?
+                %p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do.
+            / //Q2
+          .row.align-left.content_anim29.animated.fadeInUp
+            / Q3
+            .col-xs-12.col-sm-6.col-md-6.col-lg-6
+              .iconbox.content_anim1.animated.fadeInUp
+                %h5 Can I switch plans later?
+                %p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            / //Q3
+            / Q4
+            .col-xs-12.col-sm-6.col-md-6.col-lg-6
+              .iconbox.content_anim1.animated.fadeInUp
+                %h5 What payment types do you accept?
+                %p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            / //Q4
+      / //Subsection: FAQ
+      / Subsection: CTA
+      %section.subsection.darker_bg
+        .container
+          .row.align-center
+            .col-xs-12.col-sm-12.col-md-12.col-lg-12
+              %h3
+                A very clear closing argument
+                = succeed "statement" do
+                  %br.visible-lg.visible-md/
+              %div
+                %button.btn.waves-effect.waves-light.subscribe-submit
+                  Cta button
+      / //Subsection: CTA
+      / Footer
+      %section#footer.subsection.color_bg
+        .container
+          .row
+            .col-xs-12.col-sm-12.col-md-12.col-lg-12.outher
+              %img.logo.inner{:alt => "logo", :src => "logo.png"}/
+              %p.inner © Copyright 2015
+              %p.float-right.inner.visible-lg.visible-md
+                Call us 
+                %strong 1.800.439.7656
+
+  %footer
     = javascript_include_tag :application
     = render 'layouts/ga'

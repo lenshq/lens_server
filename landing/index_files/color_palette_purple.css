@@ -1,0 +1,23 @@
+/*------------------------------------------------------------------
+[Stylesheet]
+Color Palette - Purple
+-------------------------------------------------------------------*/
+
+.btn,
+.btn-large {
+	background-color: #f4511e
+}
+
+.btn:hover,
+.btn-large:hover {
+	background-color: #ff5722;
+}
+
+.hero_fullscreen.background_solid,
+.color_bg {
+	background-color: #9c27b0
+}
+
+a {
+	color:#ff5722
+}

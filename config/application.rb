@@ -39,6 +39,10 @@ module LensServer
       serializers
     ).map { |path| config.root.join('app', path) }
 
+    config.assets.precompile += %w(
+      landing.css
+    )
+
     config.api_only = false
   end
 end

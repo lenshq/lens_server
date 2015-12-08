@@ -1,0 +1,23 @@
+/*------------------------------------------------------------------
+[Stylesheet]
+Color Palette - Light Blue
+-------------------------------------------------------------------*/
+
+.btn,
+.btn-large {
+	background-color: #5e35b1
+}
+
+.btn:hover,
+.btn-large:hover {
+	background-color: #673ab7
+}
+
+.hero_fullscreen.background_solid,
+.color_bg  {
+	background-color: #03a9f4;
+}
+
+a {
+	color:#673ab7
+}

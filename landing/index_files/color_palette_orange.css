@@ -1,0 +1,23 @@
+/*------------------------------------------------------------------
+[Stylesheet]
+Color Palette - Orange
+-------------------------------------------------------------------*/
+
+.btn,
+.btn-large {
+	background-color: #8e24aa
+}
+
+.btn:hover,
+.btn-large:hover {
+	background-color: #9c27b0
+}
+
+.hero_fullscreen.background_solid,
+.color_bg  {
+	background-color: #ff9800;
+}
+
+a {
+	color:#9c27b0
+}

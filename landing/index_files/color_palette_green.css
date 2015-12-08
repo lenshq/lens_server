@@ -1,0 +1,23 @@
+/*------------------------------------------------------------------
+[Stylesheet]
+Color Palette - Green
+-------------------------------------------------------------------*/
+
+.btn,
+.btn-large {
+	background-color: #6d4c41;
+}
+
+.btn:hover,
+.btn-large:hover {
+	background-color: #795548;
+}
+
+.hero_fullscreen.background_solid,
+.color_bg{
+	background-color: #4caf50;
+}
+
+a {
+	color:#795548
+}

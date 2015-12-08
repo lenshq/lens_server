@@ -1,0 +1,23 @@
+/*------------------------------------------------------------------
+[Stylesheet]
+Color Palette - Deep Purple
+-------------------------------------------------------------------*/
+
+.btn,
+.btn-large {
+	background-color: #c0ca33;
+}
+
+.btn:hover,
+.btn-large:hover {
+	background-color: #cddc39;
+}
+
+.hero_fullscreen.background_solid,
+.color_bg  {
+	background-color: #673ab7;
+}
+
+a {
+	color:#cddc39
+}

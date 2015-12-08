@@ -1,0 +1,23 @@
+/*------------------------------------------------------------------
+[Stylesheet]
+Color Palette - Gray
+-------------------------------------------------------------------*/
+
+.btn,
+.btn-large {
+	background-color: #f4511e 
+}
+
+.btn:hover,
+.btn-large:hover {
+	background-color: #ff5722;
+}
+
+.hero_fullscreen.background_solid,
+.color_bg {
+	background-color: #9e9e9e;
+}
+
+a {
+	color:#ff5722
+}

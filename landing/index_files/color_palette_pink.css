@@ -1,0 +1,23 @@
+/*------------------------------------------------------------------
+[Stylesheet]
+Color Palette - Pink
+-------------------------------------------------------------------*/
+
+.btn,
+.btn-large {
+	background-color: #ffb300;
+}
+
+.btn:hover,
+.btn-large:hover {
+	background-color: #ffc107;
+}
+
+.hero_fullscreen.background_solid,
+.color_bg {
+	background-color: #e91e63;
+}
+
+a {
+	color:#ffc107
+}

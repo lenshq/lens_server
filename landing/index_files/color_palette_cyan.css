@@ -1,0 +1,23 @@
+/*------------------------------------------------------------------
+[Stylesheet]
+Color Palette - Cyan
+-------------------------------------------------------------------*/
+
+.btn,
+.btn-large {
+	background-color: #d81b60
+}
+
+.btn:hover,
+.btn-large:hover {
+	background-color: #e91e63;
+}
+
+.hero_fullscreen.background_solid,
+.color_bg   {
+	background-color: #00bcd4;
+}
+
+a {
+	color:#e91e63
+}

@@ -1,0 +1,23 @@
+/*------------------------------------------------------------------
+[Stylesheet]
+Color Palette - Blue Gray
+-------------------------------------------------------------------*/
+
+.btn,
+.btn-large {
+	background-color: #039be5;
+}
+
+.btn:hover,
+.btn-large:hover {
+	background-color: #03a9f4;
+}
+
+.hero_fullscreen.background_solid,
+.color_bg {
+	background-color: #607d8b;
+}
+
+a {
+	color:#03a9f4
+}

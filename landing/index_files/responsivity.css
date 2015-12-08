@@ -1,0 +1,30 @@
+/*------------------------------------------------------------------
+[Stylesheet]
+Responsiveness Fixes
+-------------------------------------------------------------------*/
+
+@media (max-width: 479px) {	
+	.content_container h2 {
+		font-size: 2rem;
+		line-height:2rem;
+	}
+		
+	.container {
+		padding-left: 0;
+		padding-right: 0;
+	}
+	
+	.top_bar p {margin-top:0.5rem;}
+	.iconbox {margin-bottom:4rem;}
+	
+}
+
+@media (min-width: 480px) and (max-width: 767px) {
+	.top_bar p {
+		margin-top:0.5rem;
+	}
+	.iconbox {margin-bottom:4rem;}
+	
+}
+
+

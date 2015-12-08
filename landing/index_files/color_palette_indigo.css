@@ -1,0 +1,23 @@
+/*------------------------------------------------------------------
+[Stylesheet]
+Color Palette - Indigo
+-------------------------------------------------------------------*/
+
+.btn,
+.btn-large {
+	background-color: #e53935;
+}
+
+.btn:hover,
+.btn-large:hover {
+	background-color: #f44336;
+}
+
+.hero_fullscreen.background_solid,
+.color_bg {
+	background-color: #3f51b5;
+}
+
+a {
+	color:#f44336
+}
