@@ -31,12 +31,12 @@ class Event
 
       if scenario.present?
         query.filter(scenario: scenario.events_hash)
-        query.group_by([:position, :event_type]) #, :content])
+        query.group_by([:position, :event_type, :content])
       end
 
       if event_source.present?
         query.filter(event_source: event_source.id)
-        query.group_by([:scenario, :position, :event_type]) #, :content])
+        query.group_by([:scenario, :position, :event_type, :content])
       end
 
       get(query)

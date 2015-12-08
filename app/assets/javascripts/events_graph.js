@@ -42,7 +42,7 @@ var renderTreeHistogram = function(data, element) {
 
   bar.append('rect')
     .attr('class', 'bar')
-    .attr('y', function(d) { console.log(d); return y(d) })
+    .attr('y', function(d) { return y(d) })
     .attr('width', barWidth - 1)
     .attr('height', function(d) { return height - y(d); })
     .on('mouseover', function(d) { tip.show(d) })
