@@ -4,9 +4,19 @@
   .panel-body
     .row
       .col-md-8
+        %h4
+          Distribution chart
+          %span.small (of the number of the requests to the duration (ms) of the requests)
         %svg#distribution-chart.chart
+
+        %h4
+          Percentile chart
+          %span.small (of the duration)
         %svg#quantiles-chart.chart
+
+        %h4 Events chart
         %svg#events-chart.chart
+
       .col-md-4
         .panel.panel-default
           .panel-heading

@@ -120,16 +120,11 @@ var renderTreeChart = function(data) {
         '</div>';
     });
 
-
-  var globalTimeContainer = chart.append('g').attr('class', 'global-time');
   var detailsContainer = chart.append('g').attr('class', 'details');
-
-  detailsContainer.call(tip);
-
-  rects = detailsContainer.selectAll('g')
-  .data(data)
-  .enter()
-  .append("g").attr('position', function(d) { return d.position })
+  var rects = detailsContainer.selectAll('g')
+    .data(data)
+    .enter()
+    .append("g").attr('position', function(d) { return d.position })
 
   rects.append("rect")
     .attr("x", function(d) { return x(timeStartFn(d)) })
@@ -147,10 +142,12 @@ var renderTreeChart = function(data) {
     .attr("x", function(d) { return x(timeStartFn(d)) })
     .attr("y", function(d) { return parentY(d) })
     .attr("width", function(d) { return x(d.finished_at - d.started_at) })
-    .attr("height", 20)
+    .attr("height", elHeight)
     .attr('class', function(d) { return rectClassFn(parentRect(d)) + (parentRect(d).position == d.position ? '' : '-child') })
   .on('mouseover', function(d) { tip.show(d) })
   .on('mouseout', tip.hide);
+
+  detailsContainer.call(tip);
 };
 
 var renderScenariosChart = function(app, source, scenario, token) {
@@ -166,3 +163,4 @@ var renderScenariosChart = function(app, source, scenario, token) {
     renderTreeChart(treeData);
   });
 }
+
