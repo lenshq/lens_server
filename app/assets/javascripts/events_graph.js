@@ -12,20 +12,21 @@ var renderTreeHistogram = function(data, element) {
       return '<div class="histogram-tooltip">' + d + '</div>';
     });
 
-  var margin = {top: 20, right: 40, bottom: 30, left: 20}
+  var margin = {top: 20, right: 40, bottom: 30, left: 40}
   var width = parseInt(d3.select(svg.node().parentNode).style('width')) - margin.left - margin.right;
   var height = parseInt(d3.select(svg.node()).style('height')) - margin.top - margin.bottom;
   var barWidth = width / data.probabilities.length;
 
   var x = d3.scale.linear()
     .domain(d3.extent(data.probabilities, function(d) { return d }))
-    .range([barWidth / 2, width - barWidth / 2]);
+    .range([0, width]);
 
   var y = d3.scale.linear()
     .domain([d3.min(data.quantiles), d3.max(data.quantiles)])
     .range([height, 0])
 
   var xAxis = d3.svg.axis().scale(x).orient('bottom');
+  var yAxis = d3.svg.axis().scale(y).orient('left');
 
   var chart = svg
       .attr('width', width + margin.left + margin.right)
@@ -52,8 +53,12 @@ var renderTreeHistogram = function(data, element) {
     .attr('class', 'x axis')
     .attr('transform', 'translate(0,' + height + ')')
     .call(xAxis);
-};
 
+  chart.append('g')
+    .attr('class', 'y axis')
+    .attr('transform', 'translate(0, 0)')
+    .call(yAxis);
+};
 
 var renderTreeChart = function(data) {
   var rectClassFn = function(d) { return d.event_type.replace(/\./g, '-') };
@@ -69,18 +74,32 @@ var renderTreeChart = function(data) {
 
   var svg = d3.select('#events-chart');
 
+  var elHeight = 20;
+  var elHeightWitPadding = elHeight + 2;
+
   svg.selectAll('*').remove();
   var container = d3.select(svg.node().parentNode);
 
   var margin = {top: 20, right: 40, bottom: 30, left: 20}
   var width = parseInt(container.style('width')) - margin.left - margin.right;
-  var height = parseInt(data.length * 20 + 40) - margin.top - margin.bottom;
+  var height = parseInt(data.length * elHeightWitPadding + 40) - margin.top - margin.bottom;
   var barWidth = width / data.length;
 
   var x = d3.scale.linear().domain([ startTime, finishTime]).range([startTime, width ]);
-  var y = d3.scale.linear().domain([0, data.length]).range([height, 0])
+  var y = d3.scale.linear().domain([0, data.length]).range([height, 0]);
 
   var xAxis = d3.svg.axis().scale(x).orient('bottom');
+
+  var parentRect = function(el) {
+    var els = data.filter(function(item) {
+      return item.started_at < el.started_at && item.finished_at > el.finished_at
+    });
+    return els.length > 0 ? els[els.length - 1] : el;
+  };
+
+  var parentY = function(el) {
+    return (parentRect(el).position) * elHeightWitPadding;
+  };
 
   var chart = svg
       .attr('width', width + margin.left + margin.right)
@@ -107,29 +126,29 @@ var renderTreeChart = function(data) {
 
   detailsContainer.call(tip);
 
-  globalTimeContainer.selectAll('rect')
-    .data(data)
-    .enter()
-    .append("rect")
-      .attr("x", function(d) { return x(timeStartFn(d)) })
-      .attr("y", function(d) { return 0 })
-      .attr("width", function(d) { return x(d.finished_at - d.started_at) })
-      .attr("height", 20)
-      .attr('class', function(d) { return rectClassFn(d) });
-
-
-  detailsContainer.selectAll('rect')
-  .data(data.slice(1))
+  rects = detailsContainer.selectAll('g')
+  .data(data)
   .enter()
-  .append("rect")
+  .append("g").attr('position', function(d) { return d.position })
+
+  rects.append("rect")
     .attr("x", function(d) { return x(timeStartFn(d)) })
-    .attr("y", function(d) { return (d.position * 20) + 10})
+    .attr("y", function(d) { return (d.position * elHeightWitPadding) })
     .attr("width", function(d) { return x(d.finished_at - d.started_at) })
-    .attr("height", 20)
+    .attr("height", elHeight)
     .attr('class', function(d) { return rectClassFn(d) })
     .attr('data-start', function(d) { return d.started_at })
     .attr('data-finish', function(d) { return d.finished_at })
     .attr('data-duration', function(d) { return d.duration })
+  .on('mouseover', function(d) { tip.show(d) })
+  .on('mouseout', tip.hide);
+
+  rects.append("rect")
+    .attr("x", function(d) { return x(timeStartFn(d)) })
+    .attr("y", function(d) { return parentY(d) })
+    .attr("width", function(d) { return x(d.finished_at - d.started_at) })
+    .attr("height", 20)
+    .attr('class', function(d) { return rectClassFn(parentRect(d)) + (parentRect(d).position == d.position ? '' : '-child') })
   .on('mouseover', function(d) { tip.show(d) })
   .on('mouseout', tip.hide);
 };

@@ -1,0 +1,73 @@
+#requests-chart.chart {
+    height: 400px;
+}
+
+.chart rect {
+    fill: lightgray;
+}
+
+.chart rect:hover {
+    fill: gray;
+}
+
+.chart .details rect.process_action-action_controller {
+    fill: blue;
+    z-index: 100;
+}
+
+.chart .details rect.process_action-action_controller-child {
+    fill: lightblue;
+}
+
+.chart .details rect.db-sql-query {
+    fill: #2AE512;
+}
+
+.chart .details rect.db-sql-query-child {
+    fill: #A3F699;
+}
+
+.chart .details rect.app-view-render-partial,
+.chart .details rect.app-view-render-template {
+    fill: #BE00DE;
+}
+
+.chart .details rect.app-view-render-partial-child,
+.chart .details rect.app-view-render-template-child {
+    fill: #EB78FF;
+}
+
+.d3-tip .tooltip {
+    background-color: #C8D7DB;
+    padding: 10px;
+    width: 400px;
+}
+
+.d3-tip .histogram-tooltip {
+    padding: 3px;
+}
+
+.chart text {
+    fill: black;
+    font: 10px sans-serif;
+    text-anchor: end;
+}
+
+.axis text {
+    font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+table#event-sources .left {
+    text-align: left;
+}
+
+table#event-sources .right {
+    text-align: right;
+}

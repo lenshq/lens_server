@@ -1,7 +1,7 @@
-
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "bootstrap-material-design";
+@import 'chart';
 
 html, body, .landing {
     height: 100%;
@@ -45,66 +45,4 @@ html, body, .landing {
     background-repeat: no-repeat;
 }
 
-#requests-chart.chart {
-  height: 400px;
-}
 
-.chart rect {
-  fill: lightgray;
-}
-
-.chart rect:hover {
-  fill: gray;
-}
-
-.chart .global-time rect {
-    fill: lightblue;
-}
-
-.chart .global-time rect.process_action-action_controller {
-    fill: blue;
-}
-
-.chart .details rect.db-sql-query {
-  fill: #7BD45D;
-}
-
-.chart .details rect.app-view-render-partial,
-.chart .details rect.app-view-render-template {
-  fill: #B65DD4;
-}
-
-.d3-tip .tooltip {
-  background-color: #C8D7DB;
-  padding: 10px;
-  width: 400px;
-}
-
-.d3-tip .histogram-tooltip {
-  padding: 3px;
-}
-
-.chart text {
-  fill: black;
-  font: 10px sans-serif;
-  text-anchor: end;
-}
-
-.axis text {
-  font: 10px sans-serif;
-}
-
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
-
-table#event-sources .left {
-  text-align: left;
-}
-
-table#event-sources .right {
-  text-align: right;
-}
