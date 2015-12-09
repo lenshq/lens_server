@@ -18,6 +18,7 @@ gem 'pg_query'
 gem 'haml-rails'
 gem 'bootstrap-sass'
 gem 'bootstrap-material-design'
+gem 'bcrypt', '~> 3.1', '>= 3.1.10'
 
 # State machine
 gem 'aasm'
@@ -47,6 +48,8 @@ group :test do
   gem 'database_cleaner'
   gem 'rspec-rails', '~> 3.0'
   gem 'factory_girl_rails'
+  gem 'faker', '~> 1.5'
+  gem 'capybara', '~> 2.5'
 end
 
 group :test, :development do

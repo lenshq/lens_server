@@ -15,6 +15,7 @@
             = render 'shared/navigation'
         .row
           .col-md-12
+            = render partial: 'shared/flash_messages', flash: flash
             = yield
     %footer
     = javascript_include_tag :application

@@ -1,0 +1,4 @@
+- flash.each do |type, message|
+  %div{ 'class' => "alert alert-dismissable #{alert_class_for(type)}" }
+    %button.close{ 'type' => 'button', 'data-dismiss' => 'alert' } ×
+    = message
