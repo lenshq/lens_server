@@ -1,9 +1,10 @@
-.page--index
-  .promo__content
-    .logo
-    %h1.promo__title LensHQ
-    %p.promo__desc
-      Smart profiling tool for Rails apps.
-  = link_to '/auth/github', class: 'btn btn-primary btn-raised' do
+.container--banner
+  .title LensHQ
+.container--top
+  .logo
+  %h1 Smart profiling tool for your production application
+  %h2 Make timely decisions based on the real time analyzed data
+  = link_to '/auth/github', id: 'cta', class: 'btn btn-primary btn-raised' do
     %span.icon.icon--large.icon--github
     %span.button__label Sign in with GitHub
+.container--odd
