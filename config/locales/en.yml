@@ -1,7 +1,7 @@
 en:
   layouts:
-    application:
-      lens_description: "Tool for profiling production application"
+    landing:
+      lens_description: "Smart tool for profiling production application"
 
   navigation:
     applications: "Applications"
