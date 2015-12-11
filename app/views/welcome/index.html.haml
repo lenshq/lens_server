@@ -1,5 +1,6 @@
 .container--banner
   .title LensHQ
+
 .container--top
   .logo
   %h1 Smart profiling tool for your production application
@@ -7,4 +8,40 @@
   = link_to '/auth/github', id: 'cta', class: 'btn btn-primary btn-raised' do
     %span.icon.icon--large.icon--github
     %span.button__label Sign in with GitHub
+
 .container--odd
+  .feature
+    .time
+      %i.icon
+      %span.title Real time
+      .description
+        %p Data analysis is performed in real time.
+        %p You can the results of their actions almost instantly.
+
+  .feature
+    .chart
+      %i.icon
+      %span.title Intuitive charts
+      .description
+        %p No need to try to understand large amounts of data to find the bottleneck.
+        %p The data is displayed after analysis and processing in an understandable form.
+
+  .feature
+    .opensource
+      %i.icon
+      %span.title OpenSource
+      .description
+        %p The source code for the project is opened and is available on github.
+        %p You can install it in your company.
+        %p If you do something is not enough - you can send a Pull Request.
+
+
+.container--even
+
+.container--bottom
+  .copyright Copyright © 2015
+  .links
+    = link_to 'Source at Github', 'https://github.com/lenshq'
+    |
+    = link_to 'Follow on twitter', 'https://twitter.com/lenshq'
+

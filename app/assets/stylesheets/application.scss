@@ -3,6 +3,15 @@
 @import "bootstrap-material-design";
 @import 'chart';
 
+// $primary-color-dark:   #0097A7
+// $primary-color:        #00BCD4
+// $primary-color-light:  #B2EBF2
+// $primary-color-text:   #FFFFFF
+// $accent-color:         #00BCD4
+// $primary-text-color:   #212121
+// $secondary-text-color: #727272
+// $divider-color:        #B6B6B6
+
 html, body, .landing {
     height: 100%;
     -webkit-font-smoothing: antialiased !important;
@@ -27,6 +36,24 @@ html, body, .landing {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.container--bottom {
+    clear: both;
+    background: #00bcd4;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 500;
+}
+
+.container--bottom a {
+    color: #212121;
+    font-weight: 500;
+    display: inline;
 }
 
 .logo {
@@ -64,7 +91,31 @@ html, body, .landing {
 }
 
 .container--odd {
-    height: 300px;
+    clear: both;
+    background-color: white;
+}
+
+.container--even {
+    clear: both;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.landing .feature {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 33%;
+    padding: 50px;
+}
+
+.landing .feature .title {
+    margin: 0;
+}
+
+.landing .feature .description {
+    width: 85%;
 }
 
 .promo__content {
