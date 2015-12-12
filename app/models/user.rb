@@ -15,20 +15,20 @@
 #
 
 class User < ActiveRecord::Base
-  USER_ROLES = ['User', 'Admin']
+  USER_ROLES = %w(User Admin)
 
   has_many :application_users
   has_many :applications, through: :application_users
 
   before_create :generate_api_token
 
-  validates_inclusion_of :role, in: USER_ROLES
+  validates :role, inclusion: USER_ROLES
 
   def generate_api_token
     self[:api_token] = SecureRandom.hex(24)
   end
 
-  def is_admin?
+  def admin?
     role == 'Admin'
   end
 end
