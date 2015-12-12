@@ -4,7 +4,7 @@ class RegisterGithubUser
   end
 
   def call
-    user = User.find_or_create_by! uid: @auth_hash[:uid]
+    user = User.find_or_create_by!(uid: @auth_hash[:uid], role: 'User')
     update user, credentials: @auth_hash[:credentials], info: @auth_hash[:info]
     user
   end
