@@ -72,4 +72,13 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              LensServer.config.secret.smtp.host,
+    port:                 LensServer.config.secret.smtp.port,
+    domain:               LensServer.config.secret.smtp.domain,
+    user_name:            LensServer.config.secret.smtp.username,
+    password:             LensServer.config.secret.smtp.password,
+    authentication:       'plain',
+    enable_starttls_auto: true  }
 end
