@@ -17,6 +17,8 @@ defaults: &defaults
       requests: requests
   graphs:
     period: 604800 # seconds
+  mailer:
+    from: 'lens@yourdomain'
 
 production:
   <<: *defaults

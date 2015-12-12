@@ -18,6 +18,7 @@ gem 'pg_query'
 gem 'haml-rails'
 gem 'bootstrap-sass'
 gem 'bootstrap-material-design'
+gem 'premailer-rails'
 
 # State machine
 gem 'aasm'
