@@ -15,7 +15,7 @@
 #
 
 class User < ActiveRecord::Base
-  USER_ROLES = %w(User Admin)
+  USER_ROLES = %w(user admin)
 
   has_many :application_users
   has_many :applications, through: :application_users
@@ -29,6 +29,6 @@ class User < ActiveRecord::Base
   end
 
   def admin?
-    role == 'Admin'
+    role == 'admin'
   end
 end

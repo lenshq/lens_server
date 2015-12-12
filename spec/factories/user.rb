@@ -1,9 +1,9 @@
 FactoryGirl.define do
   factory :user do
-    role 'User'
+    role 'user'
   end
 
   factory :admin do
-    role 'Admin'
+    role 'admin'
   end
 end
