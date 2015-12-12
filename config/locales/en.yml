@@ -1,10 +1,17 @@
 en:
+  submit: "Submit"
   layouts:
     landing:
       lens_description: "Smart tool for profiling production application"
 
   navigation:
     applications: "Applications"
+
+  welcome:
+    followers_form:
+      email: "Email"
+      name: "Name"
+      why_are_you_interested: "Why are you interested in the newsletter?"
 
   applications:
     index:
@@ -28,7 +35,6 @@ en:
       description: "Description"
       description_placeholder: "App for profiling production applications"
 
-      submit: "Submit"
 
     applications:
       sure: "Are you sure?"

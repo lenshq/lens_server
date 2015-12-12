@@ -1,0 +1,17 @@
+%p.text-center
+  %span#follower_new_title_js.title Subscribe to our newsletter
+.col-lg-4.col-lg-offset-4
+  = form_for @follower, remote: true, url: api_v1_followers_path, html: { class: 'form-horizontal' } do |f|
+    %fieldset
+      .col-lg-12
+        .form-group
+          = f.text_field :email, placeholder: t('.email'), class: 'form-control'
+          %span.help-block
+      .col-lg-12
+        .form-group
+          = f.text_field :name, placeholder: t('.name'), class: 'form-control'
+      .col-lg-12
+        .form-group
+          = f.text_area :reason, rows: 4, placeholder: t('.why_are_you_interested'), class: 'form-control'
+      .col-lg-4.col-lg-offset-4
+        = f.submit t('submit'), class: 'btn btn-primary btn-lg'
