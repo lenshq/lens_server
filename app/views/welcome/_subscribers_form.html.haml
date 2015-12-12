@@ -1,7 +1,7 @@
 %p.text-center
-  %span#follower_new_title_js.title Subscribe to our newsletter
+  %span#subscriber_new_title_js.title Subscribe to our newsletter
 .col-lg-4.col-lg-offset-4
-  = form_for @follower, remote: true, url: api_v1_followers_path, html: { class: 'form-horizontal' } do |f|
+  = form_for @subscriber, remote: true, url: api_v1_subscribers_path, html: { class: 'form-horizontal' } do |f|
     %fieldset
       .col-lg-12
         .form-group

@@ -58,16 +58,6 @@ ActiveRecord::Schema.define(version: 20151212114233) do
     t.float    "finished_at"
   end
 
-  create_table "followers", force: :cascade do |t|
-    t.string   "email",      null: false
-    t.string   "name"
-    t.string   "reason"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "followers", ["email"], name: "index_followers_on_email", unique: true, using: :btree
-
   create_table "raw_events", force: :cascade do |t|
     t.integer  "application_id"
     t.text     "data"
@@ -103,6 +93,16 @@ ActiveRecord::Schema.define(version: 20151212114233) do
 
   add_index "scenarios", ["event_source_id"], name: "index_scenarios_on_event_source_id", using: :btree
   add_index "scenarios", ["events_hash", "event_source_id"], name: "index_scenarios_on_events_hash_and_event_source_id", unique: true, using: :btree
+
+  create_table "subscribers", force: :cascade do |t|
+    t.string   "email",      null: false
+    t.string   "name"
+    t.string   "reason"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "subscribers", ["email"], name: "index_subscribers_on_email", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email"

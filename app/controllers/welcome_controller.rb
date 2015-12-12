@@ -2,7 +2,7 @@ class WelcomeController < ApplicationController
   layout 'landing'
 
   def index
-    @follower = Follower.new
+    @subscriber = Subscriber.new
     redirect_to applications_path if signed_in?
   end
 end

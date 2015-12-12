@@ -8,7 +8,7 @@ en:
     applications: "Applications"
 
   welcome:
-    followers_form:
+    subscribers_form:
       email: "Email"
       name: "Name"
       why_are_you_interested: "Why are you interested in the newsletter?"

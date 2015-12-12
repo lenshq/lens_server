@@ -25,7 +25,7 @@ Rails.application.routes.draw do
         end
       end
       resources :events, only: [:create], controller: '/client_api/v1/events'
-      resources :followers, only: [:create]
+      resources :subscribers, only: [:create]
     end
   end
 

@@ -6,5 +6,3 @@
 //= require moment
 //= require application_graph
 //= require events_graph
-//= require followers
-
