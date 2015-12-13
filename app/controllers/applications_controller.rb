@@ -1,10 +1,11 @@
 class ApplicationsController < SignedApplicationController
   def index
-    @applications = current_user.applications
+    @applications =
+      current_user.admin? ? Application.all : current_user.applications
   end
 
   def show
-    @application = current_user.applications.find params[:id]
+    @application = select_source_and_find(params[:id])
   end
 
   def new
@@ -22,11 +23,11 @@ class ApplicationsController < SignedApplicationController
   end
 
   def edit
-    @application = current_user.applications.find params[:id]
+    @application = select_source_and_find(params[:id])
   end
 
   def update
-    @application = current_user.applications.find params[:id]
+    @application = select_source_and_find(params[:id])
     if @application.update_attributes application_params
       redirect_to application_path @application
     else
@@ -35,7 +36,7 @@ class ApplicationsController < SignedApplicationController
   end
 
   def destroy
-    @application = current_user.applications.find params[:id]
+    @application = select_source_and_find(params[:id])
     @application.destroy
     redirect_to applications_path
   end
@@ -44,5 +45,11 @@ class ApplicationsController < SignedApplicationController
 
   def application_params
     params.require(:application).permit(:title, :description, :domain)
+  end
+
+  def select_source_and_find(application_id)
+    source =
+      current_user.admin? ? Application : current_user.applications
+    source.find(application_id)
   end
 end
