@@ -1,1 +1,1 @@
-Rails.application.config.assets.precompile += %w( mailer.css )
+Rails.application.config.assets.precompile += %w( mailer.css landing.js )

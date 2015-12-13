@@ -19,14 +19,18 @@ html, body, .landing {
 
 .container--banner {
     height: 80px;
+    margin-left: 50px;
 }
 
 .title {
-    margin-left: 50px;
     margin-top: 20px;
     font-family: "Roboto", sans-serif;
     color: #77777;
     font-size: 3em;
+}
+
+.success {
+    color: #009688;
 }
 
 .container--top {
@@ -123,5 +127,9 @@ html, body, .landing {
 
 .button__label {
     color: white;
+}
+
+#follower_reason {
+    resize: vertical;
 }
 
