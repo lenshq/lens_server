@@ -95,14 +95,19 @@ ActiveRecord::Schema.define(version: 20151212114233) do
   add_index "scenarios", ["events_hash", "event_source_id"], name: "index_scenarios_on_events_hash_and_event_source_id", unique: true, using: :btree
 
   create_table "subscribers", force: :cascade do |t|
-    t.string   "email",      null: false
+    t.string   "email",                null: false
     t.string   "name"
     t.string   "reason"
+    t.string   "aasm_state",           null: false
+    t.string   "verification_token",   null: false
+    t.string   "unsubscription_token", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "subscribers", ["email"], name: "index_subscribers_on_email", unique: true, using: :btree
+  add_index "subscribers", ["unsubscription_token"], name: "index_subscribers_on_unsubscription_token", unique: true, using: :btree
+  add_index "subscribers", ["verification_token"], name: "index_subscribers_on_verification_token", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email"
