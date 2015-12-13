@@ -15,20 +15,16 @@
 #
 
 class User < ActiveRecord::Base
-  USER_ROLES = %w(user admin)
+  extend Enumerize
+
+  enumerize :role, in: [:admin, :user], default: :user, predicates: true
 
   has_many :application_users
   has_many :applications, through: :application_users
 
   before_create :generate_api_token
 
-  validates :role, inclusion: USER_ROLES
-
   def generate_api_token
     self[:api_token] = SecureRandom.hex(24)
-  end
-
-  def admin?
-    role == 'admin'
   end
 end
