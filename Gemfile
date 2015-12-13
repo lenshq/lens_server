@@ -37,6 +37,8 @@ gem 'rollbar', '~> 2.4.0'
 
 gem 'lz4-ruby'
 
+gem 'enumerize'
+
 group :development do
   gem 'pry-rails'
   gem 'annotate'
