@@ -3,7 +3,7 @@ module Applications
     protected
 
     def application
-      @application ||= current_user.applications.find_by(id: params[:application_id])
+      @application ||= policy_scope(Application).find_by(id: params[:application_id])
     end
   end
 end
