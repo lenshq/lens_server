@@ -22,3 +22,5 @@
 /tmp
 /spec/examples.txt
 *.sw*
+
+.byebug_history
