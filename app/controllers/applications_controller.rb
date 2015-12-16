@@ -1,6 +1,6 @@
 class ApplicationsController < SignedApplicationController
   before_action :find_and_authorize, only: [:show, :edit, :update, :destroy]
-  after_action :verify_authorized, except: [:create, :new]
+  after_action :verify_authorized
 
   def index
     @applications = policy_scope(Application)
