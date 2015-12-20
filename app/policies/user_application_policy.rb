@@ -8,9 +8,10 @@ class UserApplicationPolicy < ApplicationPolicy
   end
 
   private
-    def admin_or_belongs_to_user
-      user.admin? || (user.applications.include? record)
-    end
+
+  def admin_or_belongs_to_user
+    user.admin? || (user.applications.include? record)
+  end
 
   class Scope
     attr_reader :user, :scope

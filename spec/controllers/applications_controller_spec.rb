@@ -44,16 +44,16 @@ RSpec.describe ApplicationsController do
 
     context 'if user' do
       before { sign_in_user }
-      it { expect { subject }.to change { Application.count }.by 1 }
+      it { expect { subject }.to change { Application.count }.by(1) }
     end
 
     context 'if admin' do
       before { sign_in_admin }
-      it { expect { subject }.to change { Application.count }.by 1 }
+      it { expect { subject }.to change { Application.count }.by(1) }
     end
 
     context 'if no user' do
-      it { expect { subject }.to change { Application.count }.by 0 }
+      it { expect { subject }.to change { Application.count }.by(0) }
     end
   end
 
@@ -79,7 +79,7 @@ RSpec.describe ApplicationsController do
   end
 
   describe 'get #SHOW' do
-    def show_app app
+    def show_app(app)
       get :show, id: app.id
     end
 
@@ -119,7 +119,7 @@ RSpec.describe ApplicationsController do
   end
 
   describe 'post #DESTROY' do
-    def destroy_app app
+    def destroy_app(app)
       post :destroy, id: app.id
     end
 
@@ -127,11 +127,11 @@ RSpec.describe ApplicationsController do
       before { sign_in_user }
 
       it 'should destroy user application' do
-        expect { destroy_app user_application }.to change { Application.count }.by -1
+        expect { destroy_app user_application }.to change { Application.count }.by(-1)
       end
 
       xit 'should not destroy admin application' do
-        expect { destroy_app admin_application }.to change { Application.count }.by 0
+        expect { destroy_app admin_application }.to change { Application.count }.by(0)
       end
     end
 
@@ -139,21 +139,21 @@ RSpec.describe ApplicationsController do
       before { sign_in_admin }
 
       it 'should destroy user application' do
-        expect { destroy_app user_application }.to change { Application.count }.by -1
+        expect { destroy_app user_application }.to change { Application.count }.by(-1)
       end
 
       it 'should destroy admin application' do
-        expect { destroy_app admin_application }.to change { Application.count }.by -1
+        expect { destroy_app admin_application }.to change { Application.count }.by(-1)
       end
     end
 
     context 'if no user' do
       it 'should not destroy user application' do
-        expect { destroy_app user_application }.to change { Application.count }.by 0
+        expect { destroy_app user_application }.to change { Application.count }.by(0)
       end
 
       it 'should not destroy admin application' do
-        expect { destroy_app admin_application }.to change { Application.count }.by 0
+        expect { destroy_app admin_application }.to change { Application.count }.by(0)
       end
     end
   end
@@ -164,7 +164,6 @@ RSpec.describe ApplicationsController do
     def check_update(app, shloud_be_eq)
       put :update, id: app.id, application: app_attrs
       app = Application.find(app.id)
-      option = shloud_be_eq ? "to" : "not_to"
       app_attrs.each do |k, v|
         if shloud_be_eq
           expect(app[k]).to eq(v)
