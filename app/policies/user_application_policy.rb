@@ -1,4 +1,17 @@
 class UserApplicationPolicy < ApplicationPolicy
+  def update?
+    admin_or_belongs_to_user
+  end
+
+  def destroy?
+    admin_or_belongs_to_user
+  end
+
+  private
+    def admin_or_belongs_to_user
+      user.admin? || (user.applications.include? record)
+    end
+
   class Scope
     attr_reader :user, :scope
 
