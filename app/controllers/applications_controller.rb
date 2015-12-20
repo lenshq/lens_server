@@ -1,5 +1,4 @@
 class ApplicationsController < SignedApplicationController
-  before_action :find_and_authorize, only: [:show, :edit, :update, :destroy]
   after_action :verify_authorized
 
   def index
@@ -8,16 +7,17 @@ class ApplicationsController < SignedApplicationController
   end
 
   def show
+    @application = find_and_authorize_application
   end
 
   def new
     @application = Application.new
-    authorize @applications
+    authorize @application
   end
 
   def create
     @application = Application.new application_params
-    authorize @applications
+    authorize @application
     if @application.save
       current_user.applications << @application
       redirect_to application_path @application
@@ -27,9 +27,11 @@ class ApplicationsController < SignedApplicationController
   end
 
   def edit
+    @application = find_and_authorize_application
   end
 
   def update
+    @application = find_and_authorize_application
     if @application.update_attributes application_params
       redirect_to application_path @application
     else
@@ -38,6 +40,7 @@ class ApplicationsController < SignedApplicationController
   end
 
   def destroy
+    @application = find_and_authorize_application
     @application.destroy
     redirect_to applications_path
   end
@@ -48,8 +51,9 @@ class ApplicationsController < SignedApplicationController
     params.require(:application).permit(:title, :description, :domain)
   end
 
-  def find_and_authorize
+  def find_and_authorize_application
     @application = policy_scope(Application).find(params[:id])
     authorize @application
+    @application
   end
 end
