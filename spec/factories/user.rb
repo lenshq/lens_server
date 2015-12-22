@@ -1,8 +1,9 @@
 FactoryGirl.define do
   factory :user do
-  end
+    trait :admin do
+      role 'admin'
+    end
 
-  factory :admin do
-    role 'admin'
+    factory :admin, traits: [:admin]
   end
 end
