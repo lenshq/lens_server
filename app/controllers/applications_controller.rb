@@ -52,7 +52,7 @@ class ApplicationsController < SignedApplicationController
   end
 
   def find_and_authorize_application
-    @application = policy_scope(Application).find(params[:id])
+    @application = Application.find(params[:id])
     authorize @application
     @application
   end

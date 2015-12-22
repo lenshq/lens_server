@@ -4,6 +4,6 @@ class SignedApplicationController < ApplicationController
   private
 
   def authenticate!
-    redirect_to root_path unless signed_in?
+    redirect_to root_path, status: :unauthorized unless signed_in?
   end
 end

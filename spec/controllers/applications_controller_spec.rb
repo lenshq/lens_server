@@ -1,4 +1,5 @@
 require 'rails_helper'
+include AuthHelper
 
 RSpec.describe ApplicationsController do
   let(:user) { create :user }
@@ -8,33 +9,30 @@ RSpec.describe ApplicationsController do
 
   render_views
 
-  before { user.applications << user_application; admin.applications << admin_application }
-
-  def sign_in_user
-    session[:user_id] = user.id
-  end
-
-  def sign_in_admin
-    session[:user_id] = admin.id
+  before do
+    user.applications << user_application
+    admin.applications << admin_application
   end
 
   describe 'get #INDEX' do
     subject { get :index }
 
     context 'if user' do
-      before { sign_in_user }
+      before { sign_in user }
+
       it { is_expected.to be_success }
       it { is_expected.to have_http_status(200) }
     end
 
     context 'if admin' do
-      before { sign_in_admin }
+      before { sign_in admin }
+
       it { is_expected.to be_success }
       it { is_expected.to have_http_status(200) }
     end
 
     context 'if no user' do
-      it { is_expected.to have_http_status(302) }
+      it { is_expected.to have_http_status(401) }
     end
   end
 
@@ -43,17 +41,20 @@ RSpec.describe ApplicationsController do
     subject { post :create, app_attrs }
 
     context 'if user' do
-      before { sign_in_user }
+      before { sign_in user }
+
       it { expect { subject }.to change { Application.count }.by(1) }
     end
 
     context 'if admin' do
-      before { sign_in_admin }
+      before { sign_in admin }
+
       it { expect { subject }.to change { Application.count }.by(1) }
     end
 
     context 'if no user' do
       it { expect { subject }.to change { Application.count }.by(0) }
+      it { is_expected.to have_http_status(401) }
     end
   end
 
@@ -61,20 +62,19 @@ RSpec.describe ApplicationsController do
     subject { get :new }
 
     context 'if user' do
-      before { sign_in_user }
+      before { sign_in user }
       it { expect(subject).to be_success }
       it { is_expected.to have_http_status(200) }
     end
 
     context 'if admin' do
-      before { sign_in_admin }
+      before { sign_in admin }
       it { expect(subject).to be_success }
       it { is_expected.to have_http_status(200) }
     end
 
     context 'if no user' do
-      it { expect(subject).not_to be_success }
-      it { is_expected.to have_http_status(302) }
+      it { is_expected.to have_http_status(401) }
     end
   end
 
@@ -84,19 +84,19 @@ RSpec.describe ApplicationsController do
     end
 
     context 'if user' do
-      before { sign_in_user }
+      before { sign_in user }
 
       it 'should show user app' do
         expect(show_app user_application).to have_http_status(200)
       end
 
-      xit 'should not show admin app' do
-        expect(show_app admin_application).to have_http_status(302)
+      it 'should not show admin app' do
+        expect(show_app admin_application).to have_http_status(403)
       end
     end
 
     context 'if admin' do
-      before { sign_in_admin }
+      before { sign_in admin }
 
       it 'should show user app' do
         expect(show_app user_application).to have_http_status(200)
@@ -109,11 +109,11 @@ RSpec.describe ApplicationsController do
 
     context 'if no user' do
       it 'should not show user app' do
-        expect(show_app user_application).to have_http_status(302)
+        expect(show_app user_application).to have_http_status(401)
       end
 
       it 'should not show admin app' do
-        expect(show_app admin_application).to have_http_status(302)
+        expect(show_app admin_application).to have_http_status(401)
       end
     end
   end
@@ -124,19 +124,20 @@ RSpec.describe ApplicationsController do
     end
 
     context 'if user' do
-      before { sign_in_user }
+      before { sign_in user }
 
       it 'should destroy user application' do
         expect { destroy_app user_application }.to change { Application.count }.by(-1)
       end
 
-      xit 'should not destroy admin application' do
+      it 'should not destroy admin application' do
         expect { destroy_app admin_application }.to change { Application.count }.by(0)
+        expect(response).to have_http_status(403)
       end
     end
 
     context 'if admin' do
-      before { sign_in_admin }
+      before { sign_in admin }
 
       it 'should destroy user application' do
         expect { destroy_app user_application }.to change { Application.count }.by(-1)
@@ -150,10 +151,12 @@ RSpec.describe ApplicationsController do
     context 'if no user' do
       it 'should not destroy user application' do
         expect { destroy_app user_application }.to change { Application.count }.by(0)
+        expect(response).to have_http_status(401)
       end
 
       it 'should not destroy admin application' do
         expect { destroy_app admin_application }.to change { Application.count }.by(0)
+        expect(response).to have_http_status(401)
       end
     end
   end
@@ -174,20 +177,20 @@ RSpec.describe ApplicationsController do
     end
 
     context 'if user' do
-      before { session[:user_id] = user.id }
+      before { sign_in user }
 
       it 'should update user application' do
         check_update(user_application, true)
       end
 
-      # 404???
-      xit 'should not update admin application' do
-        check_update(admin_application, false)
+      it 'should not update admin application' do
+        expect(put :update, id: admin_application.id, application: app_attrs).
+          to have_http_status(403)
       end
     end
 
     context 'if admin' do
-      before { session[:user_id] = admin.id }
+      before { sign_in admin }
 
       it 'should update user application' do
         check_update(user_application, true)
@@ -199,14 +202,14 @@ RSpec.describe ApplicationsController do
     end
 
     context 'if no user' do
-      # 302 here ?
       it 'should not update user application' do
-        check_update(user_application, false)
+        expect(put :update, id: user_application.id, application: app_attrs).
+          to have_http_status(401)
       end
 
-      # 302 here ?
       it 'should not update admin application' do
-        check_update(admin_application, false)
+        expect(put :update, id: admin_application.id, application: app_attrs).
+          to have_http_status(401)
       end
     end
   end

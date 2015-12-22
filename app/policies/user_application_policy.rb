@@ -1,4 +1,8 @@
 class UserApplicationPolicy < ApplicationPolicy
+  def show?
+    scope.where(id: record.id).exists? && admin_or_belongs_to_user
+  end
+
   def update?
     admin_or_belongs_to_user
   end
@@ -10,7 +14,7 @@ class UserApplicationPolicy < ApplicationPolicy
   private
 
   def admin_or_belongs_to_user
-    user.admin? || (user.applications.include? record)
+    user.admin? || user.applications.include?(record)
   end
 
   class Scope
