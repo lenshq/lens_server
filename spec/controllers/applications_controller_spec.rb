@@ -87,11 +87,11 @@ RSpec.describe ApplicationsController do
       before { sign_in user }
 
       it 'should show user app' do
-        expect(show_app user_application).to have_http_status(200)
+        expect(show_app(user_application)).to have_http_status(200)
       end
 
       it 'should not show admin app' do
-        expect(show_app admin_application).to have_http_status(403)
+        expect(show_app(admin_application)).to have_http_status(403)
       end
     end
 
@@ -99,21 +99,21 @@ RSpec.describe ApplicationsController do
       before { sign_in admin }
 
       it 'should show user app' do
-        expect(show_app user_application).to have_http_status(200)
+        expect(show_app(user_application)).to have_http_status(200)
       end
 
       it 'should show admin app' do
-        expect(show_app admin_application).to have_http_status(200)
+        expect(show_app(admin_application)).to have_http_status(200)
       end
     end
 
     context 'if no user' do
       it 'should not show user app' do
-        expect(show_app user_application).to have_http_status(401)
+        expect(show_app(user_application)).to have_http_status(401)
       end
 
       it 'should not show admin app' do
-        expect(show_app admin_application).to have_http_status(401)
+        expect(show_app(admin_application)).to have_http_status(401)
       end
     end
   end
@@ -127,11 +127,11 @@ RSpec.describe ApplicationsController do
       before { sign_in user }
 
       it 'should destroy user application' do
-        expect { destroy_app user_application }.to change { Application.count }.by(-1)
+        expect { destroy_app(user_application) }.to change { Application.count }.by(-1)
       end
 
       it 'should not destroy admin application' do
-        expect { destroy_app admin_application }.to change { Application.count }.by(0)
+        expect { destroy_app(admin_application) }.to change { Application.count }.by(0)
         expect(response).to have_http_status(403)
       end
     end
@@ -140,22 +140,22 @@ RSpec.describe ApplicationsController do
       before { sign_in admin }
 
       it 'should destroy user application' do
-        expect { destroy_app user_application }.to change { Application.count }.by(-1)
+        expect { destroy_app(user_application) }.to change { Application.count }.by(-1)
       end
 
       it 'should destroy admin application' do
-        expect { destroy_app admin_application }.to change { Application.count }.by(-1)
+        expect { destroy_app(admin_application) }.to change { Application.count }.by(-1)
       end
     end
 
     context 'if no user' do
       it 'should not destroy user application' do
-        expect { destroy_app user_application }.to change { Application.count }.by(0)
+        expect { destroy_app(user_application) }.to change { Application.count }.by(0)
         expect(response).to have_http_status(401)
       end
 
       it 'should not destroy admin application' do
-        expect { destroy_app admin_application }.to change { Application.count }.by(0)
+        expect { destroy_app(admin_application) }.to change { Application.count }.by(0)
         expect(response).to have_http_status(401)
       end
     end
@@ -184,7 +184,7 @@ RSpec.describe ApplicationsController do
       end
 
       it 'should not update admin application' do
-        expect(put :update, id: admin_application.id, application: app_attrs).
+        expect(put(:update, id: admin_application.id, application: app_attrs)).
           to have_http_status(403)
       end
     end
@@ -203,12 +203,12 @@ RSpec.describe ApplicationsController do
 
     context 'if no user' do
       it 'should not update user application' do
-        expect(put :update, id: user_application.id, application: app_attrs).
+        expect(put(:update, id: user_application.id, application: app_attrs)).
           to have_http_status(401)
       end
 
       it 'should not update admin application' do
-        expect(put :update, id: admin_application.id, application: app_attrs).
+        expect(put(:update, id: admin_application.id, application: app_attrs)).
           to have_http_status(401)
       end
     end

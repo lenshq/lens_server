@@ -3,7 +3,7 @@ module Api
     include Pundit
     before_action :authenticate!
 
-    rescue_from Pundit::NotAuthorizedError do |exception|
+    rescue_from Pundit::NotAuthorizedError do
       head 401
     end
 
