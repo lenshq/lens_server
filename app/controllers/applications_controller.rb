@@ -1,5 +1,6 @@
 class ApplicationsController < SignedApplicationController
   after_action :verify_authorized
+  before_action :find_and_authorize_application, only: [:show, :edit, :destroy]
 
   def index
     @applications = policy_scope(Application)
@@ -7,7 +8,6 @@ class ApplicationsController < SignedApplicationController
   end
 
   def show
-    @application = find_and_authorize_application
   end
 
   def new
@@ -27,7 +27,6 @@ class ApplicationsController < SignedApplicationController
   end
 
   def edit
-    @application = find_and_authorize_application
   end
 
   def update
@@ -40,7 +39,6 @@ class ApplicationsController < SignedApplicationController
   end
 
   def destroy
-    @application = find_and_authorize_application
     @application.destroy
     redirect_to applications_path
   end

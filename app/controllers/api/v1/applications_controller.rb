@@ -2,7 +2,7 @@ module Api
   module V1
     class ApplicationsController < Api::V1::ApplicationController
       def index
-        apps = current_user.applications.all
+        apps = policy_scope(Application)
         render json: apps, each_serializer: ApplicationSerializer
       end
 
@@ -12,7 +12,8 @@ module Api
       end
 
       def show
-        app = current_user.applications.find params[:id]
+        app = Application.find(params[:id])
+        authorize app
         render json: app
       end
 
