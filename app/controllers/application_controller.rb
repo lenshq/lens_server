@@ -5,6 +5,6 @@ class ApplicationController < ActionController::Base
   helper_method :signed_in?, :current_user
 
   rescue_from Pundit::NotAuthorizedError do |exception|
-    redirect_to root_url, alert: exception.message, status: :forbidden
+    redirect_to root_url, alert: exception.message, status: :unauthorized
   end
 end
