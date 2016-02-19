@@ -23,6 +23,10 @@ class Application < ActiveRecord::Base
 
   before_validation :generate_token, on: :create
 
+  def self.policy_class
+    UserApplicationPolicy
+  end
+
   protected
 
   def generate_token

@@ -1,4 +1,5 @@
 require 'factory_girl'
+require "pundit/rspec"
 
 if ENV['COVERAGE']
   require 'simplecov'

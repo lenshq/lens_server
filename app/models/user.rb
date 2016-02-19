@@ -15,6 +15,10 @@
 #
 
 class User < ActiveRecord::Base
+  extend Enumerize
+
+  enumerize :role, in: [:admin, :user], default: :user, predicates: true
+
   has_many :application_users
   has_many :applications, through: :application_users
 

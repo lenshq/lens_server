@@ -80,6 +80,8 @@ GEM
     docile (1.1.5)
     domain_name (0.5.25)
       unf (>= 0.0.5, < 1.0.0)
+    enumerize (1.1.0)
+      activesupport (>= 3.2)
     erubis (2.7.0)
     execjs (2.6.0)
     factory_girl (4.5.0)
@@ -177,6 +179,8 @@ GEM
       pry (~> 0.10)
     pry-rails (0.3.4)
       pry (>= 0.9.10)
+    pundit (1.0.1)
+      activesupport (>= 3.0.0)
     rack (1.6.4)
     rack-protection (1.5.3)
       rack
@@ -308,6 +312,7 @@ DEPENDENCIES
   byebug
   codeclimate-test-reporter
   database_cleaner
+  enumerize
   factory_girl_rails
   haml-rails
   jquery-rails
@@ -321,6 +326,7 @@ DEPENDENCIES
   premailer-rails
   pry-byebug
   pry-rails
+  pundit
   rails (= 4.2.5)
   rails-api
   rails-i18n (~> 4.0.0)

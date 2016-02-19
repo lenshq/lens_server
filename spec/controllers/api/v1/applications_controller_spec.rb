@@ -23,9 +23,30 @@ RSpec.describe Api::V1::ApplicationsController do
 
   describe 'GET show' do
     let(:application) { create :application }
-    before { user.applications << application }
     subject { get :show, id: application.id, format: :json }
 
-    it { is_expected.to be_success }
+    context 'if authorized' do
+      context 'if user' do
+        context 'if application belongs to user' do
+          before { user.applications << application }
+
+          it { is_expected.to be_success }
+        end
+
+        context 'if application doesn\'t belongs to user' do
+          it { is_expected.to have_http_status(401) }
+        end
+      end
+
+      context 'if admin' do
+        before { user.update(role: :admin) }
+
+        it { is_expected.to be_success }
+      end
+    end
+
+    context 'if not authorized' do
+      it { is_expected.to have_http_status(401) }
+    end
   end
 end

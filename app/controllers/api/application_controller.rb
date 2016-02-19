@@ -1,6 +1,11 @@
 module Api
   class ApplicationController < ::ActionController::API
+    include Pundit
     before_action :authenticate!
+
+    rescue_from Pundit::NotAuthorizedError do
+      head 401
+    end
 
     protected
 
