@@ -91,7 +91,7 @@ RSpec.describe ApplicationsController do
       end
 
       it 'should not show admin app' do
-        expect(show_app(admin_application)).to have_http_status(403)
+        expect(show_app(admin_application)).to have_http_status(401)
       end
     end
 
@@ -132,7 +132,7 @@ RSpec.describe ApplicationsController do
 
       it 'should not destroy admin application' do
         expect { destroy_app(admin_application) }.to change { Application.count }.by(0)
-        expect(response).to have_http_status(403)
+        expect(response).to have_http_status(401)
       end
     end
 
@@ -185,7 +185,7 @@ RSpec.describe ApplicationsController do
 
       it 'should not update admin application' do
         expect(put(:update, id: admin_application.id, application: app_attrs)).
-          to have_http_status(403)
+          to have_http_status(401)
       end
     end
 

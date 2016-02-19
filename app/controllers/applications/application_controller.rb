@@ -1,6 +1,5 @@
 module Applications
   class ApplicationController < SignedApplicationController
-    after_action :verify_authorized
 
     protected
 
