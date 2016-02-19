@@ -1,5 +1,4 @@
 class ApplicationsController < SignedApplicationController
-  after_action :verify_authorized
   before_action :find_and_authorize_application, only: [:show, :edit, :destroy]
 
   def index
