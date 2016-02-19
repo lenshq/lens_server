@@ -1,4 +1,4 @@
-class UserApplicationPolicy < ApplicationPolicy
+class UserApplicationPolicy < BasePolicy
   def show?
     scope.where(id: record.id).exists? && admin_or_belongs_to_user
   end
