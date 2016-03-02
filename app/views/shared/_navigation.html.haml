@@ -9,3 +9,8 @@
   .navbar-collapse.collapse.navbar-responsive-collapse
     %ul.nav.navbar-nav
       = navigation_element t('navigation.applications'), applications_path
+    - if signed_in?
+      %ul.nav.navbar-nav
+        = navigation_element t('navigation.edit_user_profile'), edit_user_path(current_user)
+      %ul.nav.navbar-nav
+        = navigation_element t('navigation.sign_out'), sign_out_path, method: :delete

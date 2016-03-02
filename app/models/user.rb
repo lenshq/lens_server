@@ -15,6 +15,7 @@
 #
 
 class User < ActiveRecord::Base
+  has_secure_password
   extend Enumerize
 
   enumerize :role, in: [:admin, :user], default: :user, predicates: true
@@ -22,7 +23,14 @@ class User < ActiveRecord::Base
   has_many :application_users
   has_many :applications, through: :application_users
 
+  validates :email, presence: true
+
   before_create :generate_api_token
+  before_save :downcase_email
+
+  def downcase_email
+    self.email = email.downcase
+  end
 
   def generate_api_token
     self[:api_token] = SecureRandom.hex(24)

@@ -5,6 +5,8 @@ en:
 
   navigation:
     applications: "Applications"
+    edit_user_profile: "Edit profile"
+    sign_out: 'Sign out'
 
   applications:
     index:
@@ -27,6 +29,14 @@ en:
 
       description: "Description"
       description_placeholder: "App for profiling production applications"
+
+      submit: "Submit"
+
+  users:
+    form:
+      email_placeholder: 'Enter your email'
+      password_placeholder: 'Password'
+      password_confirmation_placeholder: 'Confirm password'
 
       submit: "Submit"
 
