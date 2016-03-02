@@ -4,7 +4,12 @@ Rails.application.routes.draw do
 
   root to: 'welcome#index'
 
-  get '/auth/github/callback', to: 'sessions#create'
+  get '/auth/github/callback', to: 'sessions#create_from_github'
+
+  resources :users
+  get    'sign_in'   => 'sessions#new'
+  post   'sign_in'   => 'sessions#create'
+  delete 'sign_out'  => 'sessions#destroy'
 
   resources :applications do
     scope module: :applications do
