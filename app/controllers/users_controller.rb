@@ -25,7 +25,7 @@ class UsersController < SignedApplicationController
   def update
     user
     if @user.update(user_params)
-      flash[:success] = "Profile updated"
+      flash[:success] = 'Profile updated'
       redirect_to edit_user_path(@user)
     else
       render 'edit'
@@ -35,7 +35,7 @@ class UsersController < SignedApplicationController
   def destroy
     user
     @user.destroy
-    flash[:success] = "User deleted"
+    flash[:success] = 'User deleted'
     redirect_to root_url
   end
 
