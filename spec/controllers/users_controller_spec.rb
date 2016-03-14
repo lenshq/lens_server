@@ -91,30 +91,22 @@ RSpec.describe UsersController do
     let(:valid_attrs) { { email: 'new_user_email@example.com' } }
     let(:invalid_attrs) { { email: '' } }
 
-    def check_update(user_attrs, shloud_be_eq)
-      put :update, id: user.id, user: valid_attrs
-      finded_user = User.find(user.id)
-      user_attrs.each do |k, v|
-        if shloud_be_eq
-          expect(finded_user[k]).to eq(v)
-        else
-          expect(finded_user[k]).not_to eq(v)
-        end
-      end
-    end
-
     context 'if user' do
       before { sign_in user }
 
       it 'updates user with valid attributes' do
-        check_update(valid_attrs, true)
+        put :update, id: user.id, user: valid_attrs
+        expect(User.find(user.id).email).to eq(valid_attrs[:email])
+        # FIXME: weid-broken-thing
+        # expect { put :update, id: user.id, user: valid_attrs }.
+        #   to change(user.reload, :email).from(user.email).to(valid_attrs[:email])
       end
 
       it 'doesn\'t update user with invalid attributes' do
-        check_update(invalid_attrs, false)
+        expect { put :update, id: user.id, user: invalid_attrs }.not_to change(user, :email)
       end
 
-      it 'should not update admin application' do
+      it 'should not update another user' do
         expect(put(:update, id: another_user.id, user: valid_attrs)).
           to have_http_status(401)
       end
