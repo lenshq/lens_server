@@ -24,6 +24,6 @@ class RegisterGithubUser
       token: credentials[:token]
     )
     user.assign_attributes(password: SecureRandom.hex(10)) unless user.persisted?
-    user.save!
+    user.save
   end
 end
