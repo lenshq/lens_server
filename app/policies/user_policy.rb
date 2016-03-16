@@ -1,6 +1,6 @@
 class UserPolicy < BasePolicy
   def update?
-    record == user
+    record.model == user
   end
 
   def destroy?

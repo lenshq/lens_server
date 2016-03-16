@@ -24,13 +24,11 @@ class User < ActiveRecord::Base
   has_many :applications, through: :application_users
 
   validates :email, presence: true
-  validates :password, length: { in: 6..32 }, if: 'password.present?'
 
   before_create :generate_api_token
-  before_save :downcase_email
 
-  def downcase_email
-    self.email = email.downcase
+  def email=(value)
+    self[:email] = value.downcase if value
   end
 
   def generate_api_token

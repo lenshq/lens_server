@@ -3,14 +3,12 @@ class UsersController < SignedApplicationController
   before_action :authenticate!, only: [:edit, :update, :destroy]
 
   def new
-    @user = User.new
-    authorize @user
+    create_user
   end
 
   def create
-    @user = User.new(user_params)
-    authorize @user
-    if @user.save
+    create_user
+    if @user.validate(user_params) && @user.save
       sign_in @user
       redirect_to applications_url
     else
@@ -19,12 +17,13 @@ class UsersController < SignedApplicationController
   end
 
   def edit
-    user
+    set_user
   end
 
   def update
-    user
-    if @user.update(user_params)
+    set_user
+    form = UserForm.new(User.new)
+    if @user.validate(user_params) && @user.save
       flash[:success] = 'Profile updated'
       redirect_to edit_user_path(@user)
     else
@@ -33,8 +32,8 @@ class UsersController < SignedApplicationController
   end
 
   def destroy
-    user
-    @user.destroy
+    authorize current_user
+    current_user.destroy
     flash[:success] = 'User deleted'
     redirect_to root_url
   end
@@ -45,8 +44,13 @@ class UsersController < SignedApplicationController
     redirect_to root_path, notice: 'You are already signed in' if current_user
   end
 
-  def user
-    @user = User.find(params[:id])
+  def set_user
+    @user = UserForm.new(current_user)
+    authorize @user
+  end
+
+  def create_user
+    @user = UserForm.new(User.new)
     authorize @user
   end
 
