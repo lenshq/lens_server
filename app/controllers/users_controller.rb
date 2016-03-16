@@ -22,7 +22,6 @@ class UsersController < SignedApplicationController
 
   def update
     set_user
-    form = UserForm.new(User.new)
     if @user.validate(user_params) && @user.save
       flash[:success] = 'Profile updated'
       redirect_to edit_user_path(@user)
