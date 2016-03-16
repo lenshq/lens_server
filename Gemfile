@@ -41,6 +41,8 @@ gem 'enumerize'
 gem 'pundit'
 
 gem 'bcrypt'
+gem 'reform'
+gem 'virtus'
 
 group :development do
   gem 'pry-rails'
