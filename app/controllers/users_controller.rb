@@ -8,7 +8,11 @@ class UsersController < SignedApplicationController
 
   def create
     create_user
-    if @user.validate(user_params) && @user.save
+    if @user.validate(user_params)
+      @user.save do |attrs|
+        @user.model.assign_attributes(attrs)
+        @user.model.save
+      end
       sign_in @user
       flash[:success] = t('users.flash.create')
       redirect_to applications_url
