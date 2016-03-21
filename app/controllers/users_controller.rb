@@ -10,6 +10,7 @@ class UsersController < SignedApplicationController
     create_user
     if @user.validate(user_params) && @user.save
       sign_in @user
+      flash[:success] = t('users.flash.create')
       redirect_to applications_url
     else
       render 'new'
@@ -23,7 +24,7 @@ class UsersController < SignedApplicationController
   def update
     set_user
     if @user.validate(user_params) && @user.save
-      flash[:success] = 'Profile updated'
+      flash[:success] = t('users.flash.update')
       redirect_to edit_user_path(@user)
     else
       render 'edit'
@@ -33,14 +34,14 @@ class UsersController < SignedApplicationController
   def destroy
     authorize current_user
     current_user.destroy
-    flash[:success] = 'User deleted'
+    flash[:success] = t('users.flash.destroy')
     redirect_to root_url
   end
 
   private
 
   def sign_check
-    redirect_to root_path, notice: 'You are already signed in' if current_user
+    redirect_to root_path, notice: t('users.flash.already_signed_in') if current_user
   end
 
   def set_user

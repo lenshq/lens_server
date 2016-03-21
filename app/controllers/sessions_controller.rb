@@ -2,6 +2,7 @@ class SessionsController < ApplicationController
   def create_from_github
     user = RegisterGithubUser.call auth_hash
     sign_in user
+    flash[:success] = t('sessions.flash.create')
     redirect_to applications_path
   end
 
@@ -11,16 +12,20 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by(email: params[:session][:email])
     if user && user.authenticate(params[:session][:password])
+      flash[:success] = t('sessions.flash.create')
       sign_in user
       redirect_to applications_url
     else
-      flash.now[:danger] = 'Invalid email/password combination'
+      flash.now[:danger] = t('sessions.flash.create_error')
       render 'new'
     end
   end
 
   def destroy
-    sign_out if signed_in?
+    if signed_in?
+      sign_out
+      flash[:success] = t('sessions.flash.destroy')
+    end
     redirect_to root_url
   end
 

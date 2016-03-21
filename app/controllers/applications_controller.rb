@@ -19,6 +19,7 @@ class ApplicationsController < SignedApplicationController
     authorize @application
     if @application.save
       current_user.applications << @application
+      flash[:success] = t('applications.flash.create')
       redirect_to application_path @application
     else
       render :new
@@ -31,6 +32,7 @@ class ApplicationsController < SignedApplicationController
   def update
     @application = find_and_authorize_application
     if @application.update_attributes application_params
+      flash[:success] = t('applications.flash.update')
       redirect_to application_path @application
     else
       render :edit
@@ -39,6 +41,7 @@ class ApplicationsController < SignedApplicationController
 
   def destroy
     @application.destroy
+    flash[:success] = t('applications.flash.destroy')
     redirect_to applications_path
   end
 
