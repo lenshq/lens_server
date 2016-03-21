@@ -1,17 +1,24 @@
 = form_for @user, html: { class: 'form-horizontal' } do |f|
   %fieldset
     .form-group
-      = label :email, Application.human_attribute_name(:email), class: 'col-lg-2 control-label'
+      = label :email, Application.human_attribute_name(:email),
+                      class: 'col-lg-2 control-label'
       .col-lg-10
-        = f.text_field :email, placeholder: t('.email_placeholder'), class: 'form-control'
+        = f.text_field :email, placeholder: t('.email_placeholder'),
+                               class: 'form-control'
     .form-group
-      = label :password, Application.human_attribute_name(:password), class: 'col-lg-2 control-label'
+      = label :password, Application.human_attribute_name(:password),
+                         class: 'col-lg-2 control-label'
       .col-lg-10
-        = f.password_field :password, placeholder: t('.password_placeholder'), class: 'form-control'
+        = f.password_field :password, placeholder: t('.password_placeholder'),
+                                      class: 'form-control'
     .form-group
-      = label :password_confirmation, Application.human_attribute_name(:password), class: 'col-lg-2 control-label'
+      = label :password_confirmation, Application.human_attribute_name(:password),
+                                      class: 'col-lg-2 control-label'
       .col-lg-10
-        = f.password_field :password_confirmation, placeholder: t('.password_confirmation_placeholder'), class: 'form-control'
+        = f.password_field :password_confirmation,
+                           placeholder: t('.password_confirmation_placeholder'),
+                           class: 'form-control'
     .form-group
       .col-lg-10.col-lg-offset-2
         = f.submit t('.submit'), class: 'btn btn-primary'

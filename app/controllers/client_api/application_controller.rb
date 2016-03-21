@@ -1,5 +1,7 @@
 module ClientApi
   class ApplicationController < ::ActionController::API
+    include AbstractController::Translation
+
     before_action :authenticate!
 
     protected
