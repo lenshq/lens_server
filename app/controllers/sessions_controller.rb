@@ -10,8 +10,8 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by(email: params[:session][:email])
-    if user && user.authenticate(params[:session][:password])
+    user = User.find_by(email: session_params[:email].downcase)
+    if user && user.authenticate(session_params[:password])
       flash[:success] = t('sessions.flash.create')
       sign_in user
       redirect_to applications_url
