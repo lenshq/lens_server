@@ -42,48 +42,34 @@ RSpec.describe UsersController do
   end
 
   describe 'post #DESTROY' do
-    def destroy(id)
-      post :destroy, id: id
-    end
+    subject { post :destroy, id: user.id }
 
     context 'if user' do
       before { sign_in user }
 
       it 'should destroy user' do
-        expect { destroy(user.id) }.to change { User.count }.by(-1)
-      end
-
-      context 'if trying to destroy another user' do
-        it 'has 401 status' do
-          expect(destroy(another_user.id)).to have_http_status(401)
-        end
+        expect { subject }.to change { User.count }.by(-1)
       end
     end
 
     context 'if no user' do
       it 'should not destroy user' do
-        expect(destroy(user.id)).to have_http_status(401)
+        is_expected.to have_http_status(401)
       end
     end
   end
 
   describe 'get #EDIT' do
-    def edit(id)
-      get :edit, id: id
-    end
+    subject { get :edit, id: user.id }
 
     context 'if user' do
       before { sign_in user }
 
-      it { expect(edit(user.id)).to have_http_status(200) }
-
-      context 'if trying to edit another user' do
-        it { expect(edit(another_user.id)).to have_http_status(401) }
-      end
+      it { is_expected.to have_http_status(200) }
     end
 
     context 'if no user' do
-      it { expect(edit(user.id)).to have_http_status(401) }
+      it { is_expected.to have_http_status(401) }
     end
   end
 
@@ -97,18 +83,11 @@ RSpec.describe UsersController do
       it 'updates user with valid attributes' do
         put :update, id: user.id, user: valid_attrs
         expect(User.find(user.id).email).to eq(valid_attrs[:email])
-        # FIXME: weid-broken-thing
-        # expect { put :update, id: user.id, user: valid_attrs }.
-        #   to change(user.reload, :email).from(user.email).to(valid_attrs[:email])
       end
 
       it 'doesn\'t update user with invalid attributes' do
-        expect { put :update, id: user.id, user: invalid_attrs }.not_to change(user, :email)
-      end
-
-      it 'should not update another user' do
-        expect(put(:update, id: another_user.id, user: valid_attrs)).
-          to have_http_status(401)
+        put :update, id: user.id, user: invalid_attrs
+        expect(User.find(user.id).email).not_to eq(invalid_attrs[:email])
       end
     end
 
