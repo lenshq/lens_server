@@ -15,7 +15,8 @@
 #
 
 class User < ActiveRecord::Base
-  has_secure_password
+  has_secure_password(validations: false)
+  attr_accessor :password_confirmation
   extend Enumerize
 
   enumerize :role, in: [:admin, :user], default: :user, predicates: true
