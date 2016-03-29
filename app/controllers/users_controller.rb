@@ -3,11 +3,13 @@ class UsersController < SignedApplicationController
   before_action :authenticate!, only: [:edit, :update, :destroy]
 
   def new
-    create_user
+    @user = NewUserForm.new(User.new)
+    authorize @user
   end
 
   def create
-    create_user
+    @user = NewUserForm.new(User.new)
+    authorize @user
     if @user.validate(user_params) && @user.save
       sign_in @user
       flash[:success] = t('users.flash.create')
@@ -45,12 +47,7 @@ class UsersController < SignedApplicationController
   end
 
   def set_user
-    @user = UserForm.new(current_user)
-    authorize @user
-  end
-
-  def create_user
-    @user = UserForm.new(User.new)
+    @user = UpdateUserForm.new(current_user)
     authorize @user
   end
 

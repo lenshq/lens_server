@@ -1,4 +1,4 @@
-= form_for @user, html: { class: 'form-horizontal' } do |f|
+= form_for @user, url: path, html: { class: 'form-horizontal' } do |f|
   %fieldset
     .form-group
       = label :email, Application.human_attribute_name(:email),
