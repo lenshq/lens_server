@@ -11,7 +11,7 @@ class NewUserForm < Reform::Form
 
   validate :password_confirmation_validation
   def password_confirmation_validation
-    errors.add(:password, "Password mismatch") if password != password_confirmation
+    errors.add(:password, 'Password mismatch') if password != password_confirmation
   end
 
   def self.policy_class
