@@ -3,7 +3,7 @@
     %h1= t('.edit_user')
 
   .panel-body
-    = render 'form', path: users_path
+    = render 'form', path: user_path(current_user)
 
   .panel-footer
     = link_to t('.back'), applications_path, class: 'btn btn-primary'

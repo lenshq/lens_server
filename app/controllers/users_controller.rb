@@ -10,7 +10,7 @@ class UsersController < SignedApplicationController
   def create
     @user = NewUserForm.new(User.new)
     authorize @user
-    if @user.validate(user_params) && @user.save
+    if @user.validate(user_params(:new_user)) && @user.save
       sign_in @user
       flash[:success] = t('users.flash.create')
       redirect_to applications_url
@@ -25,7 +25,7 @@ class UsersController < SignedApplicationController
 
   def update
     set_user
-    if @user.validate(user_params) && @user.save
+    if @user.validate(user_params(:update_user)) && @user.save
       flash[:success] = t('users.flash.update')
       redirect_to edit_user_path(@user)
     else
@@ -51,7 +51,7 @@ class UsersController < SignedApplicationController
     authorize @user
   end
 
-  def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation)
+  def user_params(value = nil)
+    params.require(value || :user).permit(:email, :password, :password_confirmation)
   end
 end

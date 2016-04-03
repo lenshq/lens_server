@@ -23,7 +23,7 @@ RSpec.describe UsersController do
   end
 
   describe 'post #CREATE' do
-    let(:user_attrs) { { user: attributes_for(:user) } }
+    let(:user_attrs) { { new_user: attributes_for(:user) } }
     subject { post :create, user_attrs }
 
     context 'if user' do
@@ -81,12 +81,12 @@ RSpec.describe UsersController do
       before { sign_in user }
 
       it 'updates user with valid attributes' do
-        put :update, id: user.id, user: valid_attrs
+        put :update, id: user.id, update_user: valid_attrs
         expect(User.find(user.id).email).to eq(valid_attrs[:email])
       end
 
       it 'doesn\'t update user with invalid attributes' do
-        put :update, id: user.id, user: invalid_attrs
+        put :update, id: user.id, update_user: invalid_attrs
         expect(User.find(user.id).email).not_to eq(invalid_attrs[:email])
       end
     end
