@@ -1,0 +1,26 @@
+.panel.panel-default
+  .panel-heading
+    %h1= t('.sign_in')
+
+  .panel-body
+    = form_for :session, url: sign_in_path,
+                         html: { class: 'form-horizontal' } do |f|
+      %fieldset
+        .form-group
+          = label :email, Application.human_attribute_name(:email),
+                          class: 'col-lg-2 control-label'
+          .col-lg-10
+            = f.text_field :email, placeholder: t('users.form.email_placeholder'),
+                                   class: 'form-control'
+        .form-group
+          = label :password, Application.human_attribute_name(:password),
+                             class: 'col-lg-2 control-label'
+          .col-lg-10
+            = f.password_field :password,
+                               placeholder: t('users.form.password_placeholder'),
+                               class: 'form-control'
+        .form-group
+          .col-lg-10.col-lg-offset-2
+            = f.submit t('users.form.submit'), class: 'btn btn-primary'
+  .panel-footer
+    = link_to t('.back'), root_path, class: 'btn btn-primary'

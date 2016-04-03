@@ -4,7 +4,7 @@ class RegisterGithubUser
   end
 
   def call
-    user = User.find_or_create_by!(uid: @auth_hash[:uid], role: 'user')
+    user = User.find_or_initialize_by(uid: @auth_hash[:uid], role: 'user')
     update user, credentials: @auth_hash[:credentials], info: @auth_hash[:info]
     user
   end
@@ -16,12 +16,14 @@ class RegisterGithubUser
   private
 
   def update(user, credentials:, info:)
-    user.update_attributes!(
-      name: info[:name],
+    user.assign_attributes(
       email: info[:email],
+      name: info[:name],
       nickname: info[:nickname],
       image: info[:image],
       token: credentials[:token]
     )
+    user.assign_attributes(password: SecureRandom.hex(10)) unless user.persisted?
+    user.save
   end
 end

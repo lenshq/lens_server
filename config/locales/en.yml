@@ -5,8 +5,14 @@ en:
 
   navigation:
     applications: "Applications"
+    edit_user_profile: "Edit profile"
+    sign_out: 'Sign out'
 
   applications:
+    flash:
+      create: 'Application was successfully created.'
+      update: 'Application was successfully updated.'
+      destroy: 'Application was successfully destroyed.'
     index:
       applications: "Applications"
       actions: "Actions"
@@ -30,6 +36,19 @@ en:
 
       submit: "Submit"
 
+  users:
+    flash:
+      create: 'Welcome! You have signed up successfully.'
+      update: 'Your profile was successfully updated.'
+      already_signed_in: 'You are already signed in.'
+      destroy: 'Bye! Your account has been successfully destroyed.'
+    form:
+      email_placeholder: 'Enter your email'
+      password_placeholder: 'Password'
+      password_confirmation_placeholder: 'Confirm password'
+
+      submit: "Submit"
+
     applications:
       sure: "Are you sure?"
 
@@ -46,4 +65,10 @@ en:
   application:
     title: "Title"
     domain: "Domain"
-
+  error:
+    unauthorized: 'Unauthorized'
+  sessions:
+    flash:
+      create_error: 'Invalid email or password.'
+      create: 'Signed in successfully.'
+      destroy: 'Signed out successfully.'

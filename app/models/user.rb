@@ -15,12 +15,15 @@
 #
 
 class User < ActiveRecord::Base
+  has_secure_password(validations: false)
   extend Enumerize
 
   enumerize :role, in: [:admin, :user], default: :user, predicates: true
 
   has_many :application_users
   has_many :applications, through: :application_users
+
+  validates :email, presence: true, uniqueness: { case_sensitive: false }
 
   before_create :generate_api_token
 

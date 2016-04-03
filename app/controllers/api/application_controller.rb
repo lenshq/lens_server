@@ -10,7 +10,7 @@ module Api
     protected
 
     def authenticate!
-      render json: { error: 'Unathorized' }, status: 401 unless current_user
+      render json: { error: t('error.unauthorized') }, status: 401 unless current_user
     end
 
     def current_user

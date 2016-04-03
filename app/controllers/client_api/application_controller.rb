@@ -1,11 +1,13 @@
 module ClientApi
   class ApplicationController < ::ActionController::API
+    include AbstractController::Translation
+
     before_action :authenticate!
 
     protected
 
     def authenticate!
-      render json: { error: 'Unauthorized' }, status: 401 unless api_token
+      render json: { error: t('error.unauthorized') }, status: 401 unless api_token
     end
 
     def api_token
