@@ -4,7 +4,8 @@ class RegisterGithubUser
   end
 
   def call
-    user = User.find_or_initialize_by(uid: @auth_hash[:uid], role: 'user')
+    user = User.find_by(uid: @auth_hash[:uid])
+    user.role = :user unless user.persisted?
     update user, credentials: @auth_hash[:credentials], info: @auth_hash[:info]
     user
   end
